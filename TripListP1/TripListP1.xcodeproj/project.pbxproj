@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		22DC852A1AC1E6D200EE955F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC85291AC1E6D200EE955F /* main.m */; };
 		22DC852D1AC1E6D200EE955F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC852C1AC1E6D200EE955F /* AppDelegate.m */; };
-		22DC85301AC1E6D200EE955F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC852F1AC1E6D200EE955F /* ViewController.m */; };
+		22DC85301AC1E6D200EE955F /* TripListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC852F1AC1E6D200EE955F /* TripListViewController.m */; };
 		22DC85331AC1E6D200EE955F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DC85311AC1E6D200EE955F /* Main.storyboard */; };
 		22DC85351AC1E6D200EE955F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DC85341AC1E6D200EE955F /* Images.xcassets */; };
 		22DC85381AC1E6D200EE955F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DC85361AC1E6D200EE955F /* LaunchScreen.xib */; };
 		22DC85441AC1E6D200EE955F /* TripListP1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC85431AC1E6D200EE955F /* TripListP1Tests.m */; };
+		22FEFBC21AC4A9A2007A6ED5 /* AddTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FEFBC11AC4A9A2007A6ED5 /* AddTripViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +33,16 @@
 		22DC85291AC1E6D200EE955F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22DC852B1AC1E6D200EE955F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22DC852C1AC1E6D200EE955F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		22DC852E1AC1E6D200EE955F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		22DC852F1AC1E6D200EE955F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		22DC852E1AC1E6D200EE955F /* TripListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListViewController.h; sourceTree = "<group>"; };
+		22DC852F1AC1E6D200EE955F /* TripListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListViewController.m; sourceTree = "<group>"; };
 		22DC85321AC1E6D200EE955F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22DC85341AC1E6D200EE955F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		22DC85371AC1E6D200EE955F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		22DC853D1AC1E6D200EE955F /* TripListP1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripListP1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DC85421AC1E6D200EE955F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DC85431AC1E6D200EE955F /* TripListP1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListP1Tests.m; sourceTree = "<group>"; };
+		22FEFBC01AC4A9A2007A6ED5 /* AddTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTripViewController.h; sourceTree = "<group>"; };
+		22FEFBC11AC4A9A2007A6ED5 /* AddTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTripViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +86,13 @@
 			children = (
 				22DC852B1AC1E6D200EE955F /* AppDelegate.h */,
 				22DC852C1AC1E6D200EE955F /* AppDelegate.m */,
-				22DC852E1AC1E6D200EE955F /* ViewController.h */,
-				22DC852F1AC1E6D200EE955F /* ViewController.m */,
+				22DC852E1AC1E6D200EE955F /* TripListViewController.h */,
+				22DC852F1AC1E6D200EE955F /* TripListViewController.m */,
 				22DC85311AC1E6D200EE955F /* Main.storyboard */,
 				22DC85341AC1E6D200EE955F /* Images.xcassets */,
 				22DC85361AC1E6D200EE955F /* LaunchScreen.xib */,
+				22FEFBC01AC4A9A2007A6ED5 /* AddTripViewController.h */,
+				22FEFBC11AC4A9A2007A6ED5 /* AddTripViewController.m */,
 				22DC85271AC1E6D200EE955F /* Supporting Files */,
 			);
 			path = TripListP1;
@@ -219,7 +224,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22DC85301AC1E6D200EE955F /* ViewController.m in Sources */,
+				22DC85301AC1E6D200EE955F /* TripListViewController.m in Sources */,
+				22FEFBC21AC4A9A2007A6ED5 /* AddTripViewController.m in Sources */,
 				22DC852D1AC1E6D200EE955F /* AppDelegate.m in Sources */,
 				22DC852A1AC1E6D200EE955F /* main.m in Sources */,
 			);
@@ -412,6 +418,7 @@
 				22DC85491AC1E6D200EE955F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22DC854A1AC1E6D200EE955F /* Build configuration list for PBXNativeTarget "TripListP1Tests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				22DC854C1AC1E6D200EE955F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

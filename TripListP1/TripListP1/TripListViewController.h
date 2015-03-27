@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TripListViewController.h
 //  TripListP1
 //
 //  Created by Armand Roelens on 3/24/15.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface TripListViewController : UIViewController
 
+
+//TripList Array
 
 @end
 
