@@ -6,18 +6,13 @@
 //  Copyright (c) 2015 CSE 394. All rights reserved.
 //
 
-#ifndef TripListP1_GroceryList_h
-#define TripListP1_GroceryList_h
-
-
-#endif
-
-@interface GroceryList : NSObject
-
-- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
+@interface GroceryItem : NSObject
 
 @property (readonly) NSString *category;
 @property (readonly) NSString *name;
-@property (readonly) NSNumber *quantity;
+@property (readonly) NSNumber *quantity; //Irrelevant for the Store Object
+@property (readonly) NSNumber *price;
+
+- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 
 @end

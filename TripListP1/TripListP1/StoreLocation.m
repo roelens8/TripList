@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Location.h"
+#import "StoreLocation.h"
 
-@implementation Location
+@implementation StoreLocation
 
 // Init the object with information from a dictionary
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
@@ -18,10 +18,8 @@
         // Assign all properties with keyed values from the dictionary
         _name = [jsonDictionary objectForKey:@"name"];
         _openHours = [jsonDictionary objectForKey:@"opening_hours"];
-        
         _priceLevel = [jsonDictionary objectForKey:@"price_level"];
         _address = [jsonDictionary objectForKey:@"vicinity"];
-
     }
     return self;
 }

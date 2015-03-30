@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GroceryItem.h"
 
-#import "GroceryList.h"
-
-@implementation GroceryList
+@implementation GroceryItem
 
 // Init the object with information from a dictionary
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
@@ -20,6 +19,7 @@
         _category = [jsonDictionary objectForKey:@"category"];
         _name = [jsonDictionary objectForKey:@"name"];
         _quantity = [jsonDictionary objectForKey:@"quantity"];
+        _price = [jsonDictionary objectForKey:@"price"];
         
     }
     return self;

@@ -12,13 +12,13 @@
 
 #endif
 
-@interface Location : NSObject
+@interface StoreLocation : NSObject
 
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *openHours;
 @property (readonly) NSNumber *priceLevel;
-@property (readonly) NSNumber *address;
+@property (readonly) NSString *address;
 
 @end

@@ -10,8 +10,8 @@
 
 @interface TripListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
 
+@property NSMutableArray *trips;
 
-//TripList Array
 
 @end
 
