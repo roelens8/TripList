@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TripListViewController : UIViewController
+@interface TripListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
 
 
 //TripList Array

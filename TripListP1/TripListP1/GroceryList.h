@@ -15,10 +15,9 @@
 @interface GroceryList : NSObject
 
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
+
 @property (readonly) NSString *category;
 @property (readonly) NSString *name;
 @property (readonly) NSNumber *quantity;
-
-
 
 @end
