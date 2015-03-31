@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class TripListViewController;
+
 @interface AddTripViewController : UIViewController
 
-- (IBAction)addTrip:(id)sender;
+@property NSMutableArray *trips; //Reference of TripList Array
+@property TripListViewController *tripListVC;
+@property (strong, nonatomic) IBOutlet UITextField *tripNameField;
+@property (strong, nonatomic) IBOutlet UIDatePicker *tripDatePicker;
 
-//Reference of TripList Array
+- (IBAction)addTrip:(id)sender;
 
 @end

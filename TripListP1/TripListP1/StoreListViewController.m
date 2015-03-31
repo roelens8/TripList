@@ -48,7 +48,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     //Navigate to Edit a Store View
     

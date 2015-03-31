@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddTripViewController.h"
+#import "TripList.h"
+#import "Trip.h"
 
 @interface TripListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
 
-@property NSMutableArray *trips;
-
+@property TripList *tripList;
+@property AddTripViewController *addTripVC;
 
 @end
 
