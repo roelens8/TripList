@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "StoreLocation.h"
 #import "GroceryItem.h"
+#import "TripList.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 

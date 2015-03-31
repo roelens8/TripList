@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Trip : NSObject
+@interface Trip : NSObject <NSCoding>
 
 @property NSString *name;
 @property NSDate *date;

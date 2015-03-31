@@ -15,11 +15,13 @@ static TripList *theTripList = nil;
 -(id)init {
     self = [super init];
     if (self) {
-        //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"books" ofType:@"plist"];
-        //self.tripList = [NSMutableArray arrayWithContentsOfFile:filePath];
-        
-        //**Load TripList from file**
-        self.trips = [[NSMutableArray alloc]init];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TripList"];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:documentsDirectory]) {
+            NSData *data = [NSData dataWithContentsOfFile:filePath];
+            self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
     }
     return self;
 }

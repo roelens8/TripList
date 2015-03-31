@@ -18,5 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *tripDatePicker;
 
 - (IBAction)addTrip:(id)sender;
+- (void)saveTripData;
 
 @end

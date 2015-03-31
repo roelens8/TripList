@@ -51,7 +51,6 @@
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     //Navigate to Edit a Store View
-    
 }
 
 - (void)addAStore {
