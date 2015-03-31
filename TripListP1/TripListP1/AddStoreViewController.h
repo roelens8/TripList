@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "Trip.h"
+#import "TripList.h"
 
 @interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
+
+@property NSMutableArray *stores;
+@property NSMutableArray *storeNames;
+@property NSMutableArray *storeItems;
+@property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 
 - (IBAction)addStore:(id)sender;
 

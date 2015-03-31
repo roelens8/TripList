@@ -20,6 +20,4 @@
 @property NSArray *storeNames;
 @property NSArray *groceryItems;
 
--(void)addAStore;
-
 @end

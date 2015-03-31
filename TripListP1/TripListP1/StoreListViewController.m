@@ -15,9 +15,6 @@
 @implementation StoreListViewController
 
 - (void) viewWillAppear:(BOOL)animated {
-    /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAStore)];
-    self.navigationItem.rightBarButtonItem = addButton;*/
-    
     TripList *tripList = [TripList sharedTripList];
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
@@ -69,10 +66,6 @@
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     //Navigate to Edit a Store View
-}
-
-- (void)addAStore {
-    //Push View to AddStore
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

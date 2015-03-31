@@ -14,6 +14,23 @@
 
 @implementation AddStoreViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.stores = [[NSMutableArray alloc]init];
+    self.storeItems = [[NSMutableArray alloc]init];
+    self.storeNames = [[NSMutableArray alloc]init];
+    
+    AppDelegate *app = [AppDelegate instance];
+    self.stores = app.stores;
+    self.storeItems = app.storeItems;
+    
+    NSMutableArray *tempStoreNameList = [[NSMutableArray alloc]init];
+    for (StoreLocation *store in self.stores) {
+        [tempStoreNameList addObject:store.name];
+    }
+    [self.storeNames addObjectsFromArray:[[NSSet setWithArray:tempStoreNameList] allObjects]];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -29,11 +46,12 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 1;
+    return [self.stores count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return nil;
+    NSString *storeName = [self.storeNames objectAtIndex:row];
+    return storeName;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -43,7 +61,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [self.storeItems count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +71,40 @@
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"foodCell"];
     }
     
+    //Create Quanity Field
+    UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(330, 10, 30, 30)];
+    quantityField.adjustsFontSizeToFitWidth = YES;
+    quantityField.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
+    quantityField.textColor = [UIColor blackColor];
+    quantityField.textAlignment = UITextAlignmentCenter;
+    quantityField.keyboardType = UIKeyboardTypeDefault;
+    quantityField.returnKeyType = UIReturnKeyDone;
+    quantityField.clearButtonMode = UITextFieldViewModeNever;
+    [quantityField setEnabled: YES];
+    [cell addSubview:quantityField];
+    
+    //Display Store Item
+    GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    NSString *itemDescription = [NSString stringWithFormat:@"\t%@ - %@", storeItem.name, storeItem.category];
+    if (storeItem.price != nil) {
+        NSString *price = [NSString stringWithFormat:@"\tPrice: %@", storeItem.price];
+        cell.detailTextLabel.text = price;
+    }
+    else {
+        cell.detailTextLabel.text = @"\tN/A";
+    }
+    cell.textLabel.text = itemDescription;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+    if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    }
+    else
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
 }
 
 - (void)addStore:(id)sender {

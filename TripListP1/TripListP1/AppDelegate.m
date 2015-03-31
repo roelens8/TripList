@@ -89,14 +89,15 @@
     //NSString *latlong = [NSString stringWithFormat: @"%@", self.deviceLocation];
     //NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%@&radius=500&types=grocery_or_supermarket&key=%@", latlong, _PlacesAPIkey];
     
-    NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.468239,-112.2562734&radius=5000&types=grocery_or_supermarket&key=%@", _PlacesAPIkey];
+    NSString *urlString = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.4106930,-111.9257050&radius=500&types=grocery_or_supermarket&key=AIzaSyAqs6W4O0sywZkROfKvEZ3GlK8bFIpyayI";
     NSURL *requestURL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:(requestURL)];
     
     //response
+    //NSData *storeData =[NSData dataWithContentsOfURL:requestURL];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSError *jsonParsingError = nil;
-    NSDictionary *locationResults = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    //NSError *jsonParsingError = nil;
+    NSDictionary *locationResults = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
     
     // Create a new array to hold the locations
     NSMutableArray *locations = [[NSMutableArray alloc] init];
@@ -111,13 +112,15 @@
         [locations addObject:location];
     }
     
+    NSMutableArray *storeList = [[NSMutableArray alloc]init];
     for (StoreLocation *store in locations) {
         NSLog(@"Name: %@ ", store.name);
         NSLog(@"Open: %@ ", store.openHours);
         NSLog(@"Price Level: %@ ", store.priceLevel);
         NSLog(@"Address: %@ ", store.address);
-        [self.stores addObject:store];
+        [storeList addObject:store];
     }
+    [self.stores addObjectsFromArray:[[NSSet setWithArray:storeList] allObjects]];
 }
 
 //Jacob P
