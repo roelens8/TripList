@@ -14,11 +14,25 @@
 
 @implementation StoreListViewController
 
+- (void) viewWillAppear:(BOOL)animated {
+    /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAStore)];
+    self.navigationItem.rightBarButtonItem = addButton;*/
+    
+    TripList *tripList = [TripList sharedTripList];
+    self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
+    
+    self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
+    if (self.groceryItems != nil) {
+        NSNumber *tripTotal = 0;
+        for (GroceryItem *grocery in self.groceryItems) {
+            tripTotal = [NSNumber numberWithInteger:([tripTotal integerValue] + [grocery.price integerValue])];
+            self.tripTotal.text = [tripTotal stringValue];
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAStore)];
-    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,20 +47,24 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [self.storeNames count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"foodCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storeCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"foodCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"storeCell"];
+    }
+    //If Stores exist then display them
+    if (self.storeNames != nil && [self.storeNames count] > 0) {
+        cell.textLabel.text = self.storeNames[indexPath.row];
     }
     
     return cell;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
@@ -57,14 +75,13 @@
     //Push View to AddStore
 }
 
-/*
-#pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"addStore"]) {
+        //self.addTripVC = (AddTripViewController *)segue.destinationViewController;
+        //self.addTripVC.tripListVC = self;
+    }
 }
-*/
+
 
 @end

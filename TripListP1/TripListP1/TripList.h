@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Trip.h"
 
 @interface TripList : NSObject
 
 @property NSMutableArray *trips;
+@property Trip *currentTrip; //For knowing which trip is currently selected
 
 + (TripList*)sharedTripList;
 

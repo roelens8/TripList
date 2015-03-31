@@ -67,4 +67,6 @@
 }
 */
 
+- (IBAction)editStore:(id)sender {
+}
 @end

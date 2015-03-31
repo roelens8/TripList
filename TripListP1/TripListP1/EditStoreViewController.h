@@ -10,4 +10,8 @@
 
 @interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UILabel *currentStore;
+
+- (IBAction)editStore:(id)sender;
+
 @end

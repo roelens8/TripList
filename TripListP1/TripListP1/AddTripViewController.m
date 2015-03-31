@@ -39,6 +39,7 @@
     Trip *trip = [[Trip alloc]init];
     trip.name = self.tripNameField.text;
     trip.date = self.tripDatePicker.date;
+    trip.shoppingList = [[NSMutableDictionary alloc] init];
     if (tripList.trips == nil) { //This will only occcur if the file is empty
         tripList.trips = [[NSMutableArray alloc]init];
     }

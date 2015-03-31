@@ -10,4 +10,6 @@
 
 @interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
+- (IBAction)addStore:(id)sender;
+
 @end

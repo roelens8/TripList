@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddTripViewController.h"
+#import "StoreListViewController.h"
 #import "TripList.h"
 #import "Trip.h"
 
@@ -15,6 +16,7 @@
 
 @property TripList *tripList;
 @property AddTripViewController *addTripVC;
+@property StoreListViewController *storeListVC;
 
 @end
 

@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,6 +51,21 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"    %@", theDate];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    
+    //Navigate to Store View
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    Trip *trip = [self.tripList.trips objectAtIndex:indexPath.row];
+    if ([cell.textLabel.text isEqualToString:[NSString stringWithFormat:@"   %@", trip.name]]) {
+        self.tripList.currentTrip = trip;
+    }
+    self.storeListVC = [[StoreListViewController alloc]init];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    self.storeListVC = [storyboard instantiateViewControllerWithIdentifier:@"storeList"];
+    [self.navigationController pushViewController:self.storeListVC animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddStoreViewController.h"
+#import "TripList.h"
+#import "Trip.h"
+#import "GroceryItem.h"
 
 @interface StoreListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
+
+@property AddStoreViewController *addStoreVC;
+@property Trip *currentTrip;
+@property (strong, nonatomic) IBOutlet UILabel *tripTotal;
+@property NSArray *storeNames;
+@property NSArray *groceryItems;
 
 -(void)addAStore;
 

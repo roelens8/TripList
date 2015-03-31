@@ -12,7 +12,7 @@
 
 @interface AddTripViewController : UIViewController
 
-@property NSMutableArray *trips; //Reference of TripList Array
+@property NSMutableArray *trips;
 @property TripListViewController *tripListVC;
 @property (strong, nonatomic) IBOutlet UITextField *tripNameField;
 @property (strong, nonatomic) IBOutlet UIDatePicker *tripDatePicker;

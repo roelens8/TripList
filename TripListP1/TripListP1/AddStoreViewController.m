@@ -56,6 +56,9 @@
     return cell;
 }
 
+- (void)addStore:(id)sender {
+    //Create a trip and add it to the sharedTripList
+}
 
 /*
 #pragma mark - Navigation

@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -14,9 +16,9 @@
                     </navigationBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="oUQ-1L-taY"/>
-                        <segue destination="G0J-Nj-xlO" kind="show" identifier="navStoreList" id="jrJ-14-kxl"/>
                         <segue destination="jQK-96-sy4" kind="show" identifier="navAddStore" id="gKu-Of-QLv"/>
                         <segue destination="r1Z-sz-4lg" kind="show" identifier="navEditStore" id="cSz-NS-hra"/>
+                        <segue destination="aC6-7a-Gp3" kind="show" identifier="navStoreList" id="hM7-zu-GJT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K8-pZ-TtT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,71 +178,185 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLN-DO-qYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="304"/>
+            <point key="canvasLocation" x="1161" y="287"/>
         </scene>
         <!--Store List-->
-        <scene sceneID="tSF-tE-dhD">
+        <scene sceneID="kwy-Z4-CaA">
             <objects>
-                <viewController id="G0J-Nj-xlO" customClass="StoreListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="storeList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aC6-7a-Gp3" customClass="StoreListViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oz9-qD-MDZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qys-aW-MQe"/>
+                        <viewControllerLayoutGuide type="top" id="KFF-fQ-dnd"/>
+                        <viewControllerLayoutGuide type="bottom" id="cSE-zT-Sm6"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fnb-xz-kmh">
+                    <view key="view" contentMode="scaleToFill" id="ODy-2z-zAU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-6p-LZ7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Total: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-MV-O9x">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="DM3-r7-cst">
+                                        <variation key="widthClass=compact" constant="24"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="87" id="o21-si-L2k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DM3-r7-cst"/>
+                                        <exclude reference="o21-si-L2k"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="DM3-r7-cst"/>
+                                        <include reference="o21-si-L2k"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvM-FV-7FT">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="e5K-zr-JYH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="e5K-zr-JYH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="e5K-zr-JYH"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8E-QN-WY6">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="6lE-Xj-RT9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6lE-Xj-RT9"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="6lE-Xj-RT9"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XXG-Mv-beT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="486"/>
-                                </variation>
+                                <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="G0J-Nj-xlO" id="U9j-Jz-9IY"/>
-                                    <outlet property="delegate" destination="G0J-Nj-xlO" id="bue-4k-lwj"/>
+                                    <outlet property="dataSource" destination="aC6-7a-Gp3" id="aqS-o3-1fe"/>
+                                    <outlet property="delegate" destination="aC6-7a-Gp3" id="uL8-tv-rDB"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Total)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0Q-do-fHS">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="306" y="564" width="56" height="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Total: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOT-Fg-Iba">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="34" y="564" width="94" height="21"/>
-                                </variation>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XXG-Mv-beT" firstAttribute="top" secondItem="KFF-fQ-dnd" secondAttribute="bottom" id="2tZ-bg-Y0h"/>
+                            <constraint firstItem="3cQ-MV-O9x" firstAttribute="leading" secondItem="ODy-2z-zAU" secondAttribute="leadingMargin" constant="11" id="5z4-tb-tcW">
+                                <variation key="widthClass=compact" constant="21"/>
+                            </constraint>
+                            <constraint firstItem="F8E-QN-WY6" firstAttribute="top" secondItem="XXG-Mv-beT" secondAttribute="bottom" constant="3" id="6MY-VL-3YC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZvM-FV-7FT" secondAttribute="trailing" constant="32" id="ASO-7a-PIT">
+                                <variation key="widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="3cQ-MV-O9x" firstAttribute="baseline" secondItem="ZvM-FV-7FT" secondAttribute="baseline" id="Je8-Kd-JuX">
+                                <variation key="widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="ZvM-FV-7FT" firstAttribute="firstBaseline" secondItem="3cQ-MV-O9x" secondAttribute="firstBaseline" id="LVR-Vf-Bmx">
+                                <variation key="widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="3cQ-MV-O9x" firstAttribute="top" secondItem="XXG-Mv-beT" secondAttribute="bottom" constant="8" symbolic="YES" id="OzR-VR-mZS">
+                                <variation key="widthClass=compact" constant="2"/>
+                            </constraint>
+                            <constraint firstItem="cSE-zT-Sm6" firstAttribute="top" secondItem="3cQ-MV-O9x" secondAttribute="bottom" constant="10" id="XC7-NX-1W7">
+                                <variation key="widthClass=compact" constant="24"/>
+                            </constraint>
+                            <constraint firstItem="ZvM-FV-7FT" firstAttribute="leading" secondItem="F8E-QN-WY6" secondAttribute="trailing" constant="8" symbolic="YES" id="Zpd-qY-Gds">
+                                <variation key="widthClass=compact" constant="3"/>
+                            </constraint>
+                            <constraint firstItem="XXG-Mv-beT" firstAttribute="leading" secondItem="ODy-2z-zAU" secondAttribute="leading" id="bOx-mB-3CX"/>
+                            <constraint firstItem="cSE-zT-Sm6" firstAttribute="top" secondItem="F8E-QN-WY6" secondAttribute="bottom" constant="26" id="bqY-Kn-0iI"/>
+                            <constraint firstAttribute="trailing" secondItem="XXG-Mv-beT" secondAttribute="trailing" id="ohR-Zh-bXb">
+                                <variation key="widthClass=compact" constant="11"/>
+                            </constraint>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="mLW-6p-LZ7"/>
-                                <exclude reference="x0Q-do-fHS"/>
-                                <exclude reference="hOT-Fg-Iba"/>
+                                <exclude reference="3cQ-MV-O9x"/>
+                                <exclude reference="ZvM-FV-7FT"/>
+                                <exclude reference="F8E-QN-WY6"/>
+                                <exclude reference="XXG-Mv-beT"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5z4-tb-tcW"/>
+                                <exclude reference="Je8-Kd-JuX"/>
+                                <exclude reference="OzR-VR-mZS"/>
+                                <exclude reference="6MY-VL-3YC"/>
+                                <exclude reference="ASO-7a-PIT"/>
+                                <exclude reference="LVR-Vf-Bmx"/>
+                                <exclude reference="Zpd-qY-Gds"/>
+                                <exclude reference="XC7-NX-1W7"/>
+                                <exclude reference="bqY-Kn-0iI"/>
+                                <exclude reference="2tZ-bg-Y0h"/>
+                                <exclude reference="bOx-mB-3CX"/>
+                                <exclude reference="ohR-Zh-bXb"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="mLW-6p-LZ7"/>
-                                <include reference="x0Q-do-fHS"/>
-                                <include reference="hOT-Fg-Iba"/>
+                                <include reference="3cQ-MV-O9x"/>
+                                <include reference="ZvM-FV-7FT"/>
+                                <include reference="F8E-QN-WY6"/>
+                                <include reference="XXG-Mv-beT"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5z4-tb-tcW"/>
+                                <include reference="Je8-Kd-JuX"/>
+                                <include reference="OzR-VR-mZS"/>
+                                <include reference="6MY-VL-3YC"/>
+                                <include reference="ASO-7a-PIT"/>
+                                <include reference="LVR-Vf-Bmx"/>
+                                <include reference="Zpd-qY-Gds"/>
+                                <include reference="XC7-NX-1W7"/>
+                                <include reference="bqY-Kn-0iI"/>
+                                <include reference="2tZ-bg-Y0h"/>
+                                <include reference="bOx-mB-3CX"/>
+                                <include reference="ohR-Zh-bXb"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Store List" id="c03-Nq-2kw"/>
+                    <navigationItem key="navigationItem" title="Store List" id="wRF-ND-zww">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="AiX-B0-nYn">
+                            <connections>
+                                <segue destination="jQK-96-sy4" kind="show" identifier="addStore" id="U4U-F3-4VI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="600"/>
+                    <connections>
+                        <outlet property="tripTotal" destination="ZvM-FV-7FT" id="8Bz-Z4-9wy"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NI5-1m-GP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nP0-oT-Ynk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="287"/>
+            <point key="canvasLocation" x="1849.5" y="288"/>
         </scene>
         <!--Add Store-->
         <scene sceneID="JQg-QK-fmA">
@@ -260,55 +376,66 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="134" y="78" width="132" height="21"/>
+                                    <rect key="frame" x="127" y="78" width="132" height="21"/>
                                 </variation>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="56C-RQ-b5j">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Groceries:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TgR-lQ-gkk">
+                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="272" width="400" height="328"/>
+                                    <rect key="frame" x="-7" y="237" width="400" height="327"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="jQK-96-sy4" id="z2T-TP-cdu"/>
                                     <outlet property="delegate" destination="jQK-96-sy4" id="Y9E-Y8-g9H"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Groceries:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgR-lQ-gkk">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="122" y="249" width="157" height="21"/>
-                                </variation>
-                            </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4X7-Ux-hQX">
                                 <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="90" width="400" height="162"/>
+                                    <rect key="frame" x="-7" y="84" width="400" height="162"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="jQK-96-sy4" id="02Y-P0-8JW"/>
                                     <outlet property="delegate" destination="jQK-96-sy4" id="2BK-AS-wVz"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRE-zY-fVM">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Finished">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="147" y="564" width="92" height="36"/>
+                                </variation>
+                                <connections>
+                                    <action selector="addStore:" destination="jQK-96-sy4" eventType="touchUpInside" id="KhH-v1-V8f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="71l-ia-Sxr"/>
                                 <exclude reference="56C-RQ-b5j"/>
-                                <exclude reference="TgR-lQ-gkk"/>
                                 <exclude reference="4X7-Ux-hQX"/>
+                                <exclude reference="QRE-zY-fVM"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="71l-ia-Sxr"/>
                                 <include reference="56C-RQ-b5j"/>
-                                <include reference="TgR-lQ-gkk"/>
                                 <include reference="4X7-Ux-hQX"/>
+                                <include reference="QRE-zY-fVM"/>
                             </mask>
                         </variation>
                     </view>
@@ -316,7 +443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHp-8K-yqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2548.5" y="287"/>
+            <point key="canvasLocation" x="2548.5" y="288"/>
         </scene>
         <!--Edit Shopping List-->
         <scene sceneID="LxO-Fg-sD1">
@@ -336,7 +463,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="27" y="94" width="132" height="24"/>
+                                    <rect key="frame" x="29" y="77" width="132" height="24"/>
                                 </variation>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3nI-7L-Mdc">
@@ -345,12 +472,12 @@
                                 <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Groceries:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gw-fs-ThI">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="146" width="400" height="454"/>
+                                    <rect key="frame" x="0.0" y="119" width="400" height="443"/>
                                 </variation>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Store Name)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-h4-cao">
@@ -359,9 +486,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="259" y="95" width="118" height="21"/>
+                                    <rect key="frame" x="259" y="80" width="118" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q39-WB-eBl">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="154" y="564" width="92" height="36"/>
+                                </variation>
+                                <connections>
+                                    <action selector="editStore:" destination="r1Z-sz-4lg" eventType="touchUpInside" id="dwx-MB-XkN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -369,6 +509,7 @@
                                 <exclude reference="MS2-Sz-h7h"/>
                                 <exclude reference="3nI-7L-Mdc"/>
                                 <exclude reference="pvR-h4-cao"/>
+                                <exclude reference="Q39-WB-eBl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -376,14 +517,21 @@
                                 <include reference="MS2-Sz-h7h"/>
                                 <include reference="3nI-7L-Mdc"/>
                                 <include reference="pvR-h4-cao"/>
+                                <include reference="Q39-WB-eBl"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Shopping List" id="f5s-XQ-c1y"/>
+                    <connections>
+                        <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFe-XG-ceX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3223.5" y="287"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="U4U-F3-4VI"/>
+    </inferredMetricsTieBreakers>
 </document>
