@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K8-pZ-TtT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-288" y="347"/>
+            <point key="canvasLocation" x="-168" y="287"/>
         </scene>
         <!--Trip List-->
         <scene sceneID="ufC-wZ-h7g">
@@ -78,13 +79,13 @@
                                 <exclude reference="QEf-0B-Hc1"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="XIz-Ao-X02"/>
+                                <exclude reference="GaH-ro-Pc0"/>
+                                <exclude reference="j4i-uX-KbC"/>
                                 <exclude reference="Syk-hQ-o9M"/>
                                 <exclude reference="Utd-Ke-nYg"/>
                                 <exclude reference="w7d-ID-1J7"/>
                                 <exclude reference="y1X-Cb-YWk"/>
-                                <exclude reference="GaH-ro-Pc0"/>
-                                <exclude reference="j4i-uX-KbC"/>
-                                <exclude reference="XIz-Ao-X02"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -93,13 +94,13 @@
                                 <include reference="QEf-0B-Hc1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="XIz-Ao-X02"/>
+                                <include reference="GaH-ro-Pc0"/>
+                                <include reference="j4i-uX-KbC"/>
                                 <include reference="Syk-hQ-o9M"/>
                                 <include reference="Utd-Ke-nYg"/>
                                 <include reference="w7d-ID-1J7"/>
                                 <include reference="y1X-Cb-YWk"/>
-                                <include reference="GaH-ro-Pc0"/>
-                                <include reference="j4i-uX-KbC"/>
-                                <include reference="XIz-Ao-X02"/>
                             </mask>
                         </variation>
                     </view>
@@ -113,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442.5" y="325"/>
+            <point key="canvasLocation" x="505.5" y="288"/>
         </scene>
         <!--Add a Trip-->
         <scene sceneID="BXV-gj-cOE">
@@ -133,11 +134,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mM2-1a-HOl">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Date: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4j-aM-Bhp">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -189,75 +185,92 @@
                                     <action selector="addTrip:" destination="nqf-wS-f3R" eventType="touchUpInside" id="2Wf-JH-VIj"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mM2-1a-HOl">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mM2-1a-HOl" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="31" id="6MJ-pj-Dxa"/>
+                            <constraint firstItem="mM2-1a-HOl" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="31" id="6MJ-pj-Dxa">
+                                <variation key="widthClass=compact" constant="33"/>
+                            </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="trailing" secondItem="mM2-1a-HOl" secondAttribute="trailing" id="8lW-Dt-35J"/>
                             <constraint firstItem="XT5-eU-gSW" firstAttribute="top" secondItem="Bcx-Eh-Zpv" secondAttribute="bottom" constant="206" id="EVE-Gg-kyX"/>
-                            <constraint firstItem="m4j-aM-Bhp" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="top" id="MDR-zG-74j"/>
+                            <constraint firstItem="m4j-aM-Bhp" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="top" id="MDR-zG-74j">
+                                <variation key="widthClass=compact" constant="-12"/>
+                            </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="leading" secondItem="mM2-1a-HOl" secondAttribute="leading" id="Omm-W2-aec"/>
-                            <constraint firstItem="7Wv-JK-Ato" firstAttribute="centerY" secondItem="mM2-1a-HOl" secondAttribute="centerY" id="Qd0-bj-dlH"/>
+                            <constraint firstItem="7Wv-JK-Ato" firstAttribute="centerY" secondItem="mM2-1a-HOl" secondAttribute="centerY" id="Qd0-bj-dlH">
+                                <variation key="widthClass=compact" constant="-2"/>
+                            </constraint>
                             <constraint firstItem="7Wv-JK-Ato" firstAttribute="leading" secondItem="m4j-aM-Bhp" secondAttribute="leading" id="Xml-nu-SwJ"/>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="leading" secondItem="m4j-aM-Bhp" secondAttribute="trailing" constant="8" symbolic="YES" id="b0O-LS-sUP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mM2-1a-HOl" secondAttribute="trailing" constant="31" id="dgT-td-qAU"/>
-                            <constraint firstItem="dhz-FW-QPV" firstAttribute="top" secondItem="mM2-1a-HOl" secondAttribute="bottom" constant="32" id="lVg-CB-wVu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mM2-1a-HOl" secondAttribute="trailing" constant="31" id="dgT-td-qAU">
+                                <variation key="widthClass=compact" constant="11"/>
+                            </constraint>
+                            <constraint firstItem="dhz-FW-QPV" firstAttribute="top" secondItem="mM2-1a-HOl" secondAttribute="bottom" constant="32" id="lVg-CB-wVu">
+                                <variation key="widthClass=compact" constant="42"/>
+                            </constraint>
                             <constraint firstItem="Bcx-Eh-Zpv" firstAttribute="leading" secondItem="abX-8q-vT5" secondAttribute="leading" constant="145" id="ndx-go-X76"/>
                             <constraint firstItem="7Wv-JK-Ato" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="35" id="njC-Tr-5Yu"/>
-                            <constraint firstItem="Bcx-Eh-Zpv" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="bottom" constant="41" id="tZ5-MJ-Ywy"/>
+                            <constraint firstItem="Bcx-Eh-Zpv" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="bottom" constant="41" id="tZ5-MJ-Ywy">
+                                <variation key="widthClass=compact" constant="27"/>
+                            </constraint>
                             <constraint firstItem="mM2-1a-HOl" firstAttribute="leading" secondItem="7Wv-JK-Ato" secondAttribute="trailing" constant="6" id="wcH-dQ-X8H"/>
                             <constraint firstItem="7Wv-JK-Ato" firstAttribute="leading" secondItem="abX-8q-vT5" secondAttribute="leadingMargin" constant="-5" id="whH-En-0bO"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="7Wv-JK-Ato"/>
-                                <exclude reference="mM2-1a-HOl"/>
                                 <exclude reference="m4j-aM-Bhp"/>
                                 <exclude reference="dhz-FW-QPV"/>
                                 <exclude reference="Bcx-Eh-Zpv"/>
+                                <exclude reference="mM2-1a-HOl"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Qd0-bj-dlH"/>
                                 <exclude reference="Xml-nu-SwJ"/>
                                 <exclude reference="njC-Tr-5Yu"/>
                                 <exclude reference="whH-En-0bO"/>
+                                <exclude reference="EVE-Gg-kyX"/>
+                                <exclude reference="MDR-zG-74j"/>
                                 <exclude reference="6MJ-pj-Dxa"/>
                                 <exclude reference="dgT-td-qAU"/>
                                 <exclude reference="wcH-dQ-X8H"/>
-                                <exclude reference="MDR-zG-74j"/>
+                                <exclude reference="ndx-go-X76"/>
+                                <exclude reference="tZ5-MJ-Ywy"/>
                                 <exclude reference="8lW-Dt-35J"/>
                                 <exclude reference="Omm-W2-aec"/>
                                 <exclude reference="b0O-LS-sUP"/>
                                 <exclude reference="lVg-CB-wVu"/>
-                                <exclude reference="ndx-go-X76"/>
-                                <exclude reference="tZ5-MJ-Ywy"/>
-                                <exclude reference="EVE-Gg-kyX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="7Wv-JK-Ato"/>
-                                <include reference="mM2-1a-HOl"/>
                                 <include reference="m4j-aM-Bhp"/>
                                 <include reference="dhz-FW-QPV"/>
                                 <include reference="Bcx-Eh-Zpv"/>
+                                <include reference="mM2-1a-HOl"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Qd0-bj-dlH"/>
                                 <include reference="Xml-nu-SwJ"/>
                                 <include reference="njC-Tr-5Yu"/>
                                 <include reference="whH-En-0bO"/>
+                                <include reference="EVE-Gg-kyX"/>
+                                <include reference="MDR-zG-74j"/>
                                 <include reference="6MJ-pj-Dxa"/>
                                 <include reference="dgT-td-qAU"/>
                                 <include reference="wcH-dQ-X8H"/>
-                                <include reference="MDR-zG-74j"/>
+                                <include reference="ndx-go-X76"/>
+                                <include reference="tZ5-MJ-Ywy"/>
                                 <include reference="8lW-Dt-35J"/>
                                 <include reference="Omm-W2-aec"/>
                                 <include reference="b0O-LS-sUP"/>
                                 <include reference="lVg-CB-wVu"/>
-                                <include reference="ndx-go-X76"/>
-                                <include reference="tZ5-MJ-Ywy"/>
-                                <include reference="EVE-Gg-kyX"/>
                             </mask>
                         </variation>
                     </view>
@@ -269,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLN-DO-qYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="287"/>
+            <point key="canvasLocation" x="1161" y="281"/>
         </scene>
         <!--Store List-->
         <scene sceneID="kwy-Z4-CaA">
