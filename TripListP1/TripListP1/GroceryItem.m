@@ -20,6 +20,7 @@
         _name = [jsonDictionary objectForKey:@"name"];
         _quantity = [jsonDictionary objectForKey:@"quantity"];
         _price = [jsonDictionary objectForKey:@"price"];
+        _unit = [jsonDictionary objectForKey:@"unit"];
         
     }
     return self;

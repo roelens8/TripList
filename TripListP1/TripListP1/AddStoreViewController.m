@@ -102,17 +102,20 @@
     
     //Display Store Items
     GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
-    NSString *itemDescription = [NSString stringWithFormat:@"\t\u200b%@\u200b - %@", storeItem.name, storeItem.category];
+    NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
-        NSString *price = [NSString stringWithFormat:@"\t Price: %@", storeItem.price];
-        cell.detailTextLabel.text = price;
+        NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
+        NSString *unit = [NSString stringWithFormat:@"%@", storeItem.unit];
+        NSString * strRR = [NSString stringWithFormat:@"%@ - %@", price, unit];
+        
+        cell.detailTextLabel.text = strRR;
     }
     else {
         cell.detailTextLabel.text = @"\tPrice: N/A";
     }
     cell.textLabel.text = itemDescription;
     cell.textLabel.numberOfLines = 2;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:14.2];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:13.2];
     
     for (int i = 0; i < [self.checkedCellRows count]; i++) {
         if (indexPath == self.checkedCellRows[i]) {

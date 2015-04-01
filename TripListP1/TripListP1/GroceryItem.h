@@ -12,6 +12,7 @@
 @property NSString *name;
 @property NSString *quantity; //Irrelevant for the Store Object
 @property NSString *price;
+@property NSString *unit;
 
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 

@@ -3,7 +3,7 @@
 //  TripListP1
 //
 //  Created by Armand Roelens on 3/24/15.
-//  Copyright (c) 2015 CSE 394. All rights reserved.
+//  Copyright (c) 2015 CSE 394. All rights reserved.m
 //
 
 #import "AppDelegate.h"
@@ -89,7 +89,7 @@
     //NSString *latlong = [NSString stringWithFormat: @"%@", self.deviceLocation];
     //NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%@&radius=500&types=grocery_or_supermarket&key=%@", latlong, _PlacesAPIkey];
     
-    NSString *urlString = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.4106930,-111.9257050&radius=500&types=grocery_or_supermarket&key=AIzaSyAqs6W4O0sywZkROfKvEZ3GlK8bFIpyayI";
+    NSString *urlString = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.4106930,-111.9257050&radius=5000&types=grocery_or_supermarket&key=AIzaSyAqs6W4O0sywZkROfKvEZ3GlK8bFIpyayI";
     NSURL *requestURL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:(requestURL)];
     
@@ -126,7 +126,7 @@
 //Jacob P
 - (void)populateGroceryItems
 {
-    NSString *urlString = [NSString stringWithFormat:@"https://api.myjson.com/bins/2h207"];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.myjson.com/bins/1dpc7"];
     NSURL *requestURL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:(requestURL)];
     
@@ -149,9 +149,11 @@
     }
     
     for (GroceryItem *item in locations) {
-        NSLog(@"Category: %@ ", item.category);
-        NSLog(@"Name: %@ ", item.name);
-        NSLog(@"Quantity: %@ ", item.quantity);
+//        NSLog(@"Category: %@ ", item.category);
+//        NSLog(@"Name: %@ ", item.name);
+//        NSLog(@"Quantity: %@ ", item.quantity);
+//        NSLog(@"Price: %@ ", item.price);
+//        NSLog(@"Unit: %@ ", item.unit);
        [self.storeItems addObject:item];
     }
 }
