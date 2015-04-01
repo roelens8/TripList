@@ -10,14 +10,18 @@
 #import "AppDelegate.h"
 #import "Trip.h"
 #import "TripList.h"
+#import "CustomCell.h"
 
 @interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property NSMutableArray *stores;
-@property NSMutableArray *storeNames;
-@property NSMutableArray *storeItems;
+@property NSMutableArray *stores; //Array of all Stores
+@property NSMutableArray *storeItems; //Array of Gorceries a store sells
+@property NSMutableArray *storeNames; //Array of all Store names
+@property NSMutableArray *checkedGroceries; //Array containing strings that concatenate all grocery data
+@property NSMutableArray *checkedCellRows; //Indexes of cells of the groceries the user selected
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 
 - (IBAction)addStore:(id)sender;
+- (void)saveTripData;
 
 @end

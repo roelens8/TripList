@@ -12,7 +12,7 @@
 
 static TripList *theTripList = nil;
 
--(id)init {
+- (id)init {
     self = [super init];
     if (self) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

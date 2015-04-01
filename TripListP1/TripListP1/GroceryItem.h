@@ -8,10 +8,10 @@
 
 @interface GroceryItem : NSObject
 
-@property (readonly) NSString *category;
-@property (readonly) NSString *name;
-@property (readonly) NSNumber *quantity; //Irrelevant for the Store Object
-@property (readonly) NSNumber *price;
+@property NSString *category;
+@property NSString *name;
+@property NSString *quantity; //Irrelevant for the Store Object
+@property NSString *price;
 
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 

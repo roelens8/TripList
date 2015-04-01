@@ -49,6 +49,7 @@
     NSString *theDate = [dateFormatter stringFromDate:trip.date];
     cell.textLabel.text = [NSString stringWithFormat:@"   %@", trip.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"    %@", theDate];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
     
     return cell;
 }

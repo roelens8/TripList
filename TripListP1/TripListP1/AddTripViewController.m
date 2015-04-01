@@ -14,8 +14,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tripDatePicker.minimumDate = [[NSDate alloc] initWithTimeIntervalSinceNow:(NSTimeInterval) 0];
     // Do any additional setup after loading the view.
-    
 }
 
 - (void)didReceiveMemoryWarning {

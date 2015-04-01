@@ -19,12 +19,20 @@
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
     self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
-    if (self.groceryItems != nil) {
+    if ((self.groceryItems != nil) && ([self.groceryItems count] > 0)) {
         NSNumber *tripTotal = 0;
-        for (GroceryItem *grocery in self.groceryItems) {
-            tripTotal = [NSNumber numberWithInteger:([tripTotal integerValue] + [grocery.price integerValue])];
-            self.tripTotal.text = [tripTotal stringValue];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        for (NSMutableArray *groceryList in self.groceryItems) {
+            for (GroceryItem *grocery in groceryList) {
+                NSNumber *price = [formatter numberFromString:grocery.price];
+                if (grocery.quantity == nil) {
+                    grocery.quantity = 0;
+                }
+                tripTotal = [NSNumber numberWithInteger:([tripTotal doubleValue] + ([price doubleValue] * [grocery.quantity integerValue]))];
+            }
         }
+        self.tripTotal.text = [tripTotal stringValue];
     }
 }
 
@@ -55,8 +63,9 @@
     }
     //If Stores exist then display them
     if (self.storeNames != nil && [self.storeNames count] > 0) {
-        cell.textLabel.text = self.storeNames[indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"\t\t\t\t\t%@",self.storeNames[indexPath.row]];
     }
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     
     return cell;
 }
@@ -64,16 +73,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
     //Navigate to Edit a Store View
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"addStore"]) {
+    //if ([segue.identifier isEqualToString:@"addStore"]) {
         //self.addTripVC = (AddTripViewController *)segue.destinationViewController;
         //self.addTripVC.tripListVC = self;
-    }
+    //}
 }
 
 
