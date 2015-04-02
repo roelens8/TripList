@@ -41,9 +41,9 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tripCell"];
+    CustomCell *cell = (CustomCell*)[tableView dequeueReusableCellWithIdentifier:@"tripCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"tripCell"];
+        cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"tripCell"];
     }
     
     TripList *tripList = [TripList sharedTripList];
@@ -53,7 +53,7 @@
     NSString *theDate = [dateFormatter stringFromDate:trip.date];
     cell.textLabel.text = [NSString stringWithFormat:@"   %@", trip.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"    %@", theDate];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     
     return cell;
 }
@@ -83,13 +83,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[tableData removeObjectAtIndex:indexPath.row];
     TripList *tripList = [TripList sharedTripList];
     [tripList.trips removeObjectAtIndex:indexPath.row];
     
     [tableView reloadData];
     
-    [self.addTripVC saveTripData];
+    AppDelegate *app = [AppDelegate instance];
+    [app saveTripData];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -23,10 +23,11 @@
 + (AppDelegate*) instance;
 
 //- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
-- (NSString*) deviceLocation;
-- (void) populateStores;
-- (void) populateGroceryItems;
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
+- (NSString*)deviceLocation;
+- (void)populateStores;
+- (void)populateGroceryItems;
+- (void)saveTripData;
 
 @end
 

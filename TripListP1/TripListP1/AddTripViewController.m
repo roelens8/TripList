@@ -44,20 +44,13 @@
         tripList.trips = [[NSMutableArray alloc]init];
     }
     [tripList.trips addObject:trip];
-    [self saveTripData];
+    
+    AppDelegate *app = [AppDelegate instance];
+    [app saveTripData];
+    [self.navigationController popViewControllerAnimated:YES];
     
     [self.navigationController popToViewController:(UIViewController*)self.tripListVC animated:YES];
     NSLog(@"%@ %@", self.tripNameField.text, self.tripDatePicker.date);
-}
-
-- (void)saveTripData {
-    TripList *tripList = [TripList sharedTripList];
-    if (tripList != nil) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TripList"];
-        [NSKeyedArchiver archiveRootObject:tripList.trips toFile:filePath];
-    }
 }
 
 @end

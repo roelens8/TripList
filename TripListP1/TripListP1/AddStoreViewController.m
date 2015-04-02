@@ -32,7 +32,6 @@
         [tempStoreNameList addObject:store.name];
     }
     [self.storeNames addObjectsFromArray:[[NSSet setWithArray:tempStoreNameList] allObjects]];
-    
 }
 
 - (void)viewDidLoad {
@@ -63,11 +62,12 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* textView = (UILabel*)view;
     if (!textView){
-        textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 120, 60)];
+        textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 60)];
         textView.adjustsFontSizeToFitWidth = YES;
         [textView setBackgroundColor:[UIColor clearColor]];
-        [textView setFont:[UIFont boldSystemFontOfSize:25]];
+        [textView setFont:[UIFont boldSystemFontOfSize:20]];
         [textView setText:[self.storeNames objectAtIndex:row]];
+        [textView setTextAlignment:NSTextAlignmentCenter];
     }
     return textView;
 }
@@ -85,8 +85,7 @@
     return [self.storeItems count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"foodCell"];
     if (cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"foodCell"];
@@ -113,7 +112,6 @@
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
         NSString *unit = [NSString stringWithFormat:@"%@", storeItem.unit];
         NSString * strRR = [NSString stringWithFormat:@"%@ - %@", price, unit];
-        
         cell.detailTextLabel.text = strRR;
     }
     else {
@@ -142,7 +140,6 @@
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @" "];
     NSArray *splitArrayPriceUnit = [cell.detailTextLabel.text componentsSeparatedByString: @" "];
-    
     NSString *checkedGroceryName = [splitArrayName objectAtIndex: 1];
     NSString *checkedGroceryCategory = [splitArrayCategory objectAtIndex:3];
     NSString *checkedGroceryPrice = [splitArrayPriceUnit objectAtIndex:2];
@@ -216,22 +213,13 @@
             
             [trip.shoppingList setObject:groceries forKey:self.storePickerSelectedStore];
             tripList.currentTrip = trip;
-            tripList.trips[i] = trip;
+            //tripList.trips[i] = trip;
             break;
         }
     }
-    [self saveTripData];
+    AppDelegate *app = [AppDelegate instance];
+    [app saveTripData];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)saveTripData {
-    TripList *tripList = [TripList sharedTripList];
-    if (tripList != nil) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TripList"];
-        [NSKeyedArchiver archiveRootObject:tripList.trips toFile:filePath];
-    }
 }
 
 /*

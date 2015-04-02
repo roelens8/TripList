@@ -12,7 +12,7 @@
 #import "TripList.h"
 #import "CustomCell.h"
 
-@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property NSMutableArray *stores; //Array of all Stores
 @property NSMutableArray *storeItems; //Array of Gorceries a store sells
@@ -23,8 +23,6 @@
 @property NSInteger storePickerSelectedRow; //Row of the selected store
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 
-
 - (IBAction)addStore:(id)sender;
-- (void)saveTripData;
 
 @end

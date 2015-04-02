@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @class TripListViewController;
 
@@ -17,6 +18,5 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *tripDatePicker;
 
 - (IBAction)addTrip:(id)sender;
-- (void)saveTripData;
 
 @end

@@ -68,6 +68,16 @@
     return (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
+- (void)saveTripData {
+    TripList *tripList = [TripList sharedTripList];
+    if (tripList != nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TripList"];
+        [NSKeyedArchiver archiveRootObject:tripList.trips toFile:filePath];
+    }
+}
+
 //Jacob P
 - (NSString *)deviceLocation {
     return [NSString stringWithFormat:@"%f,%f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];

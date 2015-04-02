@@ -29,7 +29,7 @@
                 if (grocery.quantity == nil) {
                     grocery.quantity = 0;
                 }
-                tripTotal = [NSNumber numberWithInteger:([tripTotal doubleValue] + ([price doubleValue] * [grocery.quantity doubleValue]))];
+                tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
             }
         }
         if (tripTotal == nil)
@@ -60,19 +60,20 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storeCell"];
+    CustomCell *cell = (CustomCell*)[tableView dequeueReusableCellWithIdentifier:@"storeCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"storeCell"];
+        cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"storeCell"];
     }
     //If Stores exist then display them
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;
     
     if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
     }
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-    
+
     return cell;
 }
 
@@ -89,15 +90,10 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.editStoreVC = [storyboard instantiateViewControllerWithIdentifier:@"editStore"];
     [self.navigationController pushViewController:self.editStoreVC animated:YES];
-    
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //if ([segue.identifier isEqualToString:@"addStore"]) {
-        //self.addTripVC = (AddTripViewController *)segue.destinationViewController;
-        //self.addTripVC.tripListVC = self;
-    //}
+    
 }
 
 

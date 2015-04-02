@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "TripList.h"
 #import "Trip.h"
+#import "CustomCell.h"
 
-@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property NSMutableArray *storeItems; //Store Names - NSString
+@property NSMutableArray *checkedItems; //Shopping List for current Store - GroceryItem
 
 @property (strong, nonatomic) IBOutlet UILabel *currentStore;
 

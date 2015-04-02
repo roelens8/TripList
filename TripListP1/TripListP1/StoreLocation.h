@@ -6,12 +6,6 @@
 //  Copyright (c) 2015 CSE 394. All rights reserved.
 //
 
-#ifndef TripListP1_Location_h
-#define TripListP1_Location_h
-
-
-#endif
-
 @interface StoreLocation : NSObject
 
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
