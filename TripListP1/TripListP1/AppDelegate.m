@@ -93,8 +93,7 @@
 }
 
 //Jacob P
-- (void)populateStores
-{
+- (void)populateStores {
     //request stuff
     //NSString *latlong = [NSString stringWithFormat: @"%@", self.deviceLocation];
     //NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%@&radius=500&types=grocery_or_supermarket&key=%@", latlong, _PlacesAPIkey];
@@ -134,8 +133,7 @@
 }
 
 //Jacob P
-- (void)populateGroceryItems
-{
+- (void)populateGroceryItems {
     NSString *urlString = [NSString stringWithFormat:@"https://api.myjson.com/bins/1dpc7"];
     NSURL *requestURL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:(requestURL)];
