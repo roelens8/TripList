@@ -18,25 +18,7 @@
     TripList *tripList = [TripList sharedTripList];
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
-    self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
-    if ((self.groceryItems != nil) && ([self.groceryItems count] > 0)) {
-        NSNumber *tripTotal = 0;
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        for (NSMutableArray *groceryList in self.groceryItems) {
-            for (GroceryItem *grocery in groceryList) {
-                NSNumber *price = [formatter numberFromString:grocery.price];
-                if (grocery.quantity == nil) {
-                    grocery.quantity = 0;
-                }
-                tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
-            }
-        }
-        if (tripTotal == nil)
-            self.tripTotal.text = @"0";
-        else
-            self.tripTotal.text = [tripTotal stringValue];
-    }
+    [self calculateTripTotal]; //Calculate new trip total before displaying table view
     [self.storeTableView reloadData]; //Some cells were being duplicated
 }
 
@@ -78,18 +60,51 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     //Navigate to Edit a Store View
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
     tripList.currentStore = cell.textLabel.text;
-    //Trip *trip = [tripList.trips objectAtIndex:indexPath.row];
-    
     
     self.editStoreVC = [[EditStoreViewController  alloc]init];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.editStoreVC = [storyboard instantiateViewControllerWithIdentifier:@"editStore"];
     [self.navigationController pushViewController:self.editStoreVC animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
+    TripList *tripList = [TripList sharedTripList];
+    Trip *trip = tripList.currentTrip;
+    [trip.shoppingList removeObjectForKey:cell.textLabel.text];
+    [tableView reloadData];
+    
+    [self calculateTripTotal];
+    AppDelegate *app = [AppDelegate instance];
+    [app saveTripData];
+    //[self.navigationController pushViewController:self animated:YES];
+}
+
+- (void)calculateTripTotal {
+    TripList *tripList = [TripList sharedTripList];
+    self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
+    if (self.groceryItems != nil) {
+        NSNumber *tripTotal = 0;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        for (NSMutableArray *groceryList in self.groceryItems) {
+            for (GroceryItem *grocery in groceryList) {
+                NSNumber *price = [formatter numberFromString:grocery.price];
+                if (grocery.quantity == nil) {
+                    grocery.quantity = 0;
+                }
+                tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
+            }
+        }
+        if (tripTotal == 0 || tripTotal == nil)
+            self.tripTotal.text = @"0.00";
+        else
+            self.tripTotal.text = [tripTotal stringValue];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

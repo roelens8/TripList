@@ -23,4 +23,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *tripTotal;
 @property (strong, nonatomic) IBOutlet UITableView *storeTableView;
 
+-(void)calculateTripTotal;
+
 @end
