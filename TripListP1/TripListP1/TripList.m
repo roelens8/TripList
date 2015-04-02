@@ -21,7 +21,7 @@ static TripList *theTripList = nil;
         if ([[NSFileManager defaultManager] fileExistsAtPath:documentsDirectory]) {
             NSData *data = [NSData dataWithContentsOfFile:filePath];
             self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            //NSLog(@"%@", filePath);
+            NSLog(@"%@", filePath);
         }
     }
     return self;

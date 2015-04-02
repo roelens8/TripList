@@ -19,7 +19,8 @@
     self.storeItems = [[NSMutableArray alloc]init];
     self.storeNames = [[NSMutableArray alloc]init];
     self.checkedGroceries = [[NSMutableArray alloc]init];
-    self.checkedCellRows = [[NSMutableArray alloc] init];
+    self.checkedCellRows = [[NSMutableArray alloc]init];
+    self.storePickerSelectedStore = [[NSString alloc]init];
     
     AppDelegate *app = [AppDelegate instance];
     self.stores = app.stores;
@@ -49,22 +50,14 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.stores count];
+    return [self.storeNames count];
 }
 
-//Not needed because of viewForRow methods
-/*- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+/*//Not needed because of viewForRow methods
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *storeName = [self.storeNames objectAtIndex:row];
     return storeName;
 }*/
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.storeItems count];
-}
 
 //Editing the pickerView
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -77,6 +70,19 @@
         [textView setText:[self.storeNames objectAtIndex:row]];
     }
     return textView;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.storePickerSelectedStore = [self.storeNames objectAtIndex:[self.storePicker selectedRowInComponent:0]];
+    self.storePickerSelectedRow = [self.storePicker selectedRowInComponent:0];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.storeItems count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,7 +132,6 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
-    
     return cell;
 }
 
@@ -136,22 +141,24 @@
     //Checked gorceries names and quantities will be put into an array
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @" "];
-    NSArray *splitArrayPrice = [cell.detailTextLabel.text componentsSeparatedByString: @" "];
+    NSArray *splitArrayPriceUnit = [cell.detailTextLabel.text componentsSeparatedByString: @" "];
+    
     NSString *checkedGroceryName = [splitArrayName objectAtIndex: 1];
-    NSString *checkedGroceryCategory = [splitArrayCategory objectAtIndex: 2];
-    NSString *checkedGroceryPrice = [splitArrayPrice objectAtIndex: 1];
+    NSString *checkedGroceryCategory = [splitArrayCategory objectAtIndex:3];
+    NSString *checkedGroceryPrice = [splitArrayPriceUnit objectAtIndex:2];
+    NSString *checkedGroceryUnit = [splitArrayPriceUnit objectAtIndex:4];
     UITextField *quantityField = (UITextField*)cell.subView;
     
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries removeObject:[NSString stringWithFormat:@"%@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text]];
+        [self.checkedGroceries removeObject:[NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit]];
         [self.checkedCellRows removeObject:indexPath];
     }
     else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries addObject:[NSString stringWithFormat:@"%@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text]];
+        [self.checkedGroceries addObject:[NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit]];
         [self.checkedCellRows addObject:indexPath];
     }
 }
@@ -170,6 +177,7 @@
                 NSString *groceryCategory = [splitGrocery objectAtIndex: 1];
                 NSString *groceryPrice = [splitGrocery objectAtIndex:2];
                 NSString *groceryQuantity = [splitGrocery objectAtIndex:3];
+                NSString *groceryUnit = [splitGrocery objectAtIndex:4];
                 if ([groceryPrice isEqualToString:@"N/A"] || [groceryPrice isEqualToString:@""])
                     groceryPrice = @"0.00";
                 
@@ -178,14 +186,21 @@
                 grocery.category = groceryCategory;
                 grocery.price = groceryPrice;
                 grocery.quantity = groceryQuantity;
+                grocery.unit = groceryUnit;
                 [groceries addObject:grocery]; //Add grocery to grocery list
             }
-            NSInteger row = [self.storePicker selectedRowInComponent:0];
+            
+            /*NSInteger row = [self.storePicker selectedRowInComponent:0];
             StoreLocation *pickerStore = [self.stores objectAtIndex:row];
-            NSString* storeName = pickerStore.name;
+            NSString* storeName = [[self.stores objectAtIndex:0] objectAtIndex:row];*/
+            
+            
             //If Store is already in the store list, then alert
+            if (self.storePickerSelectedRow == 0) {
+                self.storePickerSelectedStore = [self.storeNames objectAtIndex:0]; 
+            }
             for (NSString *storeTemp in [trip.shoppingList allKeys]) {
-                if ([storeName isEqualToString:storeTemp]) {
+                if ([self.storePickerSelectedStore isEqualToString:storeTemp]) {
                     UIAlertView *alert = [UIAlertView alloc];
                     alert = [alert  initWithTitle:@"Store Already Exists"
                                     message: @"Please select another store!"
@@ -196,7 +211,7 @@
                     return;
                 }
             }
-            [trip.shoppingList setObject:groceries forKey:storeName];
+            [trip.shoppingList setObject:groceries forKey:self.storePickerSelectedStore];
             tripList.currentTrip = trip;
             tripList.trips[i] = trip;
             break;

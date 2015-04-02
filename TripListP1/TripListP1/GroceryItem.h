@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 CSE 394. All rights reserved.
 //
 
-@interface GroceryItem : NSObject
+@interface GroceryItem : NSObject <NSCoding>
 
 @property NSString *category;
 @property NSString *name;

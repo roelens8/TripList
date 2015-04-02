@@ -52,7 +52,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.storeNames count];
+    TripList *tripList = [TripList sharedTripList];
+    Trip *currentTrip = tripList.currentTrip;
+    return [currentTrip.shoppingList count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,8 +64,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"storeCell"];
     }
     //If Stores exist then display them
-    if (self.storeNames != nil && [self.storeNames count] > 0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"\t\t\t\t\t%@",self.storeNames[indexPath.row]];
+    TripList *tripList = [TripList sharedTripList];
+    Trip *currentTrip = tripList.currentTrip;
+    
+    if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[currentTrip.shoppingList allKeys][indexPath.row]];
     }
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     

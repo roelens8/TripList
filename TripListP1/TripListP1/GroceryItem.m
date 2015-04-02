@@ -11,6 +11,27 @@
 
 @implementation GroceryItem
 
+- (id)initWithCoder:(NSCoder *)deCoder {
+    if ((self = [super init])) {
+        // Decode the property values by key, and assign them to the correct ivars
+        self.name = [deCoder decodeObjectForKey:@"name"];
+        self.category = [deCoder decodeObjectForKey:@"category"];
+        self.price = [deCoder decodeObjectForKey:@"price"];
+        self.unit = [deCoder decodeObjectForKey:@"unit"];
+        self.quantity = [deCoder decodeObjectForKey:@"quantity"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)enCoder {
+    // Encode our ivars using string keys
+    [enCoder encodeObject:self.name forKey:@"name"];
+    [enCoder encodeObject:self.category forKey:@"category"];
+    [enCoder encodeObject:self.price forKey:@"price"];
+    [enCoder encodeObject:self.unit forKey:@"unit"];
+    [enCoder encodeObject:self.quantity forKey:@"quantity"];
+}
+
 // Init the object with information from a dictionary
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
     if(self = [self init]) {
