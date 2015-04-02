@@ -13,6 +13,7 @@
 
 @property NSMutableArray *trips;
 @property Trip *currentTrip; //For knowing which trip is currently selected
+@property NSString *currentStore; //For knowing which store is currently selected
 
 + (TripList*)sharedTripList;
 

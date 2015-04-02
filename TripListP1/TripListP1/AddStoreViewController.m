@@ -63,10 +63,10 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* textView = (UILabel*)view;
     if (!textView){
-        textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 65, 15)];
+        textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 120, 60)];
         textView.adjustsFontSizeToFitWidth = YES;
         [textView setBackgroundColor:[UIColor clearColor]];
-        [textView setFont:[UIFont boldSystemFontOfSize:15]];
+        [textView setFont:[UIFont boldSystemFontOfSize:25]];
         [textView setText:[self.storeNames objectAtIndex:row]];
     }
     return textView;
@@ -167,9 +167,9 @@
     //Create a store and add it to the sharedTripList then save it
     TripList* tripList = [TripList sharedTripList];
     Trip *trip = [[Trip alloc]init];
+    NSMutableArray *groceries = [[NSMutableArray alloc]init];
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
-            NSMutableArray *groceries = [[NSMutableArray alloc]init];
             trip = tripList.trips[i];
             for (NSString* checkedGrocery in self.checkedGroceries) {
                 NSArray *splitGrocery = [checkedGrocery componentsSeparatedByString: @" "];
@@ -179,7 +179,7 @@
                 NSString *groceryQuantity = [splitGrocery objectAtIndex:3];
                 NSString *groceryUnit = [splitGrocery objectAtIndex:4];
                 if ([groceryPrice isEqualToString:@"N/A"] || [groceryPrice isEqualToString:@""])
-                    groceryPrice = @"0.00";
+                    groceryPrice = @"0";
                 
                 GroceryItem *grocery = [[GroceryItem alloc]init];
                 grocery.name = groceryName;
@@ -189,11 +189,6 @@
                 grocery.unit = groceryUnit;
                 [groceries addObject:grocery]; //Add grocery to grocery list
             }
-            
-            /*NSInteger row = [self.storePicker selectedRowInComponent:0];
-            StoreLocation *pickerStore = [self.stores objectAtIndex:row];
-            NSString* storeName = [[self.stores objectAtIndex:0] objectAtIndex:row];*/
-            
             
             //If Store is already in the store list, then alert
             if (self.storePickerSelectedRow == 0) {
@@ -211,6 +206,14 @@
                     return;
                 }
             }
+            for (GroceryItem *groceryItem in groceries) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                BOOL isInteger = [formatter numberFromString:groceryItem.quantity] != nil;
+                if (!isInteger) {
+                    groceryItem.quantity = @"0";
+                }
+            }
+            
             [trip.shoppingList setObject:groceries forKey:self.storePickerSelectedStore];
             tripList.currentTrip = trip;
             tripList.trips[i] = trip;

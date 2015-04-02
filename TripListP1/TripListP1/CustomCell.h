@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//The purpose of this class is to prevent the UITableViewCell subviews from disappearing for a second after selecting and deselecting the cell. Therefore, the setHighlighted and setSelected methods needed to be overriden.
+//The purpose of this class is to prevent the UITableViewCell's subviews from disappearing for a second after selecting and deselecting the cell. Therefore, the setHighlighted and setSelected methods needed to be overriden.
 @interface CustomCell : UITableViewCell
 
 @property UIView* subView;

@@ -14,7 +14,7 @@
 
 @interface TripListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
 
-@property TripList *tripList;
+//@property TripList *tripList;
 @property AddTripViewController *addTripVC;
 @property StoreListViewController *storeListVC;
 

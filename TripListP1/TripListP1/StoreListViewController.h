@@ -8,16 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "AddStoreViewController.h"
+#import "EditStoreViewController.h"
 #import "TripList.h"
 #import "Trip.h"
 #import "GroceryItem.h"
 
-@interface StoreListViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
+@interface StoreListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property AddStoreViewController *addStoreVC;
+@property EditStoreViewController *editStoreVC;
 @property Trip *currentTrip;
-@property (strong, nonatomic) IBOutlet UILabel *tripTotal;
 @property NSArray *storeNames;
 @property NSArray *groceryItems;
+@property (strong, nonatomic) IBOutlet UILabel *tripTotal;
+@property (strong, nonatomic) IBOutlet UITableView *storeTableView;
 
 @end

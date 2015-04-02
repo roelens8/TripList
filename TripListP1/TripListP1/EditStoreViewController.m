@@ -14,6 +14,11 @@
 
 @implementation EditStoreViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+    TripList *tripList = [TripList sharedTripList];
+    self.currentStore.text = tripList.currentStore;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

@@ -17,7 +17,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.tripList = [TripList sharedTripList];
+    //self.tripList = [TripList sharedTripList];
     
     self.addTripVC = [[AddTripViewController alloc] init];
 }
@@ -36,7 +36,8 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.tripList.trips count];;
+    TripList *tripList = [TripList sharedTripList];
+    return [tripList.trips count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -45,7 +46,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:@"tripCell"];
     }
     
-    Trip *trip = [self.tripList.trips objectAtIndex:indexPath.row];
+    TripList *tripList = [TripList sharedTripList];
+    Trip *trip = [tripList.trips objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MM/dd/YY HH:mm:ss"];
     NSString *theDate = [dateFormatter stringFromDate:trip.date];
@@ -61,9 +63,11 @@
     
     //Navigate to Store View
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    Trip *trip = [self.tripList.trips objectAtIndex:indexPath.row];
+    TripList *tripList = [TripList sharedTripList];
+    Trip *trip = [tripList.trips objectAtIndex:indexPath.row];
     if ([cell.textLabel.text isEqualToString:[NSString stringWithFormat:@"   %@", trip.name]]) {
-        self.tripList.currentTrip = trip;
+        //self.tripList.currentTrip = trip;
+        tripList.currentTrip = trip;
     }
     self.storeListVC = [[StoreListViewController alloc]init];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
@@ -78,10 +82,10 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableData removeObjectAtIndex:indexPath.row];
-    [self.tripList.trips removeObjectAtIndex:indexPath.row];
+    TripList *tripList = [TripList sharedTripList];
+    [tripList.trips removeObjectAtIndex:indexPath.row];
     
     [tableView reloadData];
     

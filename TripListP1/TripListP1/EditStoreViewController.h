@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TripList.h"
+#import "Trip.h"
 
 @interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
