@@ -18,6 +18,8 @@
     [super viewWillAppear:animated];
     
     self.tripList = [TripList sharedTripList];
+    
+    self.addTripVC = [[AddTripViewController alloc] init];
 }
 
 - (void)viewDidLoad {
@@ -74,6 +76,16 @@
         self.addTripVC = (AddTripViewController *)segue.destinationViewController;
         self.addTripVC.tripListVC = self;
     }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //[tableData removeObjectAtIndex:indexPath.row];
+    [self.tripList.trips removeObjectAtIndex:indexPath.row];
+    
+    [tableView reloadData];
+    
+    [self.addTripVC saveTripData];
 }
 
 @end
