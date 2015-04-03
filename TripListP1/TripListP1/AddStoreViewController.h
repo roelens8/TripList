@@ -11,6 +11,7 @@
 #import "Trip.h"
 #import "TripList.h"
 #import "CustomCell.h"
+#import "CheckedGroceryItem.h"
 
 @interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
@@ -22,6 +23,7 @@
 @property NSString *storePickerSelectedStore; //The store selected form the picker view
 @property NSInteger storePickerSelectedRow; //Row of the selected store
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
+@property (strong, nonatomic) IBOutlet UITableView *addStoreTableView;
 
 - (IBAction)addStore:(id)sender;
 

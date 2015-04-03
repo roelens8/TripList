@@ -135,7 +135,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
-    
+
     //Checked gorceries names and quantities will be put into an array
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @" "];
@@ -145,17 +145,20 @@
     NSString *checkedGroceryPrice = [splitArrayPriceUnit objectAtIndex:2];
     NSString *checkedGroceryUnit = [splitArrayPriceUnit objectAtIndex:4];
     UITextField *quantityField = (UITextField*)cell.subView;
+    CheckedGroceryItem *checkedItem = [[CheckedGroceryItem alloc]init];
+    checkedItem.groceryItemString = [NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit];
+    checkedItem.quantityField = quantityField;
     
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries removeObject:[NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit]];
+        [self.checkedGroceries removeObject:checkedItem];
         [self.checkedCellRows removeObject:indexPath];
     }
     else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries addObject:[NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit]];
+        [self.checkedGroceries addObject:checkedItem];
         [self.checkedCellRows addObject:indexPath];
     }
 }
@@ -168,12 +171,12 @@
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
-            for (NSString* checkedGrocery in self.checkedGroceries) {
-                NSArray *splitGrocery = [checkedGrocery componentsSeparatedByString: @" "];
+            for (CheckedGroceryItem* checkedGrocery in self.checkedGroceries) {
+                NSArray *splitGrocery = [checkedGrocery.groceryItemString componentsSeparatedByString: @" "];
                 NSString *groceryName = [splitGrocery objectAtIndex: 0];
                 NSString *groceryCategory = [splitGrocery objectAtIndex: 1];
                 NSString *groceryPrice = [splitGrocery objectAtIndex:2];
-                NSString *groceryQuantity = [splitGrocery objectAtIndex:3];
+                NSString *groceryQuantity = checkedGrocery.quantityField.text;
                 NSString *groceryUnit = [splitGrocery objectAtIndex:4];
                 if ([groceryPrice isEqualToString:@"N/A"] || [groceryPrice isEqualToString:@""])
                     groceryPrice = @"0";
@@ -182,8 +185,8 @@
                 grocery.name = groceryName;
                 grocery.category = groceryCategory;
                 grocery.price = groceryPrice;
-                grocery.quantity = groceryQuantity;
                 grocery.unit = groceryUnit;
+                grocery.quantity = groceryQuantity;
                 [groceries addObject:grocery]; //Add grocery to grocery list
             }
             

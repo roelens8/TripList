@@ -662,6 +662,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Store" id="15o-9z-tvb"/>
                     <connections>
+                        <outlet property="addStoreTableView" destination="56C-RQ-b5j" id="w8K-jx-QB0"/>
                         <outlet property="storePicker" destination="4X7-Ux-hQX" id="dcu-sI-3XA"/>
                     </connections>
                 </viewController>

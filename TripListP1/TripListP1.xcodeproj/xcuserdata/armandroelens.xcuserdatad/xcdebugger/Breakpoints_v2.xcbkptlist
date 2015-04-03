@@ -6,32 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TripListP1/AddStoreViewController.m"
-            timestampString = "449668042.067422"
+            filePath = "TripListP1/EditStoreViewController.m"
+            timestampString = "449731926.489532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "-addStore:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TripListP1/AddStoreViewController.m"
-            timestampString = "449668042.067422"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "-addStore:"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-editStore:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

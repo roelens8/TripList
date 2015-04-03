@@ -19,6 +19,7 @@
         self.price = [deCoder decodeObjectForKey:@"price"];
         self.unit = [deCoder decodeObjectForKey:@"unit"];
         self.quantity = [deCoder decodeObjectForKey:@"quantity"];
+        self.quantityField = nil;
     }
     return self;
 }

@@ -46,9 +46,9 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"foodCell"];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"editCell"];
     if (cell == nil) {
-        cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"foodCell"];
+        cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"editCell"];
     }
     
     //Create Quanity Field
@@ -83,6 +83,7 @@
         GroceryItem *checkedItem = self.checkedItems[i];
         if ([storeItem.name isEqualToString:checkedItem.name]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            checkedItem.quantityField = quantityField;
             quantityField.text = checkedItem.quantity;
             break;
         }
@@ -125,6 +126,7 @@
         grocery.price = checkedGroceryPrice;
         grocery.unit = checkedGroceryUnit;
         grocery.quantity = quantityField.text;
+        grocery.quantityField = quantityField;
         [self.checkedItems addObject:grocery];
     }
 }
@@ -134,6 +136,10 @@
     Trip *trip = [[Trip alloc]init];
     
     for (GroceryItem *groceryItem in self.checkedItems) {
+        if (groceryItem.quantityField != nil){
+            groceryItem.quantity = groceryItem.quantityField.text;
+            groceryItem.quantityField = nil;
+        }
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         BOOL isInteger = [formatter numberFromString:groceryItem.quantity] != nil;
         if (!isInteger) {

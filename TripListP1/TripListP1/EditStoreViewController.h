@@ -11,6 +11,8 @@
 #import "TripList.h"
 #import "Trip.h"
 #import "CustomCell.h"
+#import "GroceryItem.h"
+#import "CheckedGroceryItem.h"
 
 @interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

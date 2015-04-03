@@ -10,6 +10,7 @@
 		2211827C1AC8CD3D00724FC6 /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2211827B1AC8CD3D00724FC6 /* StoreListViewController.m */; };
 		2211827F1AC8D73B00724FC6 /* AddStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2211827E1AC8D73B00724FC6 /* AddStoreViewController.m */; };
 		221182821AC8E33800724FC6 /* EditStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221182811AC8E33800724FC6 /* EditStoreViewController.m */; };
+		225888221ACE3C620092BAE7 /* CheckedGroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 225888211ACE3C620092BAE7 /* CheckedGroceryItem.m */; };
 		225C40091ACA3D920010F4B5 /* TripList.m in Sources */ = {isa = PBXBuildFile; fileRef = 225C40081ACA3D920010F4B5 /* TripList.m */; };
 		22992BB11AC90851009DD826 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 22992BB01AC90851009DD826 /* Trip.m */; };
 		22992BB31AC91EDC009DD826 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22992BB21AC91EDC009DD826 /* CoreLocation.framework */; };
@@ -43,6 +44,8 @@
 		2211827E1AC8D73B00724FC6 /* AddStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStoreViewController.m; sourceTree = "<group>"; };
 		221182801AC8E33800724FC6 /* EditStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditStoreViewController.h; sourceTree = "<group>"; };
 		221182811AC8E33800724FC6 /* EditStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStoreViewController.m; sourceTree = "<group>"; };
+		225888201ACE3C620092BAE7 /* CheckedGroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckedGroceryItem.h; sourceTree = "<group>"; };
+		225888211ACE3C620092BAE7 /* CheckedGroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckedGroceryItem.m; sourceTree = "<group>"; };
 		225C40071ACA3D920010F4B5 /* TripList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripList.h; sourceTree = "<group>"; };
 		225C40081ACA3D920010F4B5 /* TripList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripList.m; sourceTree = "<group>"; };
 		22992BAF1AC90851009DD826 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				225C40081ACA3D920010F4B5 /* TripList.m */,
 				22DC85341AC1E6D200EE955F /* Images.xcassets */,
 				22DC85361AC1E6D200EE955F /* LaunchScreen.xib */,
+				225888201ACE3C620092BAE7 /* CheckedGroceryItem.h */,
+				225888211ACE3C620092BAE7 /* CheckedGroceryItem.m */,
 				91983A461AC7292F006EF534 /* StoreLocation.h */,
 				91983A441AC7290F006EF534 /* StoreLocation.m */,
 				22992BAF1AC90851009DD826 /* Trip.h */,
@@ -268,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225888221ACE3C620092BAE7 /* CheckedGroceryItem.m in Sources */,
 				2211827F1AC8D73B00724FC6 /* AddStoreViewController.m in Sources */,
 				22DC85301AC1E6D200EE955F /* TripListViewController.m in Sources */,
 				22CE7C791ACBB616003B5650 /* CustomCell.m in Sources */,
