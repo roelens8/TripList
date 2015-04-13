@@ -10,6 +10,8 @@
 
 @interface EditStoreViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *storeTotalLabel;
+@property double total;
 @end
 
 @implementation EditStoreViewController
@@ -25,6 +27,8 @@
     
     self.checkedItems = [[NSMutableArray alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    
+    [self calculateTotal];
 }
 
 - (void)viewDidLoad {
@@ -93,6 +97,7 @@
         }
     }
     [cell addSubview:quantityField];
+    [self calculateTotal];
     return cell;
 }
 
@@ -129,6 +134,8 @@
         grocery.quantityField = quantityField;
         [self.checkedItems addObject:grocery];
     }
+    
+    [self calculateTotal];
 }
 
 - (IBAction)editStore:(id)sender {
@@ -158,6 +165,25 @@
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)calculateTotal
+{
+    self.total = 0;
+    
+    for(CheckedGroceryItem *item in self.checkedItems)
+    {
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber* itemValue = [formatter numberFromString:item.quantityField.text];
+        
+        if (itemValue != nil)
+        {
+            self.total += [itemValue doubleValue] + .0001;
+        }
+    }
+    
+    self.storeTotalLabel.text = [NSString stringWithFormat:@"$%.2f",self.total];
 }
 
 /*

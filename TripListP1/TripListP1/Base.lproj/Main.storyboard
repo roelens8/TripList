@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -718,6 +718,9 @@
                                     <color key="textColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="-4" y="108" width="408" height="393"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="r1Z-sz-4lg" id="5FD-Oe-Fgs"/>
                                     <outlet property="delegate" destination="r1Z-sz-4lg" id="YVv-gW-Hyy"/>
@@ -747,20 +750,46 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbr-aM-DdE">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="509" width="184" height="36"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$$$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS0-Q4-TZB">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="208" y="509" width="176" height="36"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fS0-Q4-TZB" firstAttribute="leading" secondItem="kbr-aM-DdE" secondAttribute="trailing" constant="8" id="0Pa-UA-RJd"/>
+                            <constraint firstItem="fS0-Q4-TZB" firstAttribute="trailing" secondItem="eBB-Kd-k8q" secondAttribute="trailingMargin" id="9p9-lx-D3g"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3nI-7L-Mdc" secondAttribute="trailing" constant="-8" id="Bfk-sx-eoj">
                                 <variation key="widthClass=compact" constant="-20"/>
                             </constraint>
+                            <constraint firstItem="Q39-WB-eBl" firstAttribute="top" secondItem="fS0-Q4-TZB" secondAttribute="bottom" constant="8" id="LfM-tI-WSe"/>
                             <constraint firstItem="Q39-WB-eBl" firstAttribute="top" secondItem="3nI-7L-Mdc" secondAttribute="bottom" constant="8" symbolic="YES" id="Mgc-NQ-Mum"/>
+                            <constraint firstItem="fS0-Q4-TZB" firstAttribute="leading" secondItem="kbr-aM-DdE" secondAttribute="trailing" constant="8" id="Ozc-m0-tiC"/>
                             <constraint firstItem="Q39-WB-eBl" firstAttribute="centerX" secondItem="eBB-Kd-k8q" secondAttribute="centerX" id="PLV-Gs-LAJ"/>
+                            <constraint firstItem="kbr-aM-DdE" firstAttribute="leading" secondItem="eBB-Kd-k8q" secondAttribute="leadingMargin" id="Pzz-Zu-tmw"/>
                             <constraint firstItem="pvR-h4-cao" firstAttribute="trailing" secondItem="Q39-WB-eBl" secondAttribute="trailing" id="Reo-ip-vCu">
                                 <variation key="widthClass=compact" constant="81"/>
                             </constraint>
                             <constraint firstItem="3nI-7L-Mdc" firstAttribute="top" secondItem="pvR-h4-cao" secondAttribute="bottom" constant="14" id="WiI-YM-5zu">
                                 <variation key="widthClass=compact" constant="-2"/>
                             </constraint>
+                            <constraint firstItem="Q39-WB-eBl" firstAttribute="top" secondItem="kbr-aM-DdE" secondAttribute="bottom" constant="8" id="YSm-5g-AWQ"/>
+                            <constraint firstItem="kbr-aM-DdE" firstAttribute="trailing" secondItem="eBB-Kd-k8q" secondAttribute="trailingMargin" id="ZOf-89-EFZ"/>
+                            <constraint firstItem="kbr-aM-DdE" firstAttribute="top" secondItem="3nI-7L-Mdc" secondAttribute="bottom" constant="8" id="Zc5-fA-1vr"/>
                             <constraint firstItem="pvR-h4-cao" firstAttribute="top" secondItem="2Tn-II-PkV" secondAttribute="bottom" constant="14" id="kDE-jz-wOv">
                                 <variation key="widthClass=compact" constant="25"/>
                             </constraint>
@@ -774,16 +803,26 @@
                                 <exclude reference="Q39-WB-eBl"/>
                                 <exclude reference="3nI-7L-Mdc"/>
                                 <exclude reference="pvR-h4-cao"/>
+                                <exclude reference="kbr-aM-DdE"/>
+                                <exclude reference="fS0-Q4-TZB"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="tyo-PU-RCG"/>
-                                <exclude reference="Reo-ip-vCu"/>
-                                <exclude reference="kDE-jz-wOv"/>
-                                <exclude reference="Mgc-NQ-Mum"/>
-                                <exclude reference="PLV-Gs-LAJ"/>
                                 <exclude reference="Bfk-sx-eoj"/>
                                 <exclude reference="WiI-YM-5zu"/>
                                 <exclude reference="nQP-wu-o5l"/>
+                                <exclude reference="Reo-ip-vCu"/>
+                                <exclude reference="kDE-jz-wOv"/>
+                                <exclude reference="Pzz-Zu-tmw"/>
+                                <exclude reference="ZOf-89-EFZ"/>
+                                <exclude reference="Zc5-fA-1vr"/>
+                                <exclude reference="0Pa-UA-RJd"/>
+                                <exclude reference="9p9-lx-D3g"/>
+                                <exclude reference="Ozc-m0-tiC"/>
+                                <exclude reference="LfM-tI-WSe"/>
+                                <exclude reference="Mgc-NQ-Mum"/>
+                                <exclude reference="PLV-Gs-LAJ"/>
+                                <exclude reference="YSm-5g-AWQ"/>
+                                <exclude reference="tyo-PU-RCG"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -791,22 +830,33 @@
                                 <include reference="Q39-WB-eBl"/>
                                 <include reference="3nI-7L-Mdc"/>
                                 <include reference="pvR-h4-cao"/>
+                                <include reference="kbr-aM-DdE"/>
+                                <include reference="fS0-Q4-TZB"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="tyo-PU-RCG"/>
-                                <include reference="Reo-ip-vCu"/>
-                                <include reference="kDE-jz-wOv"/>
-                                <include reference="Mgc-NQ-Mum"/>
-                                <include reference="PLV-Gs-LAJ"/>
                                 <include reference="Bfk-sx-eoj"/>
                                 <include reference="WiI-YM-5zu"/>
                                 <include reference="nQP-wu-o5l"/>
+                                <include reference="Reo-ip-vCu"/>
+                                <include reference="kDE-jz-wOv"/>
+                                <include reference="Pzz-Zu-tmw"/>
+                                <exclude reference="ZOf-89-EFZ"/>
+                                <include reference="Zc5-fA-1vr"/>
+                                <include reference="0Pa-UA-RJd"/>
+                                <include reference="9p9-lx-D3g"/>
+                                <include reference="Ozc-m0-tiC"/>
+                                <include reference="LfM-tI-WSe"/>
+                                <exclude reference="Mgc-NQ-Mum"/>
+                                <include reference="PLV-Gs-LAJ"/>
+                                <include reference="YSm-5g-AWQ"/>
+                                <include reference="tyo-PU-RCG"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Shopping List" id="f5s-XQ-c1y"/>
                     <connections>
                         <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                        <outlet property="storeTotalLabel" destination="fS0-Q4-TZB" id="R14-yJ-G8n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFe-XG-ceX" userLabel="First Responder" sceneMemberID="firstResponder"/>
