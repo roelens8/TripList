@@ -14,7 +14,7 @@
 #import "GroceryItem.h"
 #import "CheckedGroceryItem.h"
 
-@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
 
 @property NSMutableArray *storeItems; //Store Names - NSString
 @property NSMutableArray *checkedItems; //Shopping List for current Store - GroceryItem
