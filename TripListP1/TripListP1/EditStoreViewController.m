@@ -9,7 +9,7 @@
 #import "EditStoreViewController.h"
 
 @interface EditStoreViewController ()
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *storeTotalLabel;
 @property double total;
 @end
@@ -19,15 +19,15 @@
 -(void)viewWillAppear:(BOOL)animated {
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;
-    self.currentStore.text = tripList.currentStore;
+    
+    UINavigationItem* navItem = [self navigationItem];
+    navItem.title = tripList.currentStore;
     
     AppDelegate *app = [AppDelegate instance];
-    self.storeItems = [[NSMutableArray alloc]init];
     self.storeItems = app.storeItems;
     
     self.checkedItems = [[NSMutableArray alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
-    
     [self calculateTotal];
 }
 
@@ -39,6 +39,38 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    if(searchBar.text != nil && searchBar.text.length > 0)
+    {
+        self.storeItems = [[NSMutableArray alloc] init];
+        
+        for(GroceryItem* item in self.storeItems)
+        {
+            if( [self item:item ContainsQuery:searchBar.text])
+            {
+                [self.storeItems addObject:item];
+            }
+        }
+    }
+    else
+    {
+        self.storeItems = [AppDelegate instance].storeItems;
+    }
+    
+    [self.tableView reloadData];
+}
+
+-(bool)item:(GroceryItem *)aGroceryItem ContainsQuery:(NSString*)queryString
+{
+    return  [aGroceryItem.category caseInsensitiveCompare:queryString] ||
+    [aGroceryItem.name caseInsensitiveCompare:queryString] ||
+    [aGroceryItem.unit caseInsensitiveCompare:queryString] ||
+    [aGroceryItem.price caseInsensitiveCompare:queryString];
+    
+    return false;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -156,7 +188,7 @@
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
-            [trip.shoppingList setObject:self.checkedItems forKey:self.currentStore.text];
+            [trip.shoppingList setObject:self.checkedItems forKey:tripList.currentStore];
             tripList.currentTrip = trip;
             tripList.trips[i] = trip;
             break;
