@@ -9,7 +9,9 @@
 #import "EditStoreViewController.h"
 
 @interface EditStoreViewController ()
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *storeTotalLabel;
+@property double total;
 @end
 
 @implementation EditStoreViewController
@@ -17,14 +19,17 @@
 -(void)viewWillAppear:(BOOL)animated {
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;
-    self.currentStore.text = tripList.currentStore;
+    
+    UINavigationItem* navItem = [self navigationItem];
+    navItem.title = tripList.currentStore;
     
     AppDelegate *app = [AppDelegate instance];
-    self.storeItems = [[NSMutableArray alloc]init];
     self.storeItems = app.storeItems;
     
     self.checkedItems = [[NSMutableArray alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    
+    [self calculateTotal];
 }
 
 - (void)viewDidLoad {
@@ -35,6 +40,108 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self resignFirstResponder];
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    if (![self.searchBar isFirstResponder])
+    {
+        [self.searchBar becomeFirstResponder];
+    }
+    
+    if(searchBar.text.length == 0)
+    {
+        [self filterStoreItems:searchBar.text];
+    }
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    if ([self.searchBar isFirstResponder])
+    {
+        [self.searchBar resignFirstResponder];
+    }
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchText.length == 0 && searchBar.isFirstResponder)
+    {
+        [searchBar resignFirstResponder];
+    }
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    self.searchBar.text = @"";
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self filterStoreItems:searchBar.text];
+}
+
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(!textField.isFirstResponder)
+    {
+        [textField becomeFirstResponder];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField.isFirstResponder)
+    {
+        [textField resignFirstResponder];
+    }
+    return true;
+}
+
+-(void)filterStoreItems:(NSString*)withQuery
+{
+    self.storeItems = [AppDelegate instance].storeItems;
+    
+    if(withQuery != nil && withQuery.length > 0)
+    {
+        NSMutableArray* filteredItems = [[NSMutableArray alloc] init];
+        
+        for(GroceryItem* groceryItem in self.storeItems)
+        {
+            if([self item:groceryItem ContainsQuery:withQuery])
+            {
+                [filteredItems addObject:groceryItem];
+            }
+        }
+        
+        self.storeItems = filteredItems;
+    }
+    
+    [self.tableView reloadData];
+}
+
+-(bool)item:(GroceryItem *)aGroceryItem ContainsQuery:(NSString*)queryString
+{
+    if (aGroceryItem != nil && queryString != nil)
+    {
+        @try
+        {
+            bool result = ([aGroceryItem.name caseInsensitiveCompare:queryString] == NSOrderedSame) ||
+            ([aGroceryItem.category caseInsensitiveCompare:queryString] == NSOrderedSame) ||
+            ([aGroceryItem.price caseInsensitiveCompare:queryString] == NSOrderedSame);
+            return result;
+        }
+        @catch(NSException* ex) {}
+        
+    }
+    
+    return false;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -61,6 +168,7 @@
     quantityField.keyboardType = UIKeyboardTypeDefault;
     quantityField.returnKeyType = UIReturnKeyDone;
     quantityField.clearButtonMode = UITextFieldViewModeNever;
+    quantityField.delegate = self;
     [quantityField setEnabled: YES];
     
     //Display Store Items
@@ -93,6 +201,7 @@
         }
     }
     [cell addSubview:quantityField];
+    [self calculateTotal];
     return cell;
 }
 
@@ -129,6 +238,8 @@
         grocery.quantityField = quantityField;
         [self.checkedItems addObject:grocery];
     }
+    
+    [self calculateTotal];
 }
 
 - (IBAction)editStore:(id)sender {
@@ -149,7 +260,7 @@
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
-            [trip.shoppingList setObject:self.checkedItems forKey:self.currentStore.text];
+            [trip.shoppingList setObject:self.checkedItems forKey:tripList.currentStore];
             tripList.currentTrip = trip;
             tripList.trips[i] = trip;
             break;
@@ -158,6 +269,25 @@
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)calculateTotal
+{
+    self.total = 0;
+    
+    for(CheckedGroceryItem *item in self.checkedItems)
+    {
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber* itemValue = [formatter numberFromString:item.quantityField.text];
+        
+        if (itemValue != nil)
+        {
+            self.total += [itemValue doubleValue] + .0001;
+        }
+    }
+    
+    self.storeTotalLabel.text = [NSString stringWithFormat:@"$%.2f",self.total];
 }
 
 /*
