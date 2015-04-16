@@ -570,9 +570,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Store" id="15o-9z-tvb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="WCu-gq-bh6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="wOB-Tn-zpe">
                             <connections>
-                                <action selector="goToSearch:" destination="jQK-96-sy4" id="ZJX-Us-4mZ"/>
+                                <action selector="goToSearch:" destination="jQK-96-sy4" id="LNM-MJ-P52"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -631,24 +631,6 @@
                                     <action selector="editStore:" destination="r1Z-sz-4lg" eventType="touchUpInside" id="dwx-MB-XkN"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3nI-7L-Mdc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gw-fs-ThI">
-                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <color key="textColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <connections>
-                                    <outlet property="dataSource" destination="r1Z-sz-4lg" id="5FD-Oe-Fgs"/>
-                                    <outlet property="delegate" destination="r1Z-sz-4lg" id="YVv-gW-Hyy"/>
-                                </connections>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Store Name)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-h4-cao">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -673,6 +655,32 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3nI-7L-Mdc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gw-fs-ThI">
+                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="textColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <searchBar key="tableFooterView" contentMode="redraw" placeholder="Search for Grocery Items" id="pFf-Sf-1Zg">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="r1Z-sz-4lg" id="PoM-kB-RJY"/>
+                                    </connections>
+                                </searchBar>
+                                <connections>
+                                    <outlet property="dataSource" destination="r1Z-sz-4lg" id="5FD-Oe-Fgs"/>
+                                    <outlet property="delegate" destination="r1Z-sz-4lg" id="YVv-gW-Hyy"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -698,8 +706,8 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Q39-WB-eBl"/>
-                                <exclude reference="3nI-7L-Mdc"/>
                                 <exclude reference="pvR-h4-cao"/>
+                                <exclude reference="3nI-7L-Mdc"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="tyo-PU-RCG"/>
@@ -715,8 +723,8 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Q39-WB-eBl"/>
-                                <include reference="3nI-7L-Mdc"/>
                                 <include reference="pvR-h4-cao"/>
+                                <include reference="3nI-7L-Mdc"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="tyo-PU-RCG"/>
@@ -730,12 +738,29 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit Shopping List" id="f5s-XQ-c1y"/>
+                    <navigationItem key="navigationItem" title="Edit Shopping List" id="f5s-XQ-c1y">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="JpZ-wK-rt9">
+                            <connections>
+                                <action selector="goToSearch:" destination="r1Z-sz-4lg" id="uQH-El-utb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                        <outlet property="itemSearchBar" destination="pFf-Sf-1Zg" id="7g1-pG-ywn"/>
+                        <outlet property="searchDisplayController" destination="sws-rh-B3I" id="GG3-M0-XyN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFe-XG-ceX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="sws-rh-B3I">
+                    <connections>
+                        <outlet property="delegate" destination="r1Z-sz-4lg" id="rhM-Lv-tfB"/>
+                        <outlet property="searchBar" destination="pFf-Sf-1Zg" id="MDZ-Vm-HId"/>
+                        <outlet property="searchContentsController" destination="r1Z-sz-4lg" id="tXU-WB-6YU"/>
+                        <outlet property="searchResultsDataSource" destination="r1Z-sz-4lg" id="OYp-I0-1zj"/>
+                        <outlet property="searchResultsDelegate" destination="r1Z-sz-4lg" id="3ww-XW-T9q"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3223.5" y="295"/>
         </scene>

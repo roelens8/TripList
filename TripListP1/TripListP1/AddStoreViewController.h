@@ -13,7 +13,7 @@
 #import "CustomCell.h"
 #import "CheckedGroceryItem.h"
 
-@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property NSMutableArray *stores; //Array of all Stores
 @property NSMutableArray *storeItems; //Array of Gorceries a store sells
