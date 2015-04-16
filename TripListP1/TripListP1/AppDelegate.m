@@ -134,7 +134,7 @@
 
 //Jacob P
 - (void)populateGroceryItems {
-    NSString *urlString = [NSString stringWithFormat:@"https://api.myjson.com/bins/1dpc7"];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.myjson.com/bins/2m0ep"];
     NSURL *requestURL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:(requestURL)];
     
