@@ -32,6 +32,9 @@
         [tempStoreNameList addObject:store.name];
     }
     [self.storeNames addObjectsFromArray:[[NSSet setWithArray:tempStoreNameList] allObjects]];
+    
+    //Initialize the filteredStoreItems array
+    self.filteredStoreItems = [NSMutableArray arrayWithCapacity:[self.storeItems count]];
 }
 
 - (void)viewDidLoad {
@@ -82,7 +85,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.storeItems count];
+    //Determine whether the normal table or the search results table is being displayed and based on that return the appropriate count
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredStoreItems count];
+    } else {
+        return [self.storeItems count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,7 +114,14 @@
     [cell addSubview:quantityField];
     
     //Display Store Items
-    GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    //Check to see whether the normal table or the search results table is being displayed from the proper array
+    GroceryItem *storeItem;
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        storeItem = [self.filteredStoreItems objectAtIndex:indexPath.row];
+    } else {
+        storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    }
+    
     NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
@@ -133,9 +148,29 @@
     return cell;
 }
 
+#pragma mark Content Filtering
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text
+    // Clear all of the items from the filtered array
+    [self.filteredStoreItems removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",searchText];
+    _filteredStoreItems = [NSMutableArray arrayWithArray:[_storeItems filteredArrayUsingPredicate:predicate]];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Makes the table data source reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
-
+    
     //Checked gorceries names and quantities will be put into an array
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @" "];
@@ -192,16 +227,16 @@
             
             //If Store is already in the store list, then alert
             if (self.storePickerSelectedRow == 0) {
-                self.storePickerSelectedStore = [self.storeNames objectAtIndex:0]; 
+                self.storePickerSelectedStore = [self.storeNames objectAtIndex:0];
             }
             for (NSString *storeTemp in [trip.shoppingList allKeys]) {
                 if ([self.storePickerSelectedStore isEqualToString:storeTemp]) {
                     UIAlertView *alert = [UIAlertView alloc];
                     alert = [alert  initWithTitle:@"Store Already Exists"
-                                    message: @"Please select another store!"
-                                    delegate:self
-                                    cancelButtonTitle:nil
-                                    otherButtonTitles:@"OK",nil];
+                                          message: @"Please select another store!"
+                                         delegate:self
+                                cancelButtonTitle:nil
+                                otherButtonTitles:@"OK",nil];
                     [alert show];
                     return;
                 }
@@ -225,14 +260,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(IBAction)goToSearch:(id)sender {
+    [self.itemSearchBar becomeFirstResponder];
 }
-*/
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
