@@ -25,6 +25,7 @@
     
     self.checkedItems = [[NSMutableArray alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    self.filteredStoreItems = [NSMutableArray arrayWithCapacity:[self.storeItems count]];
 }
 
 - (void)viewDidLoad {
@@ -42,7 +43,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.storeItems count];
+    //Determine whether the normal table or the search results table is being displayed and based on that return the appropriate count
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredStoreItems count];
+    } else {
+        return [self.storeItems count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,7 +57,7 @@
         cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"editCell"];
     }
     
-    //Create Quanity Field
+    //Create Quantity Field
     UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
@@ -64,7 +70,13 @@
     [quantityField setEnabled: YES];
     
     //Display Store Items
-    GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    //Check to see whether the normal table or the search results table is being displayed from the proper array
+    GroceryItem *storeItem;
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        storeItem = [self.filteredStoreItems objectAtIndex:indexPath.row];
+    } else {
+        storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    }
     NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
@@ -95,6 +107,26 @@
     [cell addSubview:quantityField];
     return cell;
 }
+
+#pragma mark Content Filtering
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text
+    // Clear all of the items from the filtered array
+    [self.filteredStoreItems removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",searchText];
+    _filteredStoreItems = [NSMutableArray arrayWithArray:[_storeItems filteredArrayUsingPredicate:predicate]];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Makes the table data source reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -169,5 +201,9 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+-(IBAction)goToSearch:(id)sender {
+    [self.itemSearchBar becomeFirstResponder];
+}
 
 @end

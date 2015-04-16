@@ -14,12 +14,15 @@
 #import "GroceryItem.h"
 #import "CheckedGroceryItem.h"
 
-@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface EditStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property NSMutableArray *storeItems; //Store Names - NSString
+@property NSMutableArray *filteredStoreItems; //filtered array of groceries for the search bar
 @property NSMutableArray *checkedItems; //Shopping List for current Store - GroceryItem
 
 @property (strong, nonatomic) IBOutlet UILabel *currentStore;
+
+@property IBOutlet UISearchBar *itemSearchBar;
 
 - (IBAction)editStore:(id)sender;
 

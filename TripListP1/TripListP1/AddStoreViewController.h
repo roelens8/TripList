@@ -13,10 +13,11 @@
 #import "CustomCell.h"
 #import "CheckedGroceryItem.h"
 
-@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface AddStoreViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property NSMutableArray *stores; //Array of all Stores
 @property NSMutableArray *storeItems; //Array of Gorceries a store sells
+@property NSMutableArray *filteredStoreItems; //Filtered array of groceries for the Search Bar
 @property NSMutableArray *storeNames; //Array of all Store names
 @property NSMutableArray *checkedGroceries; //Array containing strings that concatenate all grocery data
 @property NSMutableArray *checkedCellRows; //Indexes of cells of the groceries the user selected
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 @property (strong, nonatomic) IBOutlet UITableView *addStoreTableView;
 
+@property IBOutlet UISearchBar *itemSearchBar;
 - (IBAction)addStore:(id)sender;
 
 @end
