@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -747,6 +747,15 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Kw-Qa-eq4">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="285" y="66" width="75" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -774,6 +783,7 @@
                                 <exclude reference="Q39-WB-eBl"/>
                                 <exclude reference="3nI-7L-Mdc"/>
                                 <exclude reference="pvR-h4-cao"/>
+                                <exclude reference="1Kw-Qa-eq4"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="tyo-PU-RCG"/>
@@ -791,6 +801,7 @@
                                 <include reference="Q39-WB-eBl"/>
                                 <include reference="3nI-7L-Mdc"/>
                                 <include reference="pvR-h4-cao"/>
+                                <include reference="1Kw-Qa-eq4"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="tyo-PU-RCG"/>
@@ -807,6 +818,7 @@
                     <navigationItem key="navigationItem" title="Edit Shopping List" id="f5s-XQ-c1y"/>
                     <connections>
                         <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                        <outlet property="storeTotalLabel" destination="1Kw-Qa-eq4" id="gAS-uP-WyL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFe-XG-ceX" userLabel="First Responder" sceneMemberID="firstResponder"/>

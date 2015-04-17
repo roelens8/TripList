@@ -24,5 +24,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *storeTableView;
 
 -(void)calculateTripTotal;
+-(NSString*)calculateStoreTotal:(NSArray*)groceries;
 
 @end

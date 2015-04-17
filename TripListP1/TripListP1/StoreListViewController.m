@@ -52,18 +52,22 @@
     
     if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
+        NSString* storePrice = [self calculateStoreTotal:[tripList.currentTrip.shoppingList objectForKey:([self.storeNames objectAtIndex:indexPath.row])]];
+        cell.restorationIdentifier = [self.storeNames objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.storeNames objectAtIndex:indexPath.row],storePrice];
     }
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
 
     return cell;
 }
 
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Navigate to Edit a Store View
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
-    tripList.currentStore = cell.textLabel.text;
+    tripList.currentStore = cell.restorationIdentifier;
     
     self.editStoreVC = [[EditStoreViewController  alloc]init];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
@@ -75,7 +79,7 @@
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = tripList.currentTrip;
-    [trip.shoppingList removeObjectForKey:cell.textLabel.text];
+    [trip.shoppingList removeObjectForKey:cell.restorationIdentifier];
     [tableView reloadData];
     
     [self calculateTripTotal];
@@ -107,6 +111,26 @@
     }
 }
 
+- (NSString*)calculateStoreTotal:(NSArray*)groceries{
+       if (groceries != nil) {
+        NSNumber *tripTotal = 0;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        for (GroceryItem *grocery in groceries) {
+                NSNumber *price = [formatter numberFromString:grocery.price];
+                if (grocery.quantity == nil) {
+                    grocery.quantity = 0;
+                }
+                tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
+        }
+           [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            NSString* storePrice = [formatter stringFromNumber:tripTotal];
+           return storePrice;
+        
+    }
+    return 0;
+}
+ 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 }

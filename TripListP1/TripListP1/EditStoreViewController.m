@@ -9,7 +9,7 @@
 #import "EditStoreViewController.h"
 
 @interface EditStoreViewController ()
-
+@property (strong, nonatomic) IBOutlet UILabel *storeTotalLabel;
 @end
 
 @implementation EditStoreViewController
@@ -25,6 +25,7 @@
     
     self.checkedItems = [[NSMutableArray alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    [self calculateStoreTotal];
 }
 
 - (void)viewDidLoad {
@@ -129,7 +130,33 @@
         grocery.quantityField = quantityField;
         [self.checkedItems addObject:grocery];
     }
+    [self calculateStoreTotal];
 }
+
+
+- (void)calculateStoreTotal {
+    if (self.checkedItems != nil) {
+        NSNumber *tripTotal = 0;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        for (GroceryItem *grocery in self.checkedItems) {
+            NSNumber *price = [formatter numberFromString:grocery.price];
+            if (grocery.quantity == nil) {
+                grocery.quantity = 0;
+            }
+            tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
+        }
+        if (tripTotal == 0 || tripTotal == nil)
+            self.storeTotalLabel.text = @"$0.00";
+        else{
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            NSString* storePrice = [formatter stringFromNumber:tripTotal];
+            self.storeTotalLabel.text = storePrice;
+        }
+    }
+}
+
 
 - (IBAction)editStore:(id)sender {
     TripList* tripList = [TripList sharedTripList];
