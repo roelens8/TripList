@@ -84,6 +84,8 @@
     //[self.navigationController pushViewController:self animated:YES];
 }
 
+
+
 - (void)calculateTripTotal {
     TripList *tripList = [TripList sharedTripList];
     self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
@@ -100,6 +102,28 @@
                 tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
             }
         }
+        
+        // add a budget alert
+        
+        
+        
+        NSInteger tripbudget =@50;
+        NSInteger total = (int)tripTotal;
+        
+        if(total > tripbudget)
+        {
+            UIAlertView *alert = [UIAlertView alloc];
+            alert = [alert  initWithTitle:@"Budegt"
+                                  message: @"Total is over the budegt!"
+                                 delegate:self
+                        cancelButtonTitle:nil
+                        otherButtonTitles:@"OK",nil];
+            [alert show];
+            
+        }
+        
+        //
+
         if (tripTotal == 0 || tripTotal == nil)
             self.tripTotal.text = @"0.00";
         else
