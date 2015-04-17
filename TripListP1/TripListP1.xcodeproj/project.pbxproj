@@ -23,6 +23,8 @@
 		22DC85381AC1E6D200EE955F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DC85361AC1E6D200EE955F /* LaunchScreen.xib */; };
 		22DC85441AC1E6D200EE955F /* TripListP1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC85431AC1E6D200EE955F /* TripListP1Tests.m */; };
 		22FEFBC21AC4A9A2007A6ED5 /* AddTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FEFBC11AC4A9A2007A6ED5 /* AddTripViewController.m */; };
+		2C88062B1AE0DA550071D3EB /* gray metal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C88062A1AE0DA550071D3EB /* gray metal.jpg */; };
+		2C88062F1AE0DD610071D3EB /* shopping cart icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C88062E1AE0DD610071D3EB /* shopping cart icon.png */; };
 		91983A451AC7290F006EF534 /* StoreLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 91983A441AC7290F006EF534 /* StoreLocation.m */; };
 		91983A491AC7471D006EF534 /* GroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 91983A481AC7471D006EF534 /* GroceryItem.m */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		22DC85431AC1E6D200EE955F /* TripListP1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListP1Tests.m; sourceTree = "<group>"; };
 		22FEFBC01AC4A9A2007A6ED5 /* AddTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTripViewController.h; sourceTree = "<group>"; };
 		22FEFBC11AC4A9A2007A6ED5 /* AddTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTripViewController.m; sourceTree = "<group>"; };
+		2C88062A1AE0DA550071D3EB /* gray metal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gray metal.jpg"; sourceTree = "<group>"; };
+		2C88062E1AE0DD610071D3EB /* shopping cart icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopping cart icon.png"; sourceTree = "<group>"; };
 		91983A441AC7290F006EF534 /* StoreLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreLocation.m; sourceTree = "<group>"; };
 		91983A461AC7292F006EF534 /* StoreLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreLocation.h; sourceTree = "<group>"; };
 		91983A471AC7470E006EF534 /* GroceryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroceryItem.h; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				22DC85281AC1E6D200EE955F /* Info.plist */,
+				2C88062E1AE0DD610071D3EB /* shopping cart icon.png */,
+				2C88062A1AE0DA550071D3EB /* gray metal.jpg */,
 				22DC85291AC1E6D200EE955F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -253,9 +259,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C88062B1AE0DA550071D3EB /* gray metal.jpg in Resources */,
 				22DC85331AC1E6D200EE955F /* Main.storyboard in Resources */,
 				22DC85381AC1E6D200EE955F /* LaunchScreen.xib in Resources */,
 				22DC85351AC1E6D200EE955F /* Images.xcassets in Resources */,
+				2C88062F1AE0DD610071D3EB /* shopping cart icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
