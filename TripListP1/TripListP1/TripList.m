@@ -10,7 +10,22 @@
 
 @implementation TripList
 
+@dynamic trips;
+@dynamic currentTrip;
+@dynamic currentStore;
+@dynamic userName;
+
 static TripList *theTripList = nil;
+
++(NSString *)parseClassName
+{
+    return @"TripList";
+}
+
++(void)initialize {
+    [super initialize];
+    [self registerSubclass];
+}
 
 - (id)init {
     self = [super init];

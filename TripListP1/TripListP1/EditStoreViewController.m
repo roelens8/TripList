@@ -23,7 +23,7 @@
     self.storeItems = [[NSMutableArray alloc]init];
     self.storeItems = app.storeItems;
     
-    self.checkedItems = [[NSMutableArray alloc]init];
+    self.quantityFieldMap = [[NSMutableDictionary alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
 }
 
@@ -61,6 +61,7 @@
     quantityField.keyboardType = UIKeyboardTypeDefault;
     quantityField.returnKeyType = UIReturnKeyDone;
     quantityField.clearButtonMode = UITextFieldViewModeNever;
+    quantityField.text = @"0";
     [quantityField setEnabled: YES];
     
     //Display Store Items
@@ -83,13 +84,12 @@
         GroceryItem *checkedItem = self.checkedItems[i];
         if ([storeItem.name isEqualToString:checkedItem.name]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            checkedItem.quantityField = quantityField;
+            [self.quantityFieldMap setObject:quantityField forKey:checkedItem.name];
             quantityField.text = checkedItem.quantity;
             break;
         }
         else {
             cell.accessoryType = UITableViewCellAccessoryNone;
-            quantityField.text = @"0";
         }
     }
     [cell addSubview:quantityField];
@@ -107,6 +107,7 @@
         for (GroceryItem *checkedItem in self.checkedItems) {
             if ([checkedItem.name isEqualToString:checkedGroceryName]) {
                 [self.checkedItems removeObject:checkedItem];
+                [self.quantityFieldMap removeObjectForKey:checkedItem.name];
                 break;
             }
         }
@@ -126,7 +127,7 @@
         grocery.price = checkedGroceryPrice;
         grocery.unit = checkedGroceryUnit;
         grocery.quantity = quantityField.text;
-        grocery.quantityField = quantityField;
+        [self.quantityFieldMap setObject:quantityField forKey:grocery.name];
         [self.checkedItems addObject:grocery];
     }
 }
@@ -136,9 +137,10 @@
     Trip *trip = [[Trip alloc]init];
     
     for (GroceryItem *groceryItem in self.checkedItems) {
-        if (groceryItem.quantityField != nil){
-            groceryItem.quantity = groceryItem.quantityField.text;
-            groceryItem.quantityField = nil;
+        if (self.quantityFieldMap != nil){
+            UITextField *field = [self.quantityFieldMap objectForKey:groceryItem.name];
+            NSString *quanity = field.text;
+            groceryItem.quantity = quanity;
         }
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         BOOL isInteger = [formatter numberFromString:groceryItem.quantity] != nil;
@@ -146,6 +148,7 @@
             groceryItem.quantity = @"0";
         }
     }
+    self.quantityFieldMap = nil;
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];

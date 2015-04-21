@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 #import "Trip.h"
 
-@interface TripList : NSObject
+@interface TripList : PFObject <PFSubclassing>
 
 @property NSMutableArray *trips;
 @property Trip *currentTrip; //For knowing which trip is currently selected
 @property NSString *currentStore; //For knowing which store is currently selected
+@property NSString *userName; //Username for retrieving TripList
 
 + (TripList*)sharedTripList;
 

@@ -14,6 +14,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self
+                                           action:@selector(hideKeyBoard)];
+    [self.view addGestureRecognizer:tapGesture];
     self.tripDatePicker.minimumDate = [[NSDate alloc] initWithTimeIntervalSinceNow:(NSTimeInterval) 0];
     // Do any additional setup after loading the view.
 }
@@ -51,6 +55,10 @@
     
     [self.navigationController popToViewController:(UIViewController*)self.tripListVC animated:YES];
     NSLog(@"%@ %@", self.tripNameField.text, self.tripDatePicker.date);
+}
+
+-(void)hideKeyBoard {
+    [self.tripNameField resignFirstResponder];
 }
 
 @end

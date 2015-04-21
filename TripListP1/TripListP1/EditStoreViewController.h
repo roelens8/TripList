@@ -18,6 +18,7 @@
 
 @property NSMutableArray *storeItems; //Store Names - NSString
 @property NSMutableArray *checkedItems; //Shopping List for current Store - GroceryItem
+@property NSMutableDictionary *quantityFieldMap; ////If quantity was changed after checking the grocery item
 
 @property (strong, nonatomic) IBOutlet UILabel *currentStore;
 

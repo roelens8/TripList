@@ -11,6 +11,22 @@
 
 @implementation GroceryItem
 
+@dynamic category;
+@dynamic name;
+@dynamic quantity;
+@dynamic price;
+@dynamic unit;
+
++(NSString *)parseClassName
+{
+    return @"GroceryItem";
+}
+
++(void)initialize {
+    [super initialize];
+    [self registerSubclass];
+}
+
 - (id)initWithCoder:(NSCoder *)deCoder {
     if ((self = [super init])) {
         // Decode the property values by key, and assign them to the correct ivars
@@ -19,7 +35,6 @@
         self.price = [deCoder decodeObjectForKey:@"price"];
         self.unit = [deCoder decodeObjectForKey:@"unit"];
         self.quantity = [deCoder decodeObjectForKey:@"quantity"];
-        self.quantityField = nil;
     }
     return self;
 }
@@ -38,11 +53,11 @@
     if(self = [self init]) {
         
         // Assign all properties with keyed values from the dictionary
-        _category = [jsonDictionary objectForKey:@"category"];
-        _name = [jsonDictionary objectForKey:@"name"];
-        _quantity = [jsonDictionary objectForKey:@"quantity"];
-        _price = [jsonDictionary objectForKey:@"price"];
-        _unit = [jsonDictionary objectForKey:@"unit"];
+        self.category = [jsonDictionary objectForKey:@"category"];
+        self.name = [jsonDictionary objectForKey:@"name"];
+        self.quantity = [jsonDictionary objectForKey:@"quantity"];
+        self.price = [jsonDictionary objectForKey:@"price"];
+        self.unit = [jsonDictionary objectForKey:@"unit"];
         
     }
     return self;

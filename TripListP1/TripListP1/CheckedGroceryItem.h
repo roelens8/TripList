@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GroceryItem.h"
 
-//This class is used to represent check items in the AddStoreViewController
+//This class is used to represent checked items in the AddStoreViewController
 @interface CheckedGroceryItem : NSObject
 
-@property NSString* groceryItemString; //Used in AddStoreViewController
+@property NSString* groceryItemString; //Used in AddStoreViewController - String form of Grocery Item
 @property UITextField* quantityField;
 
 @end

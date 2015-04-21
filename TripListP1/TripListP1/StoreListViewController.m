@@ -81,7 +81,6 @@
     [self calculateTripTotal];
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
-    //[self.navigationController pushViewController:self animated:YES];
 }
 
 - (void)calculateTripTotal {

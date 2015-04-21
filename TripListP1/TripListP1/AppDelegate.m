@@ -16,6 +16,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //Enable Local Datastore
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:@"parseAppId" clientKey:@"parseClientKey"];
+    //Initialize Parse.
+    [Parse setApplicationId:@"jds76phixswhTcwBr3ms0lh6PBdklp85dnqkrOkx"
+                  clientKey:@"MP2arnY3WRUEn11hUEgBwaAq71KW7hFCOMksTZkh"];
+    
+    //Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     _PlacesAPIkey = @"AIzaSyDxw5AZ3wflWT5YDNuHJNVdPSi9Lm7hV9M";
     // Async mutithreaded method call to retreive google nearby places while the user does other things.
     dispatch_queue_t globalConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
@@ -70,6 +80,7 @@
 
 - (void)saveTripData {
     TripList *tripList = [TripList sharedTripList];
+    [tripList saveInBackground];
     if (tripList != nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
