@@ -104,6 +104,10 @@
         [query getObjectInBackgroundWithId:tripList.tripId block:^(PFObject *userTrip, NSError *error) {
             userTrip[@"Trips"] = data;
             [userTrip saveInBackground];
+            if (!error)
+                NSLog(@"%@", @"Successly saved to Parse!");
+            else
+                NSLog(@"%@", @"Error saving to Parse!");
         }];
     }
     if (tripList != nil) {
