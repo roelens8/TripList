@@ -76,7 +76,8 @@
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = tripList.currentTrip;
     [trip.shoppingList removeObjectForKey:cell.textLabel.text];
-    [tableView reloadData];
+    
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self calculateTripTotal];
     AppDelegate *app = [AppDelegate instance];

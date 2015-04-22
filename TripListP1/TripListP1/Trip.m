@@ -10,20 +10,6 @@
 
 @implementation Trip
 
-@dynamic name;
-@dynamic date;
-@dynamic shoppingList;
-
-+(NSString *)parseClassName
-{
-    return @"Trip";
-}
-
-+(void)initialize {
-    [super initialize];
-    [self registerSubclass];
-}
-
 - (id)initWithCoder:(NSCoder *)deCoder {
     if ((self = [super init])) {
         // Decode the property values by key, and assign them to the correct ivars

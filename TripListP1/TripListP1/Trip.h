@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
 
-@interface Trip : PFObject <NSCoding, PFSubclassing>
+@interface Trip : NSObject <NSCoding>
 
 @property NSString *name;
 @property NSDate *date;

@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 CSE 394. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 #import "CustomCell.h"
 
-@interface GroceryItem : PFObject <NSCoding, PFSubclassing>
+@interface GroceryItem : NSObject <NSCoding>
 
 @property NSString *category;
 @property NSString *name;
-@property NSString *quantity; //Irrelevant for the Store Object
+@property NSString *quantity;
 @property NSString *price;
 @property NSString *unit;
 

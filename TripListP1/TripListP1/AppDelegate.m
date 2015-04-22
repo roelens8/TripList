@@ -16,10 +16,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //Enable Local Datastore
+    //Enable Parse Local Datastore
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"parseAppId" clientKey:@"parseClientKey"];
-    //Initialize Parse.
+    //Initialize Parse
     [Parse setApplicationId:@"jds76phixswhTcwBr3ms0lh6PBdklp85dnqkrOkx"
                   clientKey:@"MP2arnY3WRUEn11hUEgBwaAq71KW7hFCOMksTZkh"];
     
@@ -78,9 +78,34 @@
     return (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
+//Saves Data to both Parse and local storage
 - (void)saveTripData {
     TripList *tripList = [TripList sharedTripList];
-    [tripList saveInBackground];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tripList.trips];
+    
+    //If it's the first time trips are saved (Insert)
+    if (tripList.tripId == nil) {
+        PFObject *test = [PFObject objectWithClassName:@"TripList"];
+        test[@"Trips"] = data;
+        tripList.userName = @"Test"; //Remove when login is implemented
+        test[@"userName"] = tripList.userName;
+        [test saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                tripList.tripId = [test objectId];
+                NSLog(@"%@", @"Successly saved to Parse");
+            } else {
+                NSLog(@"%@", error.description);
+            }
+        }];
+    }
+    else {
+        //If trips already exist (Update)
+        PFQuery *query = [PFQuery queryWithClassName:@"TripList"];
+        [query getObjectInBackgroundWithId:tripList.tripId block:^(PFObject *userTrip, NSError *error) {
+            userTrip[@"Trips"] = data;
+            [userTrip saveInBackground];
+        }];
+    }
     if (tripList != nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];

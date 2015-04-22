@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
 #import "Trip.h"
+#import "GroceryItem.h"
 
-@interface TripList : PFObject <PFSubclassing>
+@interface TripList : NSObject
 
 @property NSMutableArray *trips;
 @property Trip *currentTrip; //For knowing which trip is currently selected
 @property NSString *currentStore; //For knowing which store is currently selected
-@property NSString *userName; //Username for retrieving TripList
+@property NSString *userName; //Username for retrieveing trips
+@property NSString *tripId; //Id for updating trip
 
 + (TripList*)sharedTripList;
 

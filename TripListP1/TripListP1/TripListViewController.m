@@ -17,17 +17,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //self.tripList = [TripList sharedTripList];
     self.addTripVC = [[AddTripViewController alloc] init];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    /*Parse Test
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+    /*
     PFUser *user = [PFUser user];
     user.username = @"my name";
     user.password = @"my pass";
@@ -43,7 +38,7 @@
             NSString *errorString = [error userInfo][@"error"];
             // Show the errorString somewhere and let the user try again.
         }
-    }];a*/
+    }];*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +81,6 @@
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = [tripList.trips objectAtIndex:indexPath.row];
     if ([cell.textLabel.text isEqualToString:[NSString stringWithFormat:@"   %@", trip.name]]) {
-        //self.tripList.currentTrip = trip;
         tripList.currentTrip = trip;
     }
     self.storeListVC = [[StoreListViewController alloc]init];
@@ -106,7 +100,8 @@
     TripList *tripList = [TripList sharedTripList];
     [tripList.trips removeObjectAtIndex:indexPath.row];
     
-    [tableView reloadData];
+    //[tableView reloadData];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];

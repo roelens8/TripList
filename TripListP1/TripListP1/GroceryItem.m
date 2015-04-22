@@ -11,22 +11,6 @@
 
 @implementation GroceryItem
 
-@dynamic category;
-@dynamic name;
-@dynamic quantity;
-@dynamic price;
-@dynamic unit;
-
-+(NSString *)parseClassName
-{
-    return @"GroceryItem";
-}
-
-+(void)initialize {
-    [super initialize];
-    [self registerSubclass];
-}
-
 - (id)initWithCoder:(NSCoder *)deCoder {
     if ((self = [super init])) {
         // Decode the property values by key, and assign them to the correct ivars

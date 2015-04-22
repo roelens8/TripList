@@ -10,33 +10,31 @@
 
 @implementation TripList
 
-@dynamic trips;
-@dynamic currentTrip;
-@dynamic currentStore;
-@dynamic userName;
-
 static TripList *theTripList = nil;
-
-+(NSString *)parseClassName
-{
-    return @"TripList";
-}
-
-+(void)initialize {
-    [super initialize];
-    [self registerSubclass];
-}
 
 - (id)init {
     self = [super init];
     if (self) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        //Load from local storage
+        /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TripList"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:documentsDirectory]) {
             NSData *data = [NSData dataWithContentsOfFile:filePath];
             self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             NSLog(@"%@", filePath);
+        }*/
+        //Load from Parse storage
+        PFQuery *query = [PFQuery queryWithClassName:@"TripList"];
+        [query whereKey:@"userName" equalTo:@"Test"];
+        NSArray *tripsArray = [query findObjects];
+        if ([tripsArray count] != 0) {
+            PFObject *userTrip = [tripsArray firstObject];
+            NSData *data = userTrip[@"Trips"];
+            self.tripId = [userTrip objectId];
+            self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            self.userName = userTrip[@"userName"];
+            NSLog(@"%@", userTrip);
         }
     }
     return self;
