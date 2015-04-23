@@ -17,7 +17,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBar.hidden = YES;
+    
     self.addTripVC = [[AddTripViewController alloc] init];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -69,7 +73,7 @@
     cell.textLabel.text = [NSString stringWithFormat:@"   %@", trip.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"    %@", theDate];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-    
+    //cell.textLabel.textColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
     return cell;
 }
 

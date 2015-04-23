@@ -15,11 +15,15 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
+
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic)NSString *PlacesAPIkey;
 @property CLLocationManager *locationManager;
 @property NSMutableArray *stores; //All Stores in the system
 @property NSMutableArray *storeItems; //All Items that stores can sell
+
+
+
 
 + (AppDelegate*) instance;
 

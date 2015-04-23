@@ -15,7 +15,9 @@
 @implementation StoreListViewController
 
 - (void) viewWillAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    
     TripList *tripList = [TripList sharedTripList];
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
@@ -44,30 +46,19 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomCell *cell = (CustomCell*)[tableView dequeueReusableCellWithIdentifier:@"storeCell"];
-    TripList *tripList = [TripList sharedTripList];
     if (cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"storeCell"];
-        
-        //If Stores exists then display them
-        Trip *currentTrip = tripList.currentTrip;
-        if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
-            UILabel *storeTotalLabel = [[UILabel alloc] init];
-            [storeTotalLabel setFrame:CGRectMake(300, 10, 80, 30)];
-            storeTotalLabel.backgroundColor=[UIColor clearColor];
-            storeTotalLabel.adjustsFontSizeToFitWidth = YES;
-            storeTotalLabel.tag = 1;
-            [storeTotalLabel setFont:[UIFont boldSystemFontOfSize:20]];
-            [cell.contentView addSubview:storeTotalLabel];
-            
-            cell.textLabel.text = [NSString stringWithFormat:@"  %@",[self.storeNames objectAtIndex:indexPath.row]];
-            cell.restorationIdentifier = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
-        }
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     }
-    NSString *storeTotal = [self calculateStoreTotal:tripList storeIndex:indexPath.row];
-    UILabel *label = (UILabel *)[cell viewWithTag:1];
-    label.text = [NSString stringWithFormat:@"$ %@",storeTotal];
+    //If Stores exist then display them
+    TripList *tripList = [TripList sharedTripList];
+    Trip *currentTrip = tripList.currentTrip;
     
+    if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
+    }
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+
     return cell;
 }
 
@@ -75,9 +66,9 @@
     //Navigate to Edit a Store View
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
-    tripList.currentStore = cell.restorationIdentifier;
+    tripList.currentStore = cell.textLabel.text;
     
-    self.editStoreVC = [[EditStoreViewController alloc] init];
+    self.editStoreVC = [[EditStoreViewController  alloc]init];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.editStoreVC = [storyboard instantiateViewControllerWithIdentifier:@"editStore"];
     [self.navigationController pushViewController:self.editStoreVC animated:YES];
@@ -87,7 +78,7 @@
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = tripList.currentTrip;
-    [trip.shoppingList removeObjectForKey:cell.restorationIdentifier];
+    [trip.shoppingList removeObjectForKey:cell.textLabel.text];
     
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -117,27 +108,6 @@
         else
             self.tripTotal.text = [tripTotal stringValue];
     }
-}
-
-- (NSString*)calculateStoreTotal:(TripList*)tripList storeIndex:(NSInteger)index {
-    NSString *storeName = [self.storeNames objectAtIndex:index];
-    NSMutableArray *itemsForStore = [tripList.currentTrip.shoppingList objectForKey:storeName];
-    NSNumber *storeTotal = 0;
-    if (itemsForStore != nil) {
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        for (GroceryItem *grocery in itemsForStore) {
-            NSNumber *price = [formatter numberFromString:grocery.price];
-            if (grocery.quantity == nil) {
-                grocery.quantity = 0;
-            }
-            storeTotal = [NSNumber numberWithFloat:([storeTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
-        }
-    }
-    if (storeTotal == 0 || storeTotal == nil)
-        return @"0.00";
-    else
-        return [storeTotal stringValue];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

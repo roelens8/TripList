@@ -15,6 +15,11 @@
 @implementation EditStoreViewController
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+  
+    self.navigationController.navigationBar.hidden = NO;
+    
+    
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;
     self.currentStore.text = tripList.currentStore;
@@ -79,11 +84,17 @@
     cell.textLabel.text = itemDescription;
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:13.2];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:14.2];
+    cell.textLabel.textColor = [UIColor whiteColor] ;
+    cell.detailTextLabel.textColor = [UIColor whiteColor] ;
+    
+    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
     
     for (int i = 0; i < [self.checkedItems count]; i++) {
         GroceryItem *checkedItem = self.checkedItems[i];
         if ([storeItem.name isEqualToString:checkedItem.name]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            //cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
             [self.quantityFieldMap setObject:quantityField forKey:checkedItem.name];
             quantityField.text = checkedItem.quantity;
             break;
@@ -101,13 +112,15 @@
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSString *checkedGroceryName = [splitArrayName objectAtIndex: 1];
     
+    //cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
+    
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
         for (GroceryItem *checkedItem in self.checkedItems) {
             if ([checkedItem.name isEqualToString:checkedGroceryName]) {
-                [self.quantityFieldMap removeObjectForKey:checkedItem.name];
                 [self.checkedItems removeObject:checkedItem];
+                [self.quantityFieldMap removeObjectForKey:checkedItem.name];
                 break;
             }
         }

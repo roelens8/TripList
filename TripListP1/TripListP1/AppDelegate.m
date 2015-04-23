@@ -16,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+
     //Enable Parse Local Datastore
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"parseAppId" clientKey:@"parseClientKey"];
@@ -51,6 +52,8 @@
     
     return YES;
 }
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -104,10 +107,6 @@
         [query getObjectInBackgroundWithId:tripList.tripId block:^(PFObject *userTrip, NSError *error) {
             userTrip[@"Trips"] = data;
             [userTrip saveInBackground];
-            if (!error)
-                NSLog(@"%@", @"Successly saved to Parse!");
-            else
-                NSLog(@"%@", @"Error saving to Parse!");
         }];
     }
     if (tripList != nil) {

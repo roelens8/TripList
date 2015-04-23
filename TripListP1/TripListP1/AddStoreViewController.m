@@ -15,6 +15,11 @@
 @implementation AddStoreViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+   
+    
+    self.navigationController.navigationBar.hidden = NO;
+    
+    
     self.stores = [[NSMutableArray alloc]init];
     self.storeItems = [[NSMutableArray alloc]init];
     self.storeNames = [[NSMutableArray alloc]init];
@@ -120,6 +125,11 @@
     cell.textLabel.text = itemDescription;
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:13.2];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:14.2];
+    cell.textLabel.textColor = [UIColor whiteColor] ;
+    cell.detailTextLabel.textColor = [UIColor whiteColor] ;
+    
+    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
     
     for (int i = 0; i < [self.checkedCellRows count]; i++) {
         if (indexPath == self.checkedCellRows[i]) {
