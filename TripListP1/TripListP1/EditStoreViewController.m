@@ -119,8 +119,8 @@
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
         for (GroceryItem *checkedItem in self.checkedItems) {
             if ([checkedItem.name isEqualToString:checkedGroceryName]) {
-                [self.checkedItems removeObject:checkedItem];
                 [self.quantityFieldMap removeObjectForKey:checkedItem.name];
+                [self.checkedItems removeObject:checkedItem];
                 break;
             }
         }

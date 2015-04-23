@@ -68,7 +68,11 @@
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = [tripList.trips objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"MM/dd/YY HH:mm:ss"];
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *usFormatString = [NSDateFormatter dateFormatFromTemplate:@"EdMMM hh:mm a" options:0 locale:usLocale];
+    [dateFormatter setDateFormat:usFormatString];
+
     NSString *theDate = [dateFormatter stringFromDate:trip.date];
     cell.textLabel.text = [NSString stringWithFormat:@"   %@", trip.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"    %@", theDate];
@@ -109,7 +113,7 @@
     
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

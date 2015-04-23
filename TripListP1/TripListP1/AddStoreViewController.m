@@ -16,9 +16,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
    
-    
     self.navigationController.navigationBar.hidden = NO;
     
+    self.navigationItem.titleView = self.itemSearchBar;
     
     self.stores = [[NSMutableArray alloc]init];
     self.storeItems = [[NSMutableArray alloc]init];
