@@ -60,14 +60,17 @@
     UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
-    quantityField.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
-    quantityField.textColor = [UIColor blackColor];
+    quantityField.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    quantityField.textColor = [UIColor whiteColor];
     quantityField.textAlignment = NSTextAlignmentCenter;
     quantityField.keyboardType = UIKeyboardTypeDefault;
     quantityField.returnKeyType = UIReturnKeyDone;
     quantityField.clearButtonMode = UITextFieldViewModeNever;
     quantityField.text = @"0";
     [quantityField setEnabled: YES];
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
     //Display Store Items
     GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
@@ -87,8 +90,7 @@
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:14.2];
     cell.textLabel.textColor = [UIColor whiteColor] ;
     cell.detailTextLabel.textColor = [UIColor whiteColor] ;
-    
-    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
+    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     
     for (int i = 0; i < [self.checkedItems count]; i++) {
         GroceryItem *checkedItem = self.checkedItems[i];
@@ -111,8 +113,6 @@
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSString *checkedGroceryName = [splitArrayName objectAtIndex: 1];
-    
-    //cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
     
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;

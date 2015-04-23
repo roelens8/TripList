@@ -21,6 +21,7 @@
 @property NSMutableDictionary *quantityFieldMap; ////If quantity was changed after checking the grocery item
 
 @property (strong, nonatomic) IBOutlet UILabel *currentStore;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)editStore:(id)sender;
 

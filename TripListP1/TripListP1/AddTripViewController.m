@@ -61,8 +61,7 @@
     [self.tripNameField resignFirstResponder];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = NO;
 }
 

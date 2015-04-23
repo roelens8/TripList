@@ -22,6 +22,7 @@
 @property NSMutableArray *checkedCellRows; //Indexes of cells of the groceries the user selected
 @property NSString *storePickerSelectedStore; //The store selected form the picker view
 @property NSInteger storePickerSelectedRow; //Row of the selected store
+
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 @property (strong, nonatomic) IBOutlet UITableView *addStoreTableView;
 @property IBOutlet UISearchBar *itemSearchBar;

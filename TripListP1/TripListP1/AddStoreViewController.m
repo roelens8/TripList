@@ -69,10 +69,12 @@
     if (!textView){
         textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 60)];
         textView.adjustsFontSizeToFitWidth = YES;
-        [textView setBackgroundColor:[UIColor clearColor]];
+        [textView setBackgroundColor:[UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1]];
         [textView setFont:[UIFont boldSystemFontOfSize:20]];
         [textView setText:[self.storeNames objectAtIndex:row]];
         [textView setTextAlignment:NSTextAlignmentCenter];
+        [textView setTextColor:[UIColor whiteColor]];
+        [textView setOpaque:false];
     }
     return textView;
 }
@@ -100,8 +102,8 @@
     UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
-    quantityField.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
-    quantityField.textColor = [UIColor blackColor];
+    quantityField.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    quantityField.textColor = [UIColor whiteColor];
     quantityField.textAlignment = NSTextAlignmentCenter;
     quantityField.keyboardType = UIKeyboardTypeDefault;
     quantityField.returnKeyType = UIReturnKeyDone;
@@ -109,6 +111,8 @@
     quantityField.text = @"0";
     [quantityField setEnabled: YES];
     [cell addSubview:quantityField];
+    
+    self.addStoreTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     
     //Display Store Items
     GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
@@ -128,8 +132,7 @@
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:14.2];
     cell.textLabel.textColor = [UIColor whiteColor] ;
     cell.detailTextLabel.textColor = [UIColor whiteColor] ;
-    
-    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
+    cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     
     for (int i = 0; i < [self.checkedCellRows count]; i++) {
         if (indexPath == self.checkedCellRows[i]) {

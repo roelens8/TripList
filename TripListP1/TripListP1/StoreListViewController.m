@@ -21,6 +21,7 @@
     TripList *tripList = [TripList sharedTripList];
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
+    //self.tripTotal.textColor = [UIColor colorWithRed:(229/255.0) green:(181/255.0) blue:(25/255.0) alpha:1];
     [self calculateTripTotal]; //Calculate new trip total before displaying table view
     [self.storeTableView reloadData]; //Cells were being duplicated
 }
@@ -56,7 +57,8 @@
         if (currentTrip.shoppingList != nil && [currentTrip.shoppingList count] > 0) {
             UILabel *storeTotalLabel = [[UILabel alloc] init];
             [storeTotalLabel setFrame:CGRectMake(300, 10, 80, 30)];
-            storeTotalLabel.backgroundColor=[UIColor clearColor];
+            storeTotalLabel.backgroundColor = [UIColor clearColor];
+            storeTotalLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1];
             storeTotalLabel.adjustsFontSizeToFitWidth = YES;
             storeTotalLabel.tag = 1;
             [storeTotalLabel setFont:[UIFont boldSystemFontOfSize:20]];
@@ -66,6 +68,7 @@
             cell.restorationIdentifier = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
         }
         cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+        cell.textLabel.textColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     }
     NSString *storeTotal = [self calculateStoreTotal:tripList storeIndex:indexPath.row];
     UILabel *label = (UILabel *)[cell viewWithTag:1];
@@ -119,7 +122,7 @@
         if (tripTotal == 0 || tripTotal == nil)
             self.tripTotal.text = @"0.00";
         else
-            self.tripTotal.text = [tripTotal stringValue];
+            self.tripTotal.text = [NSString stringWithFormat:@"%.2f", [tripTotal floatValue]];
     }
 }
 
@@ -141,7 +144,7 @@
     if (storeTotal == 0 || storeTotal == nil)
         return @"0.00";
     else
-        return [storeTotal stringValue];
+        return [NSString stringWithFormat:@"%.2f", [storeTotal floatValue]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
