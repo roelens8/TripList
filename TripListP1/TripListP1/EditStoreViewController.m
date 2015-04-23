@@ -30,6 +30,7 @@
     
     self.quantityFieldMap = [[NSMutableDictionary alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    [self calculateStoreTotal:tripList];
 }
 
 - (void)viewDidLoad {
@@ -175,6 +176,27 @@
     [app saveTripData];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)calculateStoreTotal:(TripList*)tripList {
+    NSMutableArray *itemsForStore = [tripList.currentTrip.shoppingList objectForKey:self.currentStore.text];
+    NSNumber *storeTotal = 0;
+    if (itemsForStore != nil) {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        for (GroceryItem *grocery in itemsForStore) {
+            NSNumber *price = [formatter numberFromString:grocery.price];
+            if (grocery.quantity == nil) {
+                grocery.quantity = 0;
+            }
+            storeTotal = [NSNumber numberWithFloat:([storeTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
+        }
+    }
+    if (storeTotal == 0 || storeTotal == nil)
+        self.storeTotal.text = @"0.00";
+    else
+        self.storeTotal.text = [NSString stringWithFormat:@"%.2f", [storeTotal floatValue]];
+}
+
 
 /*
  #pragma mark - Navigation

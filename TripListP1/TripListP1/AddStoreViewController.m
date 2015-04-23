@@ -113,6 +113,7 @@
     [cell addSubview:quantityField];
     
     self.addStoreTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
     //Display Store Items
     GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];

@@ -22,7 +22,7 @@
     self.storeNames = [tripList.currentTrip.shoppingList allKeys]; //Array for displaying stores of a trip
     
     //self.tripTotal.textColor = [UIColor colorWithRed:(229/255.0) green:(181/255.0) blue:(25/255.0) alpha:1];
-    [self calculateTripTotal]; //Calculate new trip total before displaying table view
+    [self calculateTripTotal:tripList]; //Calculate new trip total before displaying table view
     [self.storeTableView reloadData]; //Cells were being duplicated
 }
 
@@ -98,13 +98,12 @@
     
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    [self calculateTripTotal];
+    [self calculateTripTotal:tripList];
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
 }
 
-- (void)calculateTripTotal {
-    TripList *tripList = [TripList sharedTripList];
+- (void)calculateTripTotal:(TripList*)tripList {
     self.groceryItems = [tripList.currentTrip.shoppingList allValues]; //Array of groceries to calculate the Trip Total
     if (self.groceryItems != nil) {
         NSNumber *tripTotal = 0;

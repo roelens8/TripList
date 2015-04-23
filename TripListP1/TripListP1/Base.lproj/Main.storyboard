@@ -1677,6 +1677,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                        <outlet property="storeTotal" destination="q2c-kT-IwL" id="P4f-mT-JOF"/>
                         <outlet property="tableView" destination="3nI-7L-Mdc" id="Ie3-1V-2e1"/>
                     </connections>
                 </viewController>
