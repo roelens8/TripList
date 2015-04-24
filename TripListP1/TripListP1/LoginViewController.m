@@ -7,32 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
 #import "LoginViewController.h"
-
-@interface LoginViewController ()
-
-
-@end
 
 @implementation LoginViewController
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-        self.navigationController.navigationBar.hidden = YES;
-    
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

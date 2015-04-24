@@ -17,8 +17,13 @@
 - (void)viewWillAppear:(BOOL)animated {
    
     self.navigationController.navigationBar.hidden = NO;
+    self.itemSearchBar.searchBarStyle = UISearchBarStyleMinimal;
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
+    [self.itemSearchBar setBarTintColor:[UIColor blackColor]];
     
-    self.navigationItem.titleView = self.itemSearchBar;
+    self.filteredStoreItems = [NSMutableArray arrayWithCapacity:[self.storeItems count]];
+    
+    //self.navigationItem.titleView = self.itemSearchBar;
     
     self.stores = [[NSMutableArray alloc]init];
     self.storeItems = [[NSMutableArray alloc]init];
@@ -89,7 +94,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.storeItems count];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredStoreItems count];
+    } else {
+        return [self.storeItems count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,7 +125,14 @@
     [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
     //Display Store Items
-    GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    //Check to see whether the normal table or the search results table is being displayed from the proper array
+    GroceryItem *storeItem = [[GroceryItem alloc]init];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        storeItem = [self.filteredStoreItems objectAtIndex:indexPath.row];
+    }
+    else {
+        storeItem = [self.storeItems objectAtIndex:indexPath.row];
+    }
     NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
@@ -227,16 +243,38 @@
                     groceryItem.quantity = @"0";
                 }
             }
-            
             [trip.shoppingList setObject:groceries forKey:self.storePickerSelectedStore];
             tripList.currentTrip = trip;
-            //tripList.trips[i] = trip;
             break;
         }
     }
     AppDelegate *app = [AppDelegate instance];
     [app saveTripData];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark Content Filtering
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text
+    // Clear all of the items from the filtered array
+    [self.filteredStoreItems removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",searchText];
+    self.filteredStoreItems = [NSMutableArray arrayWithArray:[self.storeItems filteredArrayUsingPredicate:predicate]];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Makes the table data source reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    //[self.addStoreTableView reloadData];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+- (IBAction)goToSearch:(id)sender {
+    [self.itemSearchBar becomeFirstResponder];
 }
 
 /*

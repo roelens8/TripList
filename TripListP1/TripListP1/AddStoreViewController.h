@@ -20,13 +20,15 @@
 @property NSMutableArray *storeNames; //Array of all Store names
 @property NSMutableArray *checkedGroceries; //Array containing strings that concatenate all grocery data
 @property NSMutableArray *checkedCellRows; //Indexes of cells of the groceries the user selected
+@property NSMutableArray *filteredStoreItems; //Filtered array of groceries for the Search Bar
 @property NSString *storePickerSelectedStore; //The store selected form the picker view
 @property NSInteger storePickerSelectedRow; //Row of the selected store
 
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 @property (strong, nonatomic) IBOutlet UITableView *addStoreTableView;
-@property IBOutlet UISearchBar *itemSearchBar;
+@property (strong, nonatomic) IBOutlet UISearchBar *itemSearchBar;
 
 - (IBAction)addStore:(id)sender;
+- (IBAction)goToSearch:(id)sender;
 
 @end

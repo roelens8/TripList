@@ -9,16 +9,12 @@
 #ifndef TripListP1_LoginViewController_h
 #define TripListP1_LoginViewController_h
 
-
 #endif
 
 #import <Foundation/Foundation.h>
-
 #import <UIKit/UIKit.h>
 
-
 @interface LoginViewController : UIViewController
-
 
 
 @end

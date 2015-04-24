@@ -20,8 +20,6 @@
     self.navigationController.navigationBar.hidden = YES;
     
     self.addTripVC = [[AddTripViewController alloc] init];
-    
-    
 }
 
 - (void)viewDidLoad {

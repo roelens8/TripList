@@ -34,7 +34,7 @@ static TripList *theTripList = nil;
             self.tripId = [userTrip objectId];
             self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             self.userName = userTrip[@"userName"];
-            NSLog(@"%@", userTrip);
+            //NSLog(@"%@", userTrip);
         }
     }
     return self;
