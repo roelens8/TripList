@@ -53,12 +53,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"editCell"];
-    if (cell == nil) {
+    UITextField *quantityField;
+    //if (cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"editCell"];
-    }
-    
+        quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
+        quantityField.tag = 10;
+        [cell addSubview:quantityField];
+    //}
     //Create Quanity Field
-    UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
+    quantityField = (UITextField *)[cell viewWithTag:10];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
     quantityField.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
@@ -106,7 +109,6 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
-    [cell addSubview:quantityField];
     return cell;
 }
 
@@ -162,7 +164,7 @@
             groceryItem.quantity = @"0";
         }
     }
-    self.quantityFieldMap = nil;
+    //self.quantityFieldMap = nil;
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
@@ -186,7 +188,7 @@
         for (GroceryItem *grocery in itemsForStore) {
             NSNumber *price = [formatter numberFromString:grocery.price];
             if (grocery.quantity == nil) {
-                grocery.quantity = 0;
+                grocery.quantity = @"0";
             }
             storeTotal = [NSNumber numberWithFloat:([storeTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
         }

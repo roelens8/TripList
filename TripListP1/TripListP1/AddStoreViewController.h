@@ -19,10 +19,13 @@
 @property NSMutableArray *storeItems; //Array of Gorceries a store sells
 @property NSMutableArray *storeNames; //Array of all Store names
 @property NSMutableArray *checkedGroceries; //Array containing strings that concatenate all grocery data
-@property NSMutableArray *checkedCellRows; //Indexes of cells of the groceries the user selected
 @property NSMutableArray *filteredStoreItems; //Filtered array of groceries for the Search Bar
 @property NSString *storePickerSelectedStore; //The store selected form the picker view
 @property NSInteger storePickerSelectedRow; //Row of the selected store
+
+@property NSMutableArray *checkedGName; //Array of names of check groceries
+@property NSMutableArray *checkedGField; //Array of UITextFields of checked groceries
+@property bool first;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *storePicker;
 @property (strong, nonatomic) IBOutlet UITableView *addStoreTableView;
@@ -30,5 +33,6 @@
 
 - (IBAction)addStore:(id)sender;
 - (IBAction)goToSearch:(id)sender;
+- (void)updateQuantityFields:(UITableView*)tableView groceriesArray:(NSMutableArray*)groceries;
 
 @end

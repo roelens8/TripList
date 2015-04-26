@@ -28,9 +28,11 @@
     self.stores = [[NSMutableArray alloc]init];
     self.storeItems = [[NSMutableArray alloc]init];
     self.storeNames = [[NSMutableArray alloc]init];
-    self.checkedGroceries = [[NSMutableArray alloc]init];
-    self.checkedCellRows = [[NSMutableArray alloc]init];
     self.storePickerSelectedStore = [[NSString alloc]init];
+    
+    self.checkedGName = [[NSMutableArray alloc]init];
+    self.checkedGField = [[NSMutableArray alloc]init];
+    self.first = true;
     
     AppDelegate *app = [AppDelegate instance];
     self.stores = app.stores;
@@ -102,10 +104,10 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"foodCell"];
-    if (cell == nil) {
+    CustomCell *cell;// = [tableView dequeueReusableCellWithIdentifier:@"foodCell"];
+    //if (cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:@"foodCell"];
-    }
+    //}
     
     //Create Quanity Field
     UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
@@ -122,6 +124,9 @@
     [cell addSubview:quantityField];
     
     self.addStoreTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    self.searchDisplayController.searchResultsTableView.separatorColor = [UIColor whiteColor];
+    self.searchDisplayController.searchResultsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
     //Display Store Items
@@ -129,11 +134,40 @@
     GroceryItem *storeItem = [[GroceryItem alloc]init];
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         storeItem = [self.filteredStoreItems objectAtIndex:indexPath.row];
+        for (NSString *checkedGrocery in self.checkedGName) {
+            NSArray *splitCheckedGrocery = [checkedGrocery componentsSeparatedByString: @"\u200b"];
+            NSString *checkedGroceryName = [splitCheckedGrocery objectAtIndex: 0];
+            if ([storeItem.name isEqual:checkedGroceryName]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                UITextField *groceryField = [self.checkedGField objectAtIndex:[self.checkedGName indexOfObject:checkedGrocery]];
+                quantityField.text = groceryField.text;
+                break;
+            }
+            else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
     }
     else {
         storeItem = [self.storeItems objectAtIndex:indexPath.row];
+        for (NSString *checkedGrocery in self.checkedGName) {
+            NSArray *splitCheckedGrocery = [checkedGrocery componentsSeparatedByString: @"\u200b"];
+            NSString *checkedGroceryName = [splitCheckedGrocery objectAtIndex: 0];
+            if ([storeItem.name isEqual:checkedGroceryName]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                UITextField *groceryField = [self.checkedGField objectAtIndex:[self.checkedGName indexOfObject:checkedGrocery]];
+                quantityField.text = groceryField.text;
+                break;
+            }
+            else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
     }
-    NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
+    if ([self.checkedGName count] == 0) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - \u200b%@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
         NSString *unit = [NSString stringWithFormat:@"%@", storeItem.unit];
@@ -151,15 +185,6 @@
     cell.detailTextLabel.textColor = [UIColor whiteColor] ;
     cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     
-    for (int i = 0; i < [self.checkedCellRows count]; i++) {
-        if (indexPath == self.checkedCellRows[i]) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            break;
-        }
-        else {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
     return cell;
 }
 
@@ -168,7 +193,7 @@
 
     //Checked gorceries names and quantities will be put into an array
     NSArray *splitArrayName = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
-    NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @" "];
+    NSArray *splitArrayCategory = [cell.textLabel.text componentsSeparatedByString: @"\u200b"];
     NSArray *splitArrayPriceUnit = [cell.detailTextLabel.text componentsSeparatedByString: @" "];
     NSString *checkedGroceryName = [splitArrayName objectAtIndex: 1];
     NSString *checkedGroceryCategory = [splitArrayCategory objectAtIndex:3];
@@ -176,20 +201,40 @@
     NSString *checkedGroceryUnit = [splitArrayPriceUnit objectAtIndex:4];
     UITextField *quantityField = (UITextField*)cell.subView;
     CheckedGroceryItem *checkedItem = [[CheckedGroceryItem alloc]init];
-    checkedItem.groceryItemString = [NSString stringWithFormat:@"%@ %@ %@ %@ %@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, quantityField.text, checkedGroceryUnit];
+    checkedItem.groceryItemString = [NSString stringWithFormat:@"%@\u200b%@\u200b%@\u200b%@",checkedGroceryName, checkedGroceryCategory, checkedGroceryPrice, checkedGroceryUnit];
     checkedItem.quantityField = quantityField;
     
-    if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-        [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries removeObject:checkedItem];
-        [self.checkedCellRows removeObject:indexPath];
+    if (tableView == self.searchDisplayController.searchResultsTableView) { //SearchDisplayTableView
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+            NSUInteger index = [self.checkedGName indexOfObject:checkedItem.groceryItemString];
+            [self.checkedGName removeObject:checkedItem.groceryItemString];
+            [self.checkedGField removeObjectAtIndex:index];
+        }
+        else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+            [self.checkedGName addObject:checkedItem.groceryItemString];
+            [self.checkedGField addObject:checkedItem.quantityField];
+        }
     }
-    else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-        [self.checkedGroceries addObject:checkedItem];
-        [self.checkedCellRows addObject:indexPath];
+    else // AddStoreTableView
+    {
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+                NSUInteger index = [self.checkedGName indexOfObject:checkedItem.groceryItemString];
+            [self.checkedGName removeObject:checkedItem.groceryItemString];
+            [self.checkedGField removeObjectAtIndex:index];
+
+        }
+        else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+            [self.checkedGName addObject:checkedItem.groceryItemString];
+            [self.checkedGField addObject:checkedItem.quantityField];
+        }
     }
 }
 
@@ -201,13 +246,15 @@
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
-            for (CheckedGroceryItem* checkedGrocery in self.checkedGroceries) {
-                NSArray *splitGrocery = [checkedGrocery.groceryItemString componentsSeparatedByString: @" "];
+            for (NSString* checkedGrocery in self.checkedGName) {
+                NSArray *splitGrocery = [checkedGrocery componentsSeparatedByString: @"\u200b"];
                 NSString *groceryName = [splitGrocery objectAtIndex: 0];
                 NSString *groceryCategory = [splitGrocery objectAtIndex: 1];
                 NSString *groceryPrice = [splitGrocery objectAtIndex:2];
-                NSString *groceryQuantity = checkedGrocery.quantityField.text;
-                NSString *groceryUnit = [splitGrocery objectAtIndex:4];
+                UITextField *groceryField = [self.checkedGField objectAtIndex:[self.checkedGName indexOfObject:checkedGrocery]];
+                NSString *groceryQuantity = groceryField.text;
+                
+                NSString *groceryUnit = [splitGrocery objectAtIndex:3];
                 if ([groceryPrice isEqualToString:@"N/A"] || [groceryPrice isEqualToString:@""])
                     groceryPrice = @"0";
                 
@@ -253,7 +300,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark Content Filtering
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     // Update the filtered array based on the search text
     // Clear all of the items from the filtered array
@@ -263,18 +309,57 @@
     self.filteredStoreItems = [NSMutableArray arrayWithArray:[self.storeItems filteredArrayUsingPredicate:predicate]];
 }
 
-#pragma mark - UISearchDisplayController Delegate Methods
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Makes the table data source reload when text changes
+    //There was a bug when setting quantity fields to 0, but this fixed that problem
+    if (self.first)
+        self.first = false;
+    else
+        [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];
+    
     [self filterContentForSearchText:searchString scope:
      [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    //[self.addStoreTableView reloadData];
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
 
 - (IBAction)goToSearch:(id)sender {
     [self.itemSearchBar becomeFirstResponder];
+    [self updateQuantityFields:self.addStoreTableView groceriesArray:self.storeItems];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)aSearchBar {
+    self.first = true;
+    [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];
+    [self.addStoreTableView reloadData];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+//If the quantity of a grocery item was changed after it was checked, update its quantity field with the new value
+- (void)updateQuantityFields:(UITableView*)tableView groceriesArray:(NSMutableArray*)groceries {
+    NSUInteger iter1 = 0;
+    NSUInteger iterMax = [self.checkedGName count];
+    for (GroceryItem *item in groceries) {
+        if (iter1 < iterMax) {
+            for (NSUInteger count = 0; count < [self.checkedGName count]; count++) {
+                NSString *checkedGrocery = [self.checkedGName objectAtIndex:count];
+                NSArray *splitCheckedGrocery = [checkedGrocery componentsSeparatedByString: @"\u200b"];
+                NSString *checkedGroceryName = [splitCheckedGrocery objectAtIndex: 0];
+            
+                if ([item.name isEqualToString:checkedGroceryName]) {
+                    CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[groceries indexOfObject:item] inSection:0]];
+                
+                    UITextField *currentQuantityField = (UITextField*)cell.subView;
+                    UITextField *checkedQuantityField = [self.checkedGField objectAtIndex:count];
+                    if (![currentQuantityField.text isEqualToString:checkedQuantityField.text]) {
+                        [self.checkedGField replaceObjectAtIndex:count withObject:currentQuantityField];
+                    }
+                    iter1++;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 /*

@@ -93,6 +93,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KND-tc-CYx"/>
                                 </constraints>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
@@ -103,24 +104,6 @@
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="KND-tc-CYx"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-wt-qOi">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="sYG-Oq-GHQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="sYG-Oq-GHQ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="sYG-Oq-GHQ"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -194,23 +177,52 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qk-0w-MRN">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-wt-qOi">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="sYG-Oq-GHQ"/>
+                                </constraints>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="sYG-Oq-GHQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="sYG-Oq-GHQ"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lYS-j2-9iJ" firstAttribute="top" secondItem="wTS-wt-qOi" secondAttribute="bottom" constant="63" id="1mw-gy-hiJ">
-                                <variation key="widthClass=compact" constant="65"/>
+                                <variation key="widthClass=compact" constant="67"/>
                             </constraint>
                             <constraint firstItem="dFh-6j-yZn" firstAttribute="trailing" secondItem="6qk-0w-MRN" secondAttribute="trailing" id="491-cd-84L"/>
-                            <constraint firstItem="dFh-6j-yZn" firstAttribute="top" secondItem="IFq-rM-0jX" secondAttribute="bottom" constant="32" id="6gb-zp-BFK"/>
+                            <constraint firstItem="dFh-6j-yZn" firstAttribute="top" secondItem="IFq-rM-0jX" secondAttribute="bottom" constant="32" id="6gb-zp-BFK">
+                                <variation key="widthClass=compact" constant="76"/>
+                            </constraint>
                             <constraint firstItem="wTS-wt-qOi" firstAttribute="trailing" secondItem="3gZ-QS-kKN" secondAttribute="trailing" id="E6x-2u-hTe"/>
-                            <constraint firstItem="wTS-wt-qOi" firstAttribute="top" secondItem="3gZ-QS-kKN" secondAttribute="bottom" constant="39" id="GIm-vx-rlg"/>
-                            <constraint firstItem="wTS-wt-qOi" firstAttribute="centerX" secondItem="lYS-j2-9iJ" secondAttribute="centerX" id="HDK-jp-t82"/>
-                            <constraint firstItem="3gZ-QS-kKN" firstAttribute="centerX" secondItem="6qk-0w-MRN" secondAttribute="centerX" id="LGP-jo-50f"/>
-                            <constraint firstItem="3gZ-QS-kKN" firstAttribute="leading" secondItem="PGJ-U3-DzJ" secondAttribute="leadingMargin" constant="95" id="MhF-lx-ygd"/>
+                            <constraint firstItem="wTS-wt-qOi" firstAttribute="top" secondItem="3gZ-QS-kKN" secondAttribute="bottom" constant="39" id="GIm-vx-rlg">
+                                <variation key="widthClass=compact" constant="37"/>
+                            </constraint>
+                            <constraint firstItem="wTS-wt-qOi" firstAttribute="centerX" secondItem="lYS-j2-9iJ" secondAttribute="centerX" id="HDK-jp-t82">
+                                <variation key="widthClass=compact" constant="2.5"/>
+                            </constraint>
+                            <constraint firstItem="3gZ-QS-kKN" firstAttribute="centerX" secondItem="6qk-0w-MRN" secondAttribute="centerX" id="LGP-jo-50f">
+                                <variation key="widthClass=compact" constant="2.5"/>
+                            </constraint>
+                            <constraint firstItem="3gZ-QS-kKN" firstAttribute="leading" secondItem="PGJ-U3-DzJ" secondAttribute="leadingMargin" constant="95" id="MhF-lx-ygd">
+                                <variation key="widthClass=compact" constant="64"/>
+                            </constraint>
                             <constraint firstItem="dFh-6j-yZn" firstAttribute="centerX" secondItem="PGJ-U3-DzJ" secondAttribute="centerX" id="NKc-gt-gzu"/>
                             <constraint firstItem="dFh-6j-yZn" firstAttribute="leading" secondItem="PGJ-U3-DzJ" secondAttribute="leadingMargin" constant="51" id="OwS-FG-pqO"/>
                             <constraint firstItem="6qk-0w-MRN" firstAttribute="top" secondItem="IFq-rM-0jX" secondAttribute="bottom" constant="146" id="Ric-vE-IHb">
-                                <variation key="widthClass=compact" constant="152"/>
+                                <variation key="widthClass=compact" constant="196"/>
                             </constraint>
                             <constraint firstItem="3gZ-QS-kKN" firstAttribute="leading" secondItem="wTS-wt-qOi" secondAttribute="leading" id="Wor-Un-1QW"/>
                             <constraint firstItem="lYS-j2-9iJ" firstAttribute="centerX" secondItem="jvs-m0-Seg" secondAttribute="centerX" id="XKI-0h-J3r"/>
@@ -228,11 +240,11 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="3gZ-QS-kKN"/>
-                                <exclude reference="wTS-wt-qOi"/>
                                 <exclude reference="lYS-j2-9iJ"/>
                                 <exclude reference="dFh-6j-yZn"/>
                                 <exclude reference="jvs-m0-Seg"/>
                                 <exclude reference="6qk-0w-MRN"/>
+                                <exclude reference="wTS-wt-qOi"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="LGP-jo-50f"/>
@@ -257,11 +269,11 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="3gZ-QS-kKN"/>
-                                <include reference="wTS-wt-qOi"/>
                                 <include reference="lYS-j2-9iJ"/>
                                 <include reference="dFh-6j-yZn"/>
                                 <include reference="jvs-m0-Seg"/>
                                 <include reference="6qk-0w-MRN"/>
+                                <include reference="wTS-wt-qOi"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="LGP-jo-50f"/>
@@ -304,6 +316,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-MD-3cv">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -312,6 +325,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="61K-a6-sNd">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -340,6 +354,7 @@
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mmM-HJ-AGA">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -728,6 +743,7 @@
                                         <variation key="widthClass=compact" constant="30"/>
                                     </constraint>
                                 </constraints>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
@@ -1031,7 +1047,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="an1-WF-bLx" firstAttribute="trailing" secondItem="3SD-ny-gUo" secondAttribute="trailing" id="0BU-ia-c9y">
-                                <variation key="widthClass=compact" constant="2"/>
+                                <variation key="widthClass=compact" constant="-1"/>
                             </constraint>
                             <constraint firstItem="XXG-Mv-beT" firstAttribute="top" secondItem="KFF-fQ-dnd" secondAttribute="bottom" id="2tZ-bg-Y0h">
                                 <variation key="widthClass=compact" constant="281"/>
@@ -1089,7 +1105,7 @@
                             </constraint>
                             <constraint firstItem="jfW-fR-jiT" firstAttribute="centerX" secondItem="bS5-vV-Jy3" secondAttribute="centerX" id="c0s-ab-w7a"/>
                             <constraint firstItem="3SD-ny-gUo" firstAttribute="centerX" secondItem="XXG-Mv-beT" secondAttribute="centerX" id="gPO-kG-ue9">
-                                <variation key="widthClass=compact" constant="8"/>
+                                <variation key="widthClass=compact" constant="12"/>
                             </constraint>
                             <constraint firstItem="an1-WF-bLx" firstAttribute="top" secondItem="bS5-vV-Jy3" secondAttribute="bottom" constant="94" id="lUo-Xo-G5E">
                                 <variation key="widthClass=compact" constant="27"/>
@@ -1717,6 +1733,6 @@
         <segue reference="6Uz-z8-Y05"/>
         <segue reference="TaJ-i1-U82"/>
         <segue reference="cra-Nw-59Y"/>
-        <segue reference="BaP-qu-kod"/>
+        <segue reference="AOV-Cv-dVs"/>
     </inferredMetricsTieBreakers>
 </document>

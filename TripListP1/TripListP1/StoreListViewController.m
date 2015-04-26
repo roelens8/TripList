@@ -67,11 +67,11 @@
         }
     }
     NSString *storeTotal = [self calculateStoreTotal:tripList storeIndex:indexPath.row];
-    UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1];
     label.text = [NSString stringWithFormat:@"$ %@",storeTotal];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"  %@",[self.storeNames objectAtIndex:indexPath.row]];
-    cell.restorationIdentifier = [NSString stringWithFormat:@"%@",[self.storeNames objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"  %@",[[tripList.currentTrip.shoppingList allKeys] objectAtIndex:indexPath.row]];
+    cell.restorationIdentifier = [NSString stringWithFormat:@"%@",[[tripList.currentTrip.shoppingList allKeys] objectAtIndex:indexPath.row]];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     cell.textLabel.textColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     
@@ -95,9 +95,9 @@
     CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:indexPath];
     TripList *tripList = [TripList sharedTripList];
     Trip *trip = tripList.currentTrip;
-    [trip.shoppingList removeObjectForKey:cell.restorationIdentifier];
     
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [trip.shoppingList removeObjectForKey:cell.restorationIdentifier];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     
     [self calculateTripTotal:tripList];
     AppDelegate *app = [AppDelegate instance];
@@ -114,7 +114,7 @@
             for (GroceryItem *grocery in groceryList) {
                 NSNumber *price = [formatter numberFromString:grocery.price];
                 if (grocery.quantity == nil) {
-                    grocery.quantity = 0;
+                    grocery.quantity = @"0";
                 }
                 tripTotal = [NSNumber numberWithFloat:([tripTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
             }
@@ -136,7 +136,7 @@
         for (GroceryItem *grocery in itemsForStore) {
             NSNumber *price = [formatter numberFromString:grocery.price];
             if (grocery.quantity == nil) {
-                grocery.quantity = 0;
+                grocery.quantity = @"0";
             }
             storeTotal = [NSNumber numberWithFloat:([storeTotal floatValue] + ([price floatValue] * [grocery.quantity floatValue]))];
         }
