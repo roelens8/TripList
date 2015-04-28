@@ -22,8 +22,14 @@
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    //Set Navigation bar colors
+    self.searchDisplayController.searchBar.translucent = NO;
+    //[self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1]];
+
     self.navigationController.navigationBar.hidden = YES;
     self.navigationItem.leftBarButtonItem=nil;
     self.navigationItem.hidesBackButton=YES;
@@ -40,11 +46,10 @@
     self.tableView.animationRepeatCount = 1;
     [self.tableView startAnimating];
     
-    [NSTimer    scheduledTimerWithTimeInterval:2.6    target:self    selector:@selector(fireMethod)    userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2.6 target:self selector:@selector(fireMethod) userInfo:nil repeats:NO];
 }
 
--(void)fireMethod
-{
+-(void)fireMethod {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     TripListViewController *lvc = [storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
     [self.navigationController pushViewController:lvc animated:YES];

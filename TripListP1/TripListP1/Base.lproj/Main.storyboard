@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -142,8 +142,7 @@
                                         <exclude reference="2si-qE-qZy"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="67" y="96" width="241" height="128"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="2si-qE-qZy"/>
                                     </mask>
@@ -172,14 +171,11 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="6xY-Of-gBe" kind="show" identifier="logIntoSignUp" id="lkq-Qb-lud"/>
+                                    <segue destination="6xY-Of-gBe" kind="show" id="5f6-mN-SHD"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qk-0w-MRN">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="67" y="216" width="241" height="84"/>
-                                </variation>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-wt-qOi">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -308,7 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLO-xo-IIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212.25" y="278.5"/>
+            <point key="canvasLocation" x="254.25" y="233.5"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="mV5-Wy-0Tm">
@@ -326,9 +322,9 @@
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="369" width="216" height="30"/>
+                                    <rect key="frame" x="16" y="417" width="216" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="61K-a6-sNd">
@@ -337,7 +333,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="225" width="216" height="30"/>
+                                    <rect key="frame" x="16" y="317" width="216" height="30"/>
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zH-iY-oZC">
@@ -348,7 +344,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="151" y="476" width="98" height="39"/>
+                                    <rect key="frame" x="151" y="482" width="98" height="39"/>
                                 </variation>
                                 <connections>
                                     <action selector="signUp:" destination="6xY-Of-gBe" eventType="touchUpInside" id="2ae-qN-WmP"/>
@@ -360,21 +356,30 @@
                                     <rect key="frame" x="193" y="85" width="140" height="71"/>
                                 </variation>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mmM-HJ-AGA">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="297" width="216" height="30"/>
-                                </variation>
-                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-76.png" translatesAutoresizingMaskIntoConstraints="NO" id="XVx-sY-RUm">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="8" y="57" width="177" height="128"/>
                                 </variation>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kjc-cn-kPQ">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="267" width="216" height="30"/>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mmM-HJ-AGA">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="367" width="216" height="30"/>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -383,8 +388,9 @@
                                 <exclude reference="61K-a6-sNd"/>
                                 <exclude reference="5zH-iY-oZC"/>
                                 <exclude reference="O38-5g-IaC"/>
-                                <exclude reference="mmM-HJ-AGA"/>
                                 <exclude reference="XVx-sY-RUm"/>
+                                <exclude reference="kjc-cn-kPQ"/>
+                                <exclude reference="mmM-HJ-AGA"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -393,8 +399,9 @@
                                 <include reference="61K-a6-sNd"/>
                                 <include reference="5zH-iY-oZC"/>
                                 <include reference="O38-5g-IaC"/>
-                                <include reference="mmM-HJ-AGA"/>
                                 <include reference="XVx-sY-RUm"/>
+                                <include reference="kjc-cn-kPQ"/>
+                                <include reference="mmM-HJ-AGA"/>
                             </mask>
                         </variation>
                     </view>
@@ -404,11 +411,12 @@
                         <outlet property="email" destination="61K-a6-sNd" id="rj2-dj-HGh"/>
                         <outlet property="pass" destination="mmM-HJ-AGA" id="pq0-Vl-yd2"/>
                         <outlet property="repass" destination="EKi-MD-3cv" id="o3W-Z3-TKf"/>
+                        <outlet property="username" destination="kjc-cn-kPQ" id="Xvw-I3-afi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cvk-VQ-Vdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887.25" y="166.5"/>
+            <point key="canvasLocation" x="948.75" y="211.5"/>
         </scene>
         <!--Trip List-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1305,13 +1313,19 @@
                                     <constraint firstAttribute="height" constant="324" id="Bwf-5q-ZW7">
                                         <variation key="widthClass=compact" constant="317"/>
                                     </constraint>
+                                    <constraint firstAttribute="width" constant="383" id="SI3-XC-cZk"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="aKS-Co-5q1"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="383" id="sVd-8N-buw"/>
                                 </constraints>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.59999999999999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableFooterView" contentMode="redraw" text="" id="8lM-o1-Yrq">
+                                <searchBar key="tableFooterView" contentMode="top" text="" placeholder="Search Groceries" id="8lM-o1-Yrq">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="barTintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
                                         <outlet property="delegate" destination="jQK-96-sy4" id="Rk0-fX-jfk"/>
@@ -1320,11 +1334,17 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Bwf-5q-ZW7"/>
+                                        <exclude reference="SI3-XC-cZk"/>
+                                        <exclude reference="aKS-Co-5q1"/>
+                                        <exclude reference="sVd-8N-buw"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Bwf-5q-ZW7"/>
+                                        <include reference="SI3-XC-cZk"/>
+                                        <include reference="aKS-Co-5q1"/>
+                                        <include reference="sVd-8N-buw"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1359,13 +1379,13 @@
                                 <variation key="widthClass=compact" constant="-33"/>
                             </constraint>
                             <constraint firstItem="56C-RQ-b5j" firstAttribute="leading" secondItem="8ea-cZ-hPE" secondAttribute="leadingMargin" constant="-20" id="186-Db-3RR">
-                                <variation key="widthClass=compact" constant="-16"/>
+                                <variation key="widthClass=compact" constant="-25"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="4X7-Ux-hQX" secondAttribute="trailing" constant="-14" id="7ju-7j-LeM">
                                 <variation key="widthClass=compact" constant="-35"/>
                             </constraint>
                             <constraint firstItem="QRE-zY-fVM" firstAttribute="centerX" secondItem="56C-RQ-b5j" secondAttribute="centerX" id="Aex-bG-hu2">
-                                <variation key="widthClass=compact" constant="1.5"/>
+                                <variation key="widthClass=compact" constant="8"/>
                             </constraint>
                             <constraint firstItem="4X7-Ux-hQX" firstAttribute="centerX" secondItem="QRE-zY-fVM" secondAttribute="centerX" id="Cfn-12-eLs">
                                 <variation key="widthClass=compact" constant="0.5"/>
@@ -1435,6 +1455,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="15o-9z-tvb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="4NA-SM-4V0"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="KOz-UU-jXg">
                             <connections>
                                 <action selector="goToSearch:" destination="jQK-96-sy4" id="sKD-59-BFT"/>
@@ -1445,6 +1466,7 @@
                     <connections>
                         <outlet property="addStoreTableView" destination="56C-RQ-b5j" id="w8K-jx-QB0"/>
                         <outlet property="itemSearchBar" destination="8lM-o1-Yrq" id="lJh-Ve-fuh"/>
+                        <outlet property="searchButton" destination="KOz-UU-jXg" id="kcf-0j-ICO"/>
                         <outlet property="searchDisplayController" destination="oCb-Kt-UIO" id="OMh-LS-PPP"/>
                         <outlet property="storePicker" destination="4X7-Ux-hQX" id="dcu-sI-3XA"/>
                     </connections>
@@ -1744,8 +1766,8 @@
         <image name="button.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TaJ-i1-U82"/>
-        <segue reference="Fre-qg-Q2M"/>
         <segue reference="cra-Nw-59Y"/>
+        <segue reference="gKu-Of-QLv"/>
+        <segue reference="BaP-qu-kod"/>
     </inferredMetricsTieBreakers>
 </document>

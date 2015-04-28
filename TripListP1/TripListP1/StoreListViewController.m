@@ -16,6 +16,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    self.title = @"Back";
     self.navigationController.navigationBar.hidden = YES;
     
     TripList *tripList = [TripList sharedTripList];

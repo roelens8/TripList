@@ -16,9 +16,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
-  
     self.navigationController.navigationBar.hidden = NO;
-    
     
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;

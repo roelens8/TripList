@@ -15,15 +15,18 @@
 @implementation AddStoreViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-   
-    self.navigationController.navigationBar.hidden = NO;
-    self.itemSearchBar.searchBarStyle = UISearchBarStyleMinimal;
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
-    [self.itemSearchBar setBarTintColor:[UIColor blackColor]];
+    
+    UIBarButtonItem *tempButtonItem = [[ UIBarButtonItem alloc] init];
+    tempButtonItem.title = @"Back";
+    self.navigationController.navigationBar.topItem.backBarButtonItem = tempButtonItem;
     
     self.filteredStoreItems = [NSMutableArray arrayWithCapacity:[self.storeItems count]];
     
-    //self.navigationItem.titleView = self.itemSearchBar;
+    //Hide Search Bar until search button is clicked
+    self.navigationController.navigationBar.hidden = NO;
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    [self.navigationItem.titleView setHidden:YES];
     
     self.stores = [[NSMutableArray alloc]init];
     self.storeItems = [[NSMutableArray alloc]init];
@@ -127,6 +130,10 @@
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     self.searchDisplayController.searchResultsTableView.separatorColor = [UIColor whiteColor];
     self.searchDisplayController.searchResultsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    CGRect frame = self.searchDisplayController.searchResultsTableView.frame;
+    frame.origin.x = -9;
+    frame.size.width = 383;
+    self.searchDisplayController.searchResultsTableView.frame = frame;
     [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
     //Display Store Items
@@ -224,7 +231,7 @@
         if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
             [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
             [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-                NSUInteger index = [self.checkedGName indexOfObject:checkedItem.groceryItemString];
+            NSUInteger index = [self.checkedGName indexOfObject:checkedItem.groceryItemString];
             [self.checkedGName removeObject:checkedItem.groceryItemString];
             [self.checkedGField removeObjectAtIndex:index];
 
@@ -324,15 +331,58 @@
 }
 
 - (IBAction)goToSearch:(id)sender {
+    //When search button is clicked, hide search button and animate showing the serach bar
+    self.navigationItem.rightBarButtonItem = nil;
+    CATransition *fadeTextAnimation = [CATransition animation];
+    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.type = kCATransitionFade;
+    [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"fade"];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor clearColor]];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self.navigationItem.titleView setHidden:NO];
+    [self.itemSearchBar setShowsCancelButton:YES animated:YES];
+    
     [self.itemSearchBar becomeFirstResponder];
-    [self updateQuantityFields:self.addStoreTableView groceriesArray:self.storeItems];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)aSearchBar {
-    self.first = true;
+    //When the search bar's "cancel" buton is clicked show, hide the search bar and show the search button
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    CATransition *fadeTextAnimation = [CATransition animation];
+    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.type = kCAMediaTimingFunctionEaseOut;
+    [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"easeOut"];
+    [self.navigationItem.titleView setHidden:YES];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor blackColor]];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    [aSearchBar setShowsCancelButton:NO animated:YES];
+    
     [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];
     [self.addStoreTableView reloadData];
     [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+-(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    for (UIButton *cancelButton in self.navigationController.navigationBar.subviews) {
+        NSLog(@"%@",cancelButton);
+        if ([cancelButton isKindOfClass:[UIButton class]]) {
+            [cancelButton setTitle:@"Done" forState:UIControlStateNormal];
+            break;
+        }
+    }
+    for (UITextField *searchField in self.navigationController.navigationBar.subviews) {
+        NSLog(@"%@",searchField);
+        if ([searchField isKindOfClass:[UITextField class]]) {
+            searchField.textColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+             searchField.backgroundColor = [UIColor whiteColor];
+            searchField.attributedPlaceholder =
+            [[NSAttributedString alloc]
+             initWithString:@"Search Groceries"
+             attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+             break;
+        }
+        
+    }
 }
 
 //If the quantity of a grocery item was changed after it was checked, update its quantity field with the new value
@@ -351,6 +401,10 @@
                 
                     UITextField *currentQuantityField = (UITextField*)cell.subView;
                     UITextField *checkedQuantityField = [self.checkedGField objectAtIndex:count];
+                    //If CurrenQuantityField is nil but also checked, then the checked grocery item is not show in the searchdisplay table view. In order to prevent an error, set the currentQuantityField to the checkedQuantityField.
+                    if (currentQuantityField == nil) {
+                        currentQuantityField = checkedQuantityField;
+                    }
                     if (![currentQuantityField.text isEqualToString:checkedQuantityField.text]) {
                         [self.checkedGField replaceObjectAtIndex:count withObject:currentQuantityField];
                     }

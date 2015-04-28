@@ -309,10 +309,10 @@
 				22DC85271AC1E6D200EE955F /* Supporting Files */,
 				91411C2E1AE7FABE00517431 /* LaunchViewController.h */,
 				91411C2F1AE7FAD200517431 /* LaunchViewController.m */,
-				91411C331AE81E4700517431 /* LoginViewController.m */,
 				91411C351AE81E5700517431 /* LoginViewController.h */,
-				91D5695C1AE87151001A31A0 /* SignUpViewController.m */,
+				91411C331AE81E4700517431 /* LoginViewController.m */,
 				91D5695E1AE87167001A31A0 /* SignUpViewController.h */,
+				91D5695C1AE87151001A31A0 /* SignUpViewController.m */,
 			);
 			path = TripListP1;
 			sourceTree = "<group>";

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "LoginViewController.h"
 #import "TripListViewController.h"
 
 
@@ -39,13 +39,8 @@
                                             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                             TripListViewController *main = [sb instantiateViewControllerWithIdentifier:@"MainView"]; // @"SettingsListViewController" is the string you have set in above picture
                                            // [self.navigationController popToViewController:main animated:YES];
-                                            
                                             [self.navigationController pushViewController:main animated:YES];
 
-
-
-                                            
-                                            
                                         } else {
                                             // The login failed. Check error to see why.
                                             NSLog(@"not logged in");
