@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
+
 #import "LoginViewController.h"
 #import "TripListViewController.h"
 
@@ -35,7 +35,6 @@
                                         if (user) {
                                             // Do stuff after successful login.
                                             NSLog(@"logged in");
-                                            
                                             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                             TripListViewController *main = [sb instantiateViewControllerWithIdentifier:@"MainView"]; // @"SettingsListViewController" is the string you have set in above picture
                                            // [self.navigationController popToViewController:main animated:YES];
@@ -43,6 +42,13 @@
 
                                         } else {
                                             // The login failed. Check error to see why.
+                                            UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Login failed"
+                                                                                           message: [error userInfo][@"error"]
+                                                                                          delegate: self
+                                                                                 cancelButtonTitle:@"Ok"
+                                                                                 otherButtonTitles:nil];
+                                            
+                                            [alert show];
                                             NSLog(@"not logged in");
                                         }
                                     }];

@@ -401,7 +401,7 @@
                 
                     UITextField *currentQuantityField = (UITextField*)cell.subView;
                     UITextField *checkedQuantityField = [self.checkedGField objectAtIndex:count];
-                    //If CurrenQuantityField is nil but also checked, then the checked grocery item is not show in the searchdisplay table view. In order to prevent an error, set the currentQuantityField to the checkedQuantityField.
+                    //If CurrentQuantityField is nil but also checked, then the checked grocery item is not show in the searchdisplay table view. In order to prevent an error, set the currentQuantityField to the checkedQuantityField.
                     if (currentQuantityField == nil) {
                         currentQuantityField = checkedQuantityField;
                     }
