@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zle-No-mXE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -129,7 +129,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="show" identifier="loginToDashboard" id="WaW-dW-kHp"/>
+                                    <action selector="login:" destination="4cy-F6-Otl" eventType="touchUpInside" id="8xH-vs-d09"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LongLogoMaroon.PNG" translatesAutoresizingMaskIntoConstraints="NO" id="dFh-6j-yZn">
@@ -142,7 +142,8 @@
                                         <exclude reference="2si-qE-qZy"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="67" y="96" width="241" height="128"/>
                                     <mask key="constraints">
                                         <include reference="2si-qE-qZy"/>
                                     </mask>
@@ -176,6 +177,9 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qk-0w-MRN">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="67" y="216" width="241" height="84"/>
+                                </variation>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-wt-qOi">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -297,6 +301,10 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="pass" destination="wTS-wt-qOi" id="VF0-3H-TYr"/>
+                        <outlet property="user" destination="3gZ-QS-kKN" id="xqn-7Z-Tc5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLO-xo-IIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -343,7 +351,7 @@
                                     <rect key="frame" x="151" y="476" width="98" height="39"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="4cy-F6-Otl" kind="show" identifier="signUptoLogIn" id="AOV-Cv-dVs"/>
+                                    <action selector="signUp:" destination="6xY-Of-gBe" eventType="touchUpInside" id="2ae-qN-WmP"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShortLogoMaroon.PNG" translatesAutoresizingMaskIntoConstraints="NO" id="O38-5g-IaC">
@@ -392,6 +400,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="qOV-oi-nBN"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="email" destination="61K-a6-sNd" id="rj2-dj-HGh"/>
+                        <outlet property="pass" destination="mmM-HJ-AGA" id="pq0-Vl-yd2"/>
+                        <outlet property="repass" destination="EKi-MD-3cv" id="o3W-Z3-TKf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cvk-VQ-Vdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -451,6 +464,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="logout:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Xtu-h7-2ik"/>
                                     <segue destination="4cy-F6-Otl" kind="show" identifier="dashLogOut" id="BaP-qu-kod"/>
                                 </connections>
                             </button>
@@ -1730,9 +1744,8 @@
         <image name="button.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Uz-z8-Y05"/>
         <segue reference="TaJ-i1-U82"/>
+        <segue reference="Fre-qg-Q2M"/>
         <segue reference="cra-Nw-59Y"/>
-        <segue reference="AOV-Cv-dVs"/>
     </inferredMetricsTieBreakers>
 </document>

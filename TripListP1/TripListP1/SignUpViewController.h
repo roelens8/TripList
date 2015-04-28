@@ -14,7 +14,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface SignUpViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UITextField *pass;
+@property (weak, nonatomic) IBOutlet UITextField *repass;
 
 @end
