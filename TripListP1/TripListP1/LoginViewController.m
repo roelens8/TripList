@@ -35,11 +35,16 @@
                                         if (user) {
                                             // Do stuff after successful login.
                                             NSLog(@"logged in");
+                                            [TripList destroy]; //Once logged in, destroy old TripList singleton and create a new one with the current user's data
+                                            // [self.navigationController popToViewController:main animated:YES];
+                                            //TripList *list = [[TripList alloc]init]; //Initialize TripList before pushing the view so the data of the current user's TripList will be displayed
+                                            //UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                            //TripListViewController *main = [sb instantiateViewControllerWithIdentifier:@"MainView"]; // @"SettingsListViewController" is the string you have set in above picture
+                                            ///[self.navigationController pushViewController:main animated:YES];
+                                            //[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(waitToLogin) userInfo:nil repeats:NO];
                                             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                             TripListViewController *main = [sb instantiateViewControllerWithIdentifier:@"MainView"]; // @"SettingsListViewController" is the string you have set in above picture
-                                           // [self.navigationController popToViewController:main animated:YES];
                                             [self.navigationController pushViewController:main animated:YES];
-
                                         } else {
                                             // The login failed. Check error to see why.
                                             UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Login failed"
@@ -53,6 +58,12 @@
                                         }
                                     }];
     
+}
+
+-(void)waitToLogin {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TripListViewController *main = [sb instantiateViewControllerWithIdentifier:@"MainView"]; // @"SettingsListViewController" is the string you have set in above picture
+    [self.navigationController pushViewController:main animated:YES];
 }
 
 @end

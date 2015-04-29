@@ -25,16 +25,15 @@ static TripList *theTripList = nil;
             NSLog(@"%@", filePath);
         }*/
         //Load from Parse storage
+        PFUser *currentUser = [PFUser currentUser];
         PFQuery *query = [PFQuery queryWithClassName:@"TripList"];
-        [query whereKey:@"userName" equalTo:@"Test"];
+        [query whereKey:@"userName" equalTo:currentUser.username];
         NSArray *tripsArray = [query findObjects];
-        if ([tripsArray count] != 0) {
+        if ([tripsArray count] > 0) {
             PFObject *userTrip = [tripsArray firstObject];
             NSData *data = userTrip[@"Trips"];
             self.tripId = [userTrip objectId];
             self.trips = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            self.userName = userTrip[@"userName"];
-            //NSLog(@"%@", userTrip);
         }
     }
     return self;
@@ -45,6 +44,10 @@ static TripList *theTripList = nil;
         theTripList = [[TripList alloc]init];
     }
     return theTripList;
+}
+
++ (void)destroy {
+    theTripList = nil;
 }
 
 @end

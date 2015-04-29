@@ -17,9 +17,9 @@
 @property NSMutableArray *trips;
 @property Trip *currentTrip; //For knowing which trip is currently selected
 @property NSString *currentStore; //For knowing which store is currently selected
-@property NSString *userName; //Username for retrieveing trips
 @property NSString *tripId; //Id for updating trip
 
 + (TripList*)sharedTripList;
++ (void)destroy;
 
 @end

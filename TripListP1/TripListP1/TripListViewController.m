@@ -101,7 +101,10 @@
 
 - (IBAction)logout:(UIButton *)sender {
     [PFUser logOut];
-    [PFUser currentUser]; // this will now be nil
+    //PFSession *curretnSession = [PFSession u]
+    NSLog(@"%@", @"logged out");
+    //[PFUser currentUser]; // this will now be nil
+    
 }
 
 @end

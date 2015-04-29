@@ -13,10 +13,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "TripList.h"
 
 @interface LoginViewController : UIViewController
 
-
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pass;
+
+-(void)waitToLogin;
+
 @end

@@ -18,7 +18,7 @@
     
 
     //Enable Parse Local Datastore
-    [Parse enableLocalDatastore];
+    //[Parse enableLocalDatastore];
     [Parse setApplicationId:@"parseAppId" clientKey:@"parseClientKey"];
     //Initialize Parse
     [Parse setApplicationId:@"jds76phixswhTcwBr3ms0lh6PBdklp85dnqkrOkx"
@@ -85,13 +85,14 @@
 - (void)saveTripData {
     TripList *tripList = [TripList sharedTripList];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tripList.trips];
+    PFUser *currentUser = [PFUser currentUser];
     
     //If it's the first time trips are saved (Insert)
     if (tripList.tripId == nil) {
         PFObject *test = [PFObject objectWithClassName:@"TripList"];
         test[@"Trips"] = data;
-        tripList.userName = @"Test"; //Remove when login is implemented
-        test[@"userName"] = tripList.userName;
+        //tripList.userName = currentUser.username;
+        test[@"userName"] = currentUser.username;
         [test saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 tripList.tripId = [test objectId];
@@ -113,6 +114,7 @@
                 NSLog(@"%@", error.description);
         }];
     }
+    //Save to Local Storage
     if (tripList != nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -198,13 +200,7 @@
         // Add the Location object to the array
         [locations addObject:grocery];
     }
-    
     for (GroceryItem *item in locations) {
-//        NSLog(@"Category: %@ ", item.category);
-//        NSLog(@"Name: %@ ", item.name);
-//        NSLog(@"Quantity: %@ ", item.quantity);
-//        NSLog(@"Price: %@ ", item.price);
-//        NSLog(@"Unit: %@ ", item.unit);
        [self.storeItems addObject:item];
     }
 }

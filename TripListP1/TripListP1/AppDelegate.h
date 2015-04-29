@@ -22,9 +22,6 @@
 @property NSMutableArray *stores; //All Stores in the system
 @property NSMutableArray *storeItems; //All Items that stores can sell
 
-
-
-
 + (AppDelegate*) instance;
 
 //- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
