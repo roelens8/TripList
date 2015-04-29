@@ -14,6 +14,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tripDatePicker.datePickerMode = UIDatePickerModeDate;
+    [self.tripDatePicker setValue:[UIColor colorWithRed:204/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f] forKeyPath:@"textColor"];
+    /*SEL selector = NSSelectorFromString(@"setHighlightsToday:");
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDatePicker instanceMethodSignatureForSelector:selector]];
+    BOOL no = NO;
+    [invocation setSelector:selector];
+    [invocation setArgument:&no atIndex:2];
+    [invocation invokeWithTarget:self.tripDatePicker];*/
+    
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
                                            initWithTarget:self
                                            action:@selector(hideKeyBoard)];

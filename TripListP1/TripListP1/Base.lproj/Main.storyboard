@@ -785,10 +785,10 @@
                             <constraint firstItem="fbq-4K-wl3" firstAttribute="leading" secondItem="abX-8q-vT5" secondAttribute="leadingMargin" constant="-12" id="1on-JV-81g"/>
                             <constraint firstItem="5Xg-mP-Viz" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="31" id="4QW-Dm-ArT"/>
                             <constraint firstItem="mM2-1a-HOl" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="31" id="6MJ-pj-Dxa">
-                                <variation key="widthClass=compact" constant="231"/>
+                                <variation key="widthClass=compact" constant="239"/>
                             </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="trailing" secondItem="mM2-1a-HOl" secondAttribute="trailing" id="8lW-Dt-35J">
-                                <variation key="widthClass=compact" constant="60"/>
+                                <variation key="widthClass=compact" constant="62"/>
                             </constraint>
                             <constraint firstItem="XT5-eU-gSW" firstAttribute="top" secondItem="Bcx-Eh-Zpv" secondAttribute="bottom" constant="206" id="EVE-Gg-kyX">
                                 <variation key="widthClass=compact" constant="54"/>
@@ -797,33 +797,33 @@
                                 <variation key="widthClass=compact" constant="55"/>
                             </constraint>
                             <constraint firstItem="m4j-aM-Bhp" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="top" id="MDR-zG-74j">
-                                <variation key="widthClass=compact" constant="-135"/>
+                                <variation key="widthClass=compact" constant="-133"/>
                             </constraint>
                             <constraint firstItem="fbq-4K-wl3" firstAttribute="top" secondItem="gVd-xR-RRB" secondAttribute="bottom" constant="8" symbolic="YES" id="NlS-eO-pr1"/>
                             <constraint firstItem="m4j-aM-Bhp" firstAttribute="top" secondItem="fbq-4K-wl3" secondAttribute="bottom" constant="52" id="Nmr-fA-r0E">
                                 <variation key="widthClass=compact" constant="30"/>
                             </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="leading" secondItem="mM2-1a-HOl" secondAttribute="leading" id="Omm-W2-aec">
-                                <variation key="widthClass=compact" constant="-60"/>
+                                <variation key="widthClass=compact" constant="-58"/>
                             </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="leading" secondItem="m4j-aM-Bhp" secondAttribute="trailing" constant="8" symbolic="YES" id="b0O-LS-sUP">
-                                <variation key="widthClass=compact" constant="-224"/>
+                                <variation key="widthClass=compact" constant="-222"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="5Xg-mP-Viz" secondAttribute="trailing" constant="40" id="dY4-ax-K9n"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mM2-1a-HOl" secondAttribute="trailing" constant="31" id="dgT-td-qAU">
                                 <variation key="widthClass=compact" constant="55"/>
                             </constraint>
                             <constraint firstItem="dhz-FW-QPV" firstAttribute="top" secondItem="mM2-1a-HOl" secondAttribute="bottom" constant="32" id="lVg-CB-wVu">
-                                <variation key="widthClass=compact" constant="40"/>
+                                <variation key="widthClass=compact" constant="30"/>
                             </constraint>
                             <constraint firstItem="Bcx-Eh-Zpv" firstAttribute="leading" secondItem="abX-8q-vT5" secondAttribute="leading" constant="145" id="ndx-go-X76">
-                                <variation key="widthClass=compact" constant="131"/>
+                                <variation key="widthClass=compact" constant="127"/>
                             </constraint>
                             <constraint firstItem="m4j-aM-Bhp" firstAttribute="top" secondItem="5Xg-mP-Viz" secondAttribute="bottom" constant="76" id="src-Gk-W1s">
                                 <variation key="widthClass=compact" constant="54"/>
                             </constraint>
                             <constraint firstItem="Bcx-Eh-Zpv" firstAttribute="top" secondItem="dhz-FW-QPV" secondAttribute="bottom" constant="41" id="tZ5-MJ-Ywy">
-                                <variation key="widthClass=compact" constant="43"/>
+                                <variation key="widthClass=compact" constant="45"/>
                             </constraint>
                             <constraint firstItem="5Xg-mP-Viz" firstAttribute="leading" secondItem="fbq-4K-wl3" secondAttribute="trailing" constant="8" symbolic="YES" id="xGB-VO-ajM"/>
                         </constraints>
