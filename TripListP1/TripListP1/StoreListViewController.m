@@ -55,12 +55,11 @@
             UILabel *storeTotalLabel = [[UILabel alloc] init];
             [storeTotalLabel setFrame:CGRectMake(300, 10, 80, 30)];
             storeTotalLabel.backgroundColor = [UIColor clearColor];
-            storeTotalLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1];
+            storeTotalLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(220/255.0) blue:(0/255.0) alpha:1];
             storeTotalLabel.adjustsFontSizeToFitWidth = YES;
             storeTotalLabel.tag = 1;
             [storeTotalLabel setFont:[UIFont boldSystemFontOfSize:20]];
             [cell.contentView addSubview:storeTotalLabel];
-            
         }
     }
     NSString *storeTotal = [self calculateStoreTotal:tripList storeIndex:indexPath.row];

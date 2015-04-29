@@ -36,7 +36,6 @@
                                                       delegate: self
                                              cancelButtonTitle:@"Ok"
                                              otherButtonTitles:nil];
-        
         [alert show];
     }
     else {
@@ -46,7 +45,6 @@
                                                           delegate: self
                                                  cancelButtonTitle:@"Ok"
                                                  otherButtonTitles:nil];
-            
             [alert show];
             
         }

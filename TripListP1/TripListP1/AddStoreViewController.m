@@ -132,7 +132,8 @@
     frame.origin.x = -9;
     frame.size.width = 383;
     self.searchDisplayController.searchResultsTableView.frame = frame;
-    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
+    cell.contentView.superview.backgroundColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1]; //Background color of accessory view and cell background
+    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(255/255.0) blue:(0/255.0) alpha:1]]; //Color of the checkmark
     
     //Display Store Items
     //Check to see whether the normal table or the search results table is being displayed from the proper array
@@ -329,6 +330,7 @@
 }
 
 - (IBAction)goToSearch:(id)sender {
+    [self updateQuantityFields:self.addStoreTableView groceriesArray:self.storeItems]; //If the user changed the quantity of a an item, and then clicked the search button, the previous changes in the self.tableView would disappear
     //When search button is clicked, hide search button and animate showing the serach bar
     self.navigationItem.rightBarButtonItem = nil;
     CATransition *fadeTextAnimation = [CATransition animation];
@@ -362,24 +364,17 @@
 
 -(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     for (UIButton *cancelButton in self.navigationController.navigationBar.subviews) {
-        NSLog(@"%@",cancelButton);
         if ([cancelButton isKindOfClass:[UIButton class]]) {
             [cancelButton setTitle:@"Done" forState:UIControlStateNormal];
             break;
         }
     }
     for (UITextField *searchField in self.navigationController.navigationBar.subviews) {
-        NSLog(@"%@",searchField);
         if ([searchField isKindOfClass:[UITextField class]]) {
             searchField.textColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1];
              searchField.backgroundColor = [UIColor whiteColor];
-            searchField.attributedPlaceholder =
-            [[NSAttributedString alloc]
-             initWithString:@"Search Groceries"
-             attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
              break;
         }
-        
     }
 }
 

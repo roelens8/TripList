@@ -72,6 +72,7 @@
         quantityField.tag = 10;
         [cell addSubview:quantityField];
     //}
+    
     //Create Quanity Field
     quantityField = (UITextField *)[cell viewWithTag:10];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
@@ -95,7 +96,8 @@
     frame.origin.x = -9;
     frame.size.width = 383;
     self.searchDisplayController.searchResultsTableView.frame = frame;
-    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
+    cell.contentView.superview.backgroundColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1]; //Background color of accessory view and cell background
+    [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(255/255.0) blue:(0/255.0) alpha:1]]; //Color of the checkmark
     
     GroceryItem *storeItem = [[GroceryItem alloc]init];
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -198,8 +200,7 @@
 - (IBAction)editStore:(id)sender {
     TripList* tripList = [TripList sharedTripList];
     Trip *trip = [[Trip alloc]init];
-    //Update Quantity Fields if quantity was changed after the item was checked
-    [self updateQuantityFields:self.tableView groceriesArray:self.storeItems];
+    [self updateQuantityFields:self.tableView groceriesArray:self.storeItems]; //Update Quantity Fields if quantity was changed after the item was checked
     for (GroceryItem *groceryItem in self.checkedItems) {
         if (self.quantityFieldMap != nil){
             UITextField *field = [self.quantityFieldMap objectForKey:groceryItem.name];
@@ -247,16 +248,15 @@
 }
 
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-    // Update the filtered array based on the search text
-    // Clear all of the items from the filtered array
-    [self.filteredStoreItems removeAllObjects];
-    // Filter the array using NSPredicate
+    //Update the filtered array based on the search text
+    [self.filteredStoreItems removeAllObjects]; //Clear all of the items from the filtered array
+    //Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",searchText];
     self.filteredStoreItems = [NSMutableArray arrayWithArray:[self.storeItems filteredArrayUsingPredicate:predicate]];
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    // Makes the table data source reload when text changes
+    //Makes the table data source reload when text changes
     //There was a bug when setting quantity fields to 0, but this fixed that problem
     if (self.first)
         self.first = false;
@@ -270,8 +270,8 @@
 }
 
 - (IBAction)goToSearch:(id)sender {
-    //When search button is clicked, hide search button and animate showing the serach bar
-    self.navigationItem.rightBarButtonItem = nil;
+    [self updateQuantityFields:self.tableView groceriesArray:self.storeItems]; //If the user changed the quantity of a an item, and then clicked the search button, the previous changes in the self.tableView would disappear
+    self.navigationItem.rightBarButtonItem = nil; //When search button is clicked, hide search button and animate showing the serach bar
     CATransition *fadeTextAnimation = [CATransition animation];
     fadeTextAnimation.duration = 0.5;
     fadeTextAnimation.type = kCATransitionFade;
@@ -303,14 +303,12 @@
 
 -(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     for (UIButton *cancelButton in self.navigationController.navigationBar.subviews) {
-        NSLog(@"%@",cancelButton);
         if ([cancelButton isKindOfClass:[UIButton class]]) {
             [cancelButton setTitle:@"Done" forState:UIControlStateNormal];
             break;
         }
     }
     for (UITextField *searchField in self.navigationController.navigationBar.subviews) {
-        NSLog(@"%@",searchField);
         if ([searchField isKindOfClass:[UITextField class]]) {
             searchField.textColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1];
             searchField.backgroundColor = [UIColor whiteColor];
@@ -346,8 +344,6 @@
         }
     }
 }
-
-
 /*
  #pragma mark - Navigation
  

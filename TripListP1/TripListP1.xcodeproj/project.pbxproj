@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2205B0F51AF0CC9700133200 /* check-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2205B0F41AF0CC9700133200 /* check-mark.png */; };
 		2211827C1AC8CD3D00724FC6 /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2211827B1AC8CD3D00724FC6 /* StoreListViewController.m */; };
 		2211827F1AC8D73B00724FC6 /* AddStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2211827E1AC8D73B00724FC6 /* AddStoreViewController.m */; };
 		221182821AC8E33800724FC6 /* EditStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221182811AC8E33800724FC6 /* EditStoreViewController.m */; };
@@ -98,6 +99,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2205B0F41AF0CC9700133200 /* check-mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check-mark.png"; path = "../check-mark.png"; sourceTree = "<group>"; };
 		2211827A1AC8CD3D00724FC6 /* StoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListViewController.h; sourceTree = "<group>"; };
 		2211827B1AC8CD3D00724FC6 /* StoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListViewController.m; sourceTree = "<group>"; };
 		2211827D1AC8D73B00724FC6 /* AddStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStoreViewController.h; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 		91411BE71AE7FA1C00517431 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2205B0F41AF0CC9700133200 /* check-mark.png */,
 				91411C4B1AE8474E00517431 /* button (2).png */,
 				91411C411AE83CF100517431 /* LongLogoMaroon.PNG */,
 				91411C421AE83CF100517431 /* LongLogoWhite.PNG */,
@@ -485,6 +488,7 @@
 				91411C2C1AE7FA1C00517431 /* paperbag256.png in Resources */,
 				91411C101AE7FA1C00517431 /* breads64.png in Resources */,
 				91411C1E1AE7FA1C00517431 /* Icon-72@2x.png in Resources */,
+				2205B0F51AF0CC9700133200 /* check-mark.png in Resources */,
 				91411C141AE7FA1C00517431 /* fruits128.png in Resources */,
 				91411C0E1AE7FA1C00517431 /* breads128.png in Resources */,
 				91411C281AE7FA1C00517431 /* meats128.png in Resources */,
