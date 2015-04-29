@@ -8,10 +8,6 @@
 
 #import "StoreListViewController.h"
 
-@interface StoreListViewController ()
-
-@end
-
 @implementation StoreListViewController
 
 - (void) viewWillAppear:(BOOL)animated {

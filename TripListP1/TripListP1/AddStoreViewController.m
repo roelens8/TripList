@@ -8,15 +8,11 @@
 
 #import "AddStoreViewController.h"
 
-@interface AddStoreViewController ()
-
-@end
-
 @implementation AddStoreViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    UIBarButtonItem *tempButtonItem = [[ UIBarButtonItem alloc] init];
+    UIBarButtonItem *tempButtonItem = [[UIBarButtonItem alloc] init];
     tempButtonItem.title = @"Back";
     self.navigationController.navigationBar.topItem.backBarButtonItem = tempButtonItem;
     
@@ -116,6 +112,7 @@
     UITextField *quantityField = [[UITextField alloc] initWithFrame:CGRectMake(310, 10, 30, 30)];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
+    quantityField.layer.cornerRadius = 5;
     quantityField.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     quantityField.textColor = [UIColor whiteColor];
     quantityField.textAlignment = NSTextAlignmentCenter;
@@ -126,6 +123,7 @@
     [quantityField setEnabled: YES];
     [cell addSubview:quantityField];
     
+    //Set colors for search display table view
     self.addStoreTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     self.searchDisplayController.searchResultsTableView.separatorColor = [UIColor whiteColor];

@@ -8,10 +8,6 @@
 
 #import "TripListViewController.h"
 
-@interface TripListViewController ()
-
-@end
-
 @implementation TripListViewController
 
 - (void)viewWillAppear:(BOOL)animated {

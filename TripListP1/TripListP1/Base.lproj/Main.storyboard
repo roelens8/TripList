@@ -1618,10 +1618,20 @@
                                 <color key="sectionIndexBackgroundColor" red="0.59999999999999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="r1Z-sz-4lg" id="5FD-Oe-Fgs"/>
+                                    <outlet property="dataSource" destination="r1Z-sz-4lg" id="1w3-zs-awS"/>
                                     <outlet property="delegate" destination="r1Z-sz-4lg" id="YVv-gW-Hyy"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search Groceries" translatesAutoresizingMaskIntoConstraints="NO" id="tEM-90-WAU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="-1" y="21" width="375" height="44"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="r1Z-sz-4lg" id="MJk-DA-Sp6"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1689,6 +1699,7 @@
                                 <exclude reference="q2c-kT-IwL"/>
                                 <exclude reference="6Bg-Hu-bbp"/>
                                 <exclude reference="3nI-7L-Mdc"/>
+                                <exclude reference="tEM-90-WAU"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="1W6-7T-rYw"/>
@@ -1720,6 +1731,7 @@
                                 <include reference="q2c-kT-IwL"/>
                                 <include reference="6Bg-Hu-bbp"/>
                                 <include reference="3nI-7L-Mdc"/>
+                                <include reference="tEM-90-WAU"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="1W6-7T-rYw"/>
@@ -1743,15 +1755,33 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="f5s-XQ-c1y"/>
+                    <navigationItem key="navigationItem" id="f5s-XQ-c1y">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ZhB-aM-HIZ">
+                            <connections>
+                                <action selector="goToSearch:" destination="r1Z-sz-4lg" id="Uj6-s7-ypK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="currentStore" destination="pvR-h4-cao" id="TSW-43-QpE"/>
+                        <outlet property="itemSearchBar" destination="tEM-90-WAU" id="bEW-4x-XhH"/>
+                        <outlet property="searchButton" destination="ZhB-aM-HIZ" id="Fx7-et-b8B"/>
+                        <outlet property="searchDisplayController" destination="q3q-O5-0zh" id="NNM-nf-ZDS"/>
                         <outlet property="storeTotal" destination="q2c-kT-IwL" id="P4f-mT-JOF"/>
                         <outlet property="tableView" destination="3nI-7L-Mdc" id="Ie3-1V-2e1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFe-XG-ceX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="q3q-O5-0zh">
+                    <connections>
+                        <outlet property="delegate" destination="r1Z-sz-4lg" id="W3v-0y-qdz"/>
+                        <outlet property="searchBar" destination="tEM-90-WAU" id="X4k-Y0-Cfi"/>
+                        <outlet property="searchContentsController" destination="r1Z-sz-4lg" id="eZh-8o-BcE"/>
+                        <outlet property="searchResultsDataSource" destination="r1Z-sz-4lg" id="aDS-iB-xu0"/>
+                        <outlet property="searchResultsDelegate" destination="r1Z-sz-4lg" id="dqj-St-wUa"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3929.25" y="216.5"/>
         </scene>

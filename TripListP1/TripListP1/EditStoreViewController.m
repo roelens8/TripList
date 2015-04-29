@@ -8,15 +8,20 @@
 
 #import "EditStoreViewController.h"
 
-@interface EditStoreViewController ()
-
-@end
-
 @implementation EditStoreViewController
 
 -(void)viewWillAppear:(BOOL)animated {
     
+    self.filteredStoreItems = [NSMutableArray arrayWithCapacity:[self.storeItems count]];
+    
+    //Hide Search Bar until search button is clicked
     self.navigationController.navigationBar.hidden = NO;
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    [self.navigationItem.titleView setHidden:YES];
+    self.navigationController.navigationBar.hidden = NO;
+    
+    self.first = true;
     
     TripList *tripList = [TripList sharedTripList];
     Trip *currentTrip = tripList.currentTrip;
@@ -26,8 +31,13 @@
     self.storeItems = [[NSMutableArray alloc]init];
     self.storeItems = app.storeItems;
     
-    self.quantityFieldMap = [[NSMutableDictionary alloc]init];
     self.checkedItems = [[currentTrip.shoppingList objectForKey:tripList.currentStore] mutableCopy]; //Copy; Does not reference TripList singleton
+    self.quantityFieldMap = [[NSMutableDictionary alloc]init];
+    for (GroceryItem *checkedItem in self.checkedItems) {
+        UITextField *quantityField = [[UITextField alloc]init];
+        quantityField.text = checkedItem.quantity;
+        [self.quantityFieldMap setObject:quantityField forKey:checkedItem.name];
+    }
     [self calculateStoreTotal:tripList];
 }
 
@@ -46,7 +56,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.storeItems count];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredStoreItems count];
+    } else {
+        return [self.storeItems count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,6 +76,7 @@
     quantityField = (UITextField *)[cell viewWithTag:10];
     cell.subView = quantityField; //quantityField won't disappear after being selected and deselected
     quantityField.adjustsFontSizeToFitWidth = YES;
+    quantityField.layer.cornerRadius = 5;
     quantityField.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
     quantityField.textColor = [UIColor whiteColor];
     quantityField.textAlignment = NSTextAlignmentCenter;
@@ -71,11 +86,58 @@
     quantityField.text = @"0";
     [quantityField setEnabled: YES];
     
+    //Set colors for search display table view
     self.tableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithRed:153/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+    self.searchDisplayController.searchResultsTableView.separatorColor = [UIColor whiteColor];
+    self.searchDisplayController.searchResultsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    CGRect frame = self.searchDisplayController.searchResultsTableView.frame;
+    frame.origin.x = -9;
+    frame.size.width = 383;
+    self.searchDisplayController.searchResultsTableView.frame = frame;
     [[UITableViewCell appearance] setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(0/255.0) alpha:1]];
     
+    GroceryItem *storeItem = [[GroceryItem alloc]init];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if ([self.filteredStoreItems count] < 1) {
+            ;
+        }
+        else {
+            storeItem = [self.filteredStoreItems objectAtIndex:indexPath.row];
+            for (int i = 0; i < [self.checkedItems count]; i++) {
+                GroceryItem *checkedItem = self.checkedItems[i];
+                if ([storeItem.name isEqualToString:checkedItem.name]) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    NSLog(@"%@", checkedItem.quantity);
+                    UITextField *groceryField = [self.quantityFieldMap objectForKey:checkedItem.name];
+                    quantityField.text = groceryField.text;
+                    break;
+                }
+                else {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+            }
+        }
+    }
+    else {
+        storeItem = [self.storeItems objectAtIndex:indexPath.row];
+        for (int i = 0; i < [self.checkedItems count]; i++) {
+            GroceryItem *checkedItem = self.checkedItems[i];
+            if ([storeItem.name isEqualToString:checkedItem.name]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                UITextField *groceryField = [self.quantityFieldMap objectForKey:checkedItem.name];
+                quantityField.text = groceryField.text;
+                break;
+            }
+            else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
+    }
+    /*if ([self.quantityFieldMap count] == 0) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }*/
     //Display Store Items
-    GroceryItem *storeItem = [self.storeItems objectAtIndex:indexPath.row];
     NSString *itemDescription = [NSString stringWithFormat:@" \u200b%@\u200b - %@", storeItem.name, storeItem.category];
     if (storeItem.price != nil) {
         NSString *price = [NSString stringWithFormat:@" Price: %@", storeItem.price];
@@ -94,19 +156,6 @@
     cell.detailTextLabel.textColor = [UIColor whiteColor] ;
     cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
     
-    for (int i = 0; i < [self.checkedItems count]; i++) {
-        GroceryItem *checkedItem = self.checkedItems[i];
-        if ([storeItem.name isEqualToString:checkedItem.name]) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            //cell.contentView.backgroundColor = [UIColor colorWithRed:(205/255.0) green:(0/255.0) blue:(0/255.0) alpha:1] ;
-            [self.quantityFieldMap setObject:quantityField forKey:checkedItem.name];
-            quantityField.text = checkedItem.quantity;
-            break;
-        }
-        else {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
     return cell;
 }
 
@@ -149,7 +198,8 @@
 - (IBAction)editStore:(id)sender {
     TripList* tripList = [TripList sharedTripList];
     Trip *trip = [[Trip alloc]init];
-    
+    //Update Quantity Fields if quantity was changed after the item was checked
+    [self updateQuantityFields:self.tableView groceriesArray:self.storeItems];
     for (GroceryItem *groceryItem in self.checkedItems) {
         if (self.quantityFieldMap != nil){
             UITextField *field = [self.quantityFieldMap objectForKey:groceryItem.name];
@@ -162,7 +212,6 @@
             groceryItem.quantity = @"0";
         }
     }
-    //self.quantityFieldMap = nil;
     for (int i = 0; i < [tripList.trips count]; i++) {
         if (tripList.currentTrip == tripList.trips[i]) {
             trip = tripList.trips[i];
@@ -195,6 +244,107 @@
         self.storeTotal.text = @"0.00";
     else
         self.storeTotal.text = [NSString stringWithFormat:@"%.2f", [storeTotal floatValue]];
+}
+
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text
+    // Clear all of the items from the filtered array
+    [self.filteredStoreItems removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",searchText];
+    self.filteredStoreItems = [NSMutableArray arrayWithArray:[self.storeItems filteredArrayUsingPredicate:predicate]];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Makes the table data source reload when text changes
+    //There was a bug when setting quantity fields to 0, but this fixed that problem
+    if (self.first)
+        self.first = false;
+    else
+        [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];
+    
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+- (IBAction)goToSearch:(id)sender {
+    //When search button is clicked, hide search button and animate showing the serach bar
+    self.navigationItem.rightBarButtonItem = nil;
+    CATransition *fadeTextAnimation = [CATransition animation];
+    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.type = kCATransitionFade;
+    [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"fade"];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor clearColor]];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self.navigationItem.titleView setHidden:NO];
+    [self.itemSearchBar setShowsCancelButton:YES animated:YES];
+    
+    [self.itemSearchBar becomeFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)aSearchBar {
+    //When the search bar's "cancel" buton is clicked show, hide the search bar and show the search button
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    CATransition *fadeTextAnimation = [CATransition animation];
+    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.type = kCAMediaTimingFunctionEaseOut;
+    [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"easeOut"];
+    [self.navigationItem.titleView setHidden:YES];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor blackColor]];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    [aSearchBar setShowsCancelButton:NO animated:YES];
+    
+    [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];
+    [self.tableView reloadData];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+-(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    for (UIButton *cancelButton in self.navigationController.navigationBar.subviews) {
+        NSLog(@"%@",cancelButton);
+        if ([cancelButton isKindOfClass:[UIButton class]]) {
+            [cancelButton setTitle:@"Done" forState:UIControlStateNormal];
+            break;
+        }
+    }
+    for (UITextField *searchField in self.navigationController.navigationBar.subviews) {
+        NSLog(@"%@",searchField);
+        if ([searchField isKindOfClass:[UITextField class]]) {
+            searchField.textColor = [UIColor colorWithRed:204/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+            searchField.backgroundColor = [UIColor whiteColor];
+            /*searchField.attributedPlaceholder =
+            [[NSAttributedString alloc]
+             initWithString:@"Search Groceries"
+             attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];*/
+            break;
+        }
+    }
+}
+
+//If the quantity of a grocery item was changed after it was checked, update its quantity field with the new value
+- (void)updateQuantityFields:(UITableView*)tableView groceriesArray:(NSMutableArray*)groceries {
+    NSUInteger iter1 = 0;
+    NSUInteger iterMax = [self.quantityFieldMap count];
+    for (GroceryItem *item in groceries) {
+        if (iter1 < iterMax) {
+            //NSString *checkedGroceryName = [self.quantityFieldMap objectForKey:item.name];
+            if ([self.quantityFieldMap objectForKey:item.name] != nil) {
+                CustomCell *cell = (CustomCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[groceries indexOfObject:item] inSection:0]];
+                UITextField *currentQuantityField = (UITextField*)cell.subView;
+                UITextField *checkedQuantityField = [self.quantityFieldMap objectForKey:item.name];
+                //If CurrentQuantityField is nil but also checked, then the checked grocery item is not show in the searchdisplay table view. In order to prevent an error, set the currentQuantityField to the checkedQuantityField.
+                if (currentQuantityField == nil) {
+                    currentQuantityField = checkedQuantityField;
+                }
+                if (![currentQuantityField.text isEqualToString:checkedQuantityField.text]) {
+                    [self.quantityFieldMap setObject:currentQuantityField forKey:item.name];
+                }
+                iter1++;
+            }
+        }
+    }
 }
 
 

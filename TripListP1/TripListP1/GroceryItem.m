@@ -35,7 +35,6 @@
 // Init the object with information from a dictionary
 - (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
     if(self = [self init]) {
-        
         // Assign all properties with keyed values from the dictionary
         self.category = [jsonDictionary objectForKey:@"category"];
         self.name = [jsonDictionary objectForKey:@"name"];

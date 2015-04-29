@@ -9,7 +9,6 @@
 #ifndef TripListP1_SignUpViewController_h
 #define TripListP1_SignUpViewController_h
 
-
 #endif
 
 #import <Foundation/Foundation.h>

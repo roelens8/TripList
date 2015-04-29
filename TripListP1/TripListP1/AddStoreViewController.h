@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "Trip.h"
 #import "TripList.h"
@@ -18,7 +19,6 @@
 @property NSMutableArray *stores; //Array of all Stores
 @property NSMutableArray *storeItems; //Array of Gorceries a store sells
 @property NSMutableArray *storeNames; //Array of all Store names
-//@property NSMutableArray *checkedGroceries; //Array containing strings that concatenate all grocery data
 @property NSMutableArray *filteredStoreItems; //Filtered array of groceries for the Search Bar
 @property NSString *storePickerSelectedStore; //The store selected form the picker view
 @property NSInteger storePickerSelectedRow; //Row of the selected store
