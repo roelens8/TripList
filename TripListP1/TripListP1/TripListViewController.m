@@ -15,8 +15,9 @@
     
     self.title = @"Back";
     self.navigationController.navigationBar.hidden = YES;
-    
     self.addTripVC = [[AddTripViewController alloc] init];
+    
+    [self.tripTableView reloadData];
 }
 
 - (void)viewDidLoad {

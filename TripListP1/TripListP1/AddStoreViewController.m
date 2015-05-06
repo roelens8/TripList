@@ -340,6 +340,7 @@
     [self.navigationItem.rightBarButtonItem setTintColor:[UIColor clearColor]];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [self.navigationItem.titleView setHidden:NO];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
     [self.itemSearchBar setShowsCancelButton:YES animated:YES];
     
     [self.itemSearchBar becomeFirstResponder];
@@ -355,6 +356,7 @@
     [self.navigationItem.titleView setHidden:YES];
     [self.navigationItem.rightBarButtonItem setTintColor:[UIColor blackColor]];
     [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    [self.navigationItem setHidesBackButton:NO animated:YES];
     [aSearchBar setShowsCancelButton:NO animated:YES];
     
     [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];

@@ -273,12 +273,13 @@
     [self updateQuantityFields:self.tableView groceriesArray:self.storeItems]; //If the user changed the quantity of a an item, and then clicked the search button, the previous changes in the self.tableView would disappear
     self.navigationItem.rightBarButtonItem = nil; //When search button is clicked, hide search button and animate showing the serach bar
     CATransition *fadeTextAnimation = [CATransition animation];
-    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.duration = 0.25;
     fadeTextAnimation.type = kCATransitionFade;
     [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"fade"];
     [self.navigationItem.rightBarButtonItem setTintColor:[UIColor clearColor]];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [self.navigationItem.titleView setHidden:NO];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
     [self.itemSearchBar setShowsCancelButton:YES animated:YES];
     
     [self.itemSearchBar becomeFirstResponder];
@@ -288,12 +289,13 @@
     //When the search bar's "cancel" buton is clicked show, hide the search bar and show the search button
     self.navigationItem.rightBarButtonItem = self.searchButton;
     CATransition *fadeTextAnimation = [CATransition animation];
-    fadeTextAnimation.duration = 0.5;
+    fadeTextAnimation.duration = 0.25;
     fadeTextAnimation.type = kCAMediaTimingFunctionEaseOut;
     [self.navigationController.navigationBar.layer addAnimation:fadeTextAnimation forKey: @"easeOut"];
     [self.navigationItem.titleView setHidden:YES];
     [self.navigationItem.rightBarButtonItem setTintColor:[UIColor blackColor]];
     [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    [self.navigationItem setHidesBackButton:NO animated:YES];
     [aSearchBar setShowsCancelButton:NO animated:YES];
     
     [self updateQuantityFields:self.searchDisplayController.searchResultsTableView groceriesArray:self.filteredStoreItems];

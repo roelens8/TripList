@@ -18,6 +18,7 @@
 //@property TripList *tripList;
 @property AddTripViewController *addTripVC;
 @property StoreListViewController *storeListVC;
+@property (strong, nonatomic) IBOutlet UITableView *tripTableView;
 
 @end
 
